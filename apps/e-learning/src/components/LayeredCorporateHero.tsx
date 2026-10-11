@@ -23,8 +23,8 @@ export function LayeredCorporateHero() {
 
       <div data-parallax-layer="copy" className="layered-hero__copy">
         <h1 aria-label="We create content your team actually opens.">
-          {['We create content', 'your team', 'actually opens.'].map((line, index) => (
-            <span key={line} className={index === 2 ? 'is-accent' : ''}>{line}</span>
+          {['We Create Content', 'Your Team', 'Actually Opens.'].map((line, index) => (
+            <span key={line} className={index >= 1 ? 'is-accent' : ''}>{line}</span>
           ))}
         </h1>
         <p className="hero-second-hook">Boring content, minus the <span className="hook-strike">boring</span>.</p>

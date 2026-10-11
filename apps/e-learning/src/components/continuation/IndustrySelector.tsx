@@ -1,6 +1,6 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useRef } from 'react';
 import type { CSSProperties } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import { INDUSTRIES_DATA } from '../../data/learningData';
 import {Car,Landmark,Zap,ShieldCheck,Monitor,Truck,Factory,Microscope,ShoppingBag,Radio} from 'lucide-react';
 import type { IndustryItem } from '../../types';
@@ -20,51 +20,17 @@ const INDUSTRY_IMAGES: Record<string, string> = {
 };
 
 export function IndustrySelector() {
-  const containerRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const [scrollRange, setScrollRange] = useState<number>(0);
-
-  // Measure total horizontal track scroll distance dynamically
-  useLayoutEffect(() => {
-    const updateScrollRange = () => {
-      if (trackRef.current) {
-        const trackWidth = trackRef.current.scrollWidth;
-        const windowWidth = window.innerWidth;
-        // Scroll until the last card is fully and comfortably visible
-        const maxScroll = Math.max(0, trackWidth - windowWidth + 64);
-        setScrollRange(maxScroll);
-      }
-    };
-
-    updateScrollRange();
-    const timer = setTimeout(updateScrollRange, 200);
-    window.addEventListener('resize', updateScrollRange);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', updateScrollRange);
-    };
-  }, []);
-
-  // Pinned vertical-to-horizontal scroll synchronization
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const x = useTransform(scrollYProgress, (progress) => -(progress * scrollRange));
 
   return (
     <section
       id="industries"
-      ref={containerRef}
-      className="relative h-[320vh] sm:h-[350vh] bg-transparent"
+      className="industry-section bg-transparent"
     >
-      {/* Sticky Full-Viewport Stage */}
-      <div className="industry-stage sticky top-0 h-screen w-full flex flex-col overflow-hidden py-4 sm:py-5 lg:py-6">
+      <div className="industry-stage w-full py-16 sm:py-20 lg:py-24">
         
         {/* Section Header */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full shrink-0 mb-3 sm:mb-4">
+        <div className="industry-intro max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-10 sm:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -72,18 +38,17 @@ export function IndustrySelector() {
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.08] text-[#090b10]">
-              Same learning science.<br />
-              <span className="text-[#7557ff]">Different real-world problems.</span>
+              <em>Same Learning Science,</em>
+              <span>Different Real-World Problems.</span>
             </h2>
+            <p>Explore how the same learning principles solve very different workplace challenges.</p>
           </motion.div>
         </div>
 
-        {/* Horizontal Scrolling Cards Track */}
-        <div className="industry-track-window w-full overflow-hidden flex items-center flex-1 min-h-0 py-1 sm:py-2">
-          <motion.div
+        <div className="industry-track-window w-full overflow-x-auto py-1 sm:py-2" role="region" aria-label="Industry learning examples" tabIndex={0}>
+          <div
             ref={trackRef}
-            style={{ x }}
-            className="industry-track flex h-full max-h-[650px] gap-5 sm:gap-6 lg:gap-8 pl-4 sm:pl-8 lg:pl-12 pr-12 sm:pr-20 lg:pr-24 items-stretch will-change-transform"
+            className="industry-track flex gap-5 sm:gap-6 lg:gap-8 pl-4 sm:pl-8 lg:pl-12 pr-12 sm:pr-20 lg:pr-24 items-stretch"
           >
             {INDUSTRIES_DATA.map((industry) => (
               <IndustryCard
@@ -91,7 +56,7 @@ export function IndustrySelector() {
                 industry={industry}
               />
             ))}
-          </motion.div>
+          </div>
         </div>
 
       </div>
@@ -123,7 +88,7 @@ function IndustryCard({ industry }: IndustryCardProps) {
   const theme = INDUSTRY_THEMES[industry.id] || INDUSTRY_THEMES.manufacturing;
   
   return <article 
-    className="sculpted-industry-card h-full w-[380px] sm:w-[480px] md:w-[580px] lg:w-[650px] shrink-0 select-none transition-transform duration-300 hover:-translate-y-1"
+    className="sculpted-industry-card w-[330px] sm:w-[420px] lg:w-[480px] shrink-0 select-none transition-transform duration-300 hover:-translate-y-1"
     style={{ '--card-bg': theme.lightBg, '--title-bg': theme.gradient } as CSSProperties}
   >
     <header className="industry-nameplate">

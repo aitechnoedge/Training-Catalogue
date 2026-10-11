@@ -102,11 +102,15 @@ export function LevelComparisonMatrix() {
       >
         <header className="level-matrix-intro">
           <div>
-            <span>THE FOUR LEARNING LEVELS</span>
-            <h2 id="level-matrix-title">See exactly what changes at each level.</h2>
+            <span className="level-matrix-kicker">THE FOUR LEARNING LEVELS</span>
+            <h2 id="level-matrix-title">
+              <span>See Exactly What Changes</span>
+              <em>At Each Level.</em>
+            </h2>
           </div>
         </header>
 
+        <p className="level-matrix-swipe-hint">Swipe or scroll sideways to compare every level.</p>
         <div className="level-matrix-scroll" role="region" aria-label="Learning level feature comparison" tabIndex={0}>
           <table className="level-matrix-table">
             <thead>

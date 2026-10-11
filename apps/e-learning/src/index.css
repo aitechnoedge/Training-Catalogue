@@ -701,3 +701,118 @@ html,body,.site-shell { color:var(--ink); background:var(--cream); }
   .site-header .header-cta { padding: 8px; font-size: 10px; }
   .global-menu-toggle { width: 42px; height: 42px; }
 }
+
+/* PDF-aligned E-Learning hero: editorial copy on white, learning scene on the right. */
+#root .layered-hero {
+  min-height: 720px;
+  background: #fff;
+}
+
+#root .layered-hero__room {
+  left: 50%;
+  width: 50%;
+  object-position: center;
+}
+
+#root .layered-hero__wash {
+  background:
+    linear-gradient(90deg, #fff 0%, #fff 45%, rgba(255,255,255,.96) 49%, rgba(255,255,255,.25) 58%, transparent 70%),
+    linear-gradient(180deg, rgba(255,255,255,.05), transparent 78%, rgba(9,48,105,.08));
+}
+
+#root .layered-hero__copy {
+  top: 50%;
+  left: clamp(28px, 5vw, 84px);
+  width: min(42vw, 650px);
+  transform: translateY(-43%);
+}
+
+#root .layered-hero__copy h1 {
+  max-width: 650px;
+  color: #171570;
+  font-size: clamp(48px, 5.25vw, 82px);
+  font-weight: 800;
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+
+#root .layered-hero__copy h1 .is-accent {
+  width: max-content;
+  max-width: 100%;
+  margin-top: .03em;
+  color: #4247d7;
+  background: none;
+  font-family: inherit !important;
+  font-style: normal !important;
+  font-size: 1em;
+  font-weight: 800 !important;
+  letter-spacing: -.055em;
+  -webkit-text-fill-color: #4247d7;
+}
+
+#root .layered-hero__copy > p.hero-second-hook {
+  margin-top: 28px;
+  color: #191919;
+  font-size: clamp(18px, 1.45vw, 24px);
+}
+
+#root .hero-main-action {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: min(100%, 370px);
+  min-height: 62px;
+  justify-content: center;
+  padding: 0 22px;
+  color: #fff;
+  border-color: #102d70;
+  border-radius: 8px;
+  background: #12377f;
+  box-shadow: 0 15px 34px rgba(18,55,127,.22);
+}
+
+#root .hero-main-action:hover {
+  color: #fff;
+  background: #0b2864;
+}
+
+#root .hero-main-action .rotating-word {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 3.6em;
+  height: 32px;
+  padding: 0 9px;
+  border-radius: 5px;
+  color: #142868;
+  background: #a9dbff;
+}
+
+@media (max-width: 760px) {
+  #root .layered-hero {
+    height: 920px;
+    min-height: 920px;
+  }
+
+  #root .layered-hero__room {
+    display: block;
+    inset: auto 0 0;
+    width: 100%;
+    height: 43%;
+    object-position: center;
+  }
+
+  #root .layered-hero__wash {
+    top: var(--site-topbar-height);
+    height: calc(100% - var(--site-topbar-height));
+    background: linear-gradient(180deg, #fff 0%, #fff 47%, rgba(255,255,255,.96) 52%, rgba(255,255,255,.2) 66%, transparent 78%);
+  }
+
+  #root .layered-hero__copy {
+    top: calc(var(--site-topbar-height) + 42px);
+    left: 22px;
+    width: calc(100% - 44px);
+    transform: none;
+  }
+
+  #root .layered-hero__copy h1 { font-size: clamp(43px, 13vw, 62px); }
+  #root .hero-main-action { width: 100%; min-width: 0; }
+}

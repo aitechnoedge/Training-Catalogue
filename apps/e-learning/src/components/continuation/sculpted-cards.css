@@ -25,3 +25,56 @@
 .video-learning .activity-body{padding:12px 15px}.video-learning .activity-options{gap:7px}.video-learning .activity-options button{padding:9px 11px;font-size:12px}
 .brief-clues,.brief-tokens,.brief-slots{display:flex;gap:7px;margin:8px 0}.brief-clues button,.brief-tokens button,.brief-slots button,.game-start{border:1px solid #d6c8e0;border-radius:9px;padding:8px;background:#faf7fc;color:#332b3e;font-size:11px;cursor:pointer}.brief-clues button{display:flex;align-items:center;gap:4px;flex:1}.brief-tokens button{background:#eee3f6;flex:1}.brief-tokens button[aria-pressed=true]{outline:2px solid #815d9b}.brief-slots button{flex:1;border-style:dashed;min-height:55px;text-align:left}.brief-slots b,.brief-slots span{display:block}.brief-slots span{font-size:10px;margin-top:4px}.brief-evidence,.brief-feedback{font-size:12px;line-height:1.4;margin:6px 0}.game-start{display:inline-flex;align-items:center;gap:7px;background:#3d2d4b;color:white;font-weight:700}.phase-match .lesson-video,.phase-clues .lesson-video{height:clamp(110px,20svh,190px)}
 @media(max-height:740px){.single-depth-box .video-learning .lesson-video{height:25svh}.single-depth-box .brief-game.phase-match .lesson-video,.single-depth-box .brief-game.phase-clues .lesson-video{height:16svh}.brief-game .activity-guide{font-size:10px}.brief-slots button{padding:6px}}
+
+/* Natural, swipeable industry gallery used by the PDF-aligned section. */
+#industries.industry-section { min-height: auto; }
+#industries .industry-intro { text-align: center; }
+#root #industries .industry-intro h2 { margin: 0 auto; }
+#root #industries .industry-intro h2 em {
+  display: block;
+  color: #171570;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: .72em;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -.03em;
+}
+#root #industries .industry-intro h2 span {
+  display: block;
+  margin-top: .08em;
+  color: #4247d7 !important;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-style: normal !important;
+  font-weight: 820 !important;
+  letter-spacing: -.055em;
+  -webkit-text-fill-color: #4247d7;
+  -webkit-text-stroke: 0;
+}
+#industries .industry-intro p {
+  max-width: 680px;
+  margin: 18px auto 0;
+  color: #4d596b;
+  font-size: 15px;
+  line-height: 1.6;
+}
+#industries .industry-track-window {
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: #8ab6df transparent;
+  overscroll-behavior-inline: contain;
+}
+#industries .industry-track { min-width: max-content; padding-bottom: 22px; }
+#industries .sculpted-industry-card {
+  min-height: 540px;
+  scroll-snap-align: center;
+  background: #f5f9ff;
+  border-color: #d7e4f3;
+  box-shadow: 0 18px 46px rgba(20,58,101,.1);
+}
+#industries .industry-diorama { min-height: 220px; }
+
+@media (max-width: 640px) {
+  #industries .sculpted-industry-card { width: min(86vw, 360px); min-height: 500px; }
+  #industries .industry-editable-panels { grid-template-columns: 1fr; }
+  #industries .industry-diorama { min-height: 180px; }
+}

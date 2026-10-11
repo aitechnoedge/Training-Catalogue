@@ -24,30 +24,50 @@
 }
 
 .level-matrix-intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(300px, .85fr);
-  align-items: end;
-  gap: 72px;
-  margin: 0 auto 24px;
-  padding: 0 116px;
+  display: block;
+  margin: 0 auto clamp(32px, 4vw, 54px);
+  padding: clamp(36px, 6vw, 76px) 20px 0;
+  text-align: center;
 }
 
-.level-matrix-intro > div > span {
-  color: #355c95;
+.level-matrix-kicker {
+  display: inline-flex;
+  padding: 8px 18px;
+  border-radius: 999px;
+  color: #12377f;
+  background: #c9e8ff;
   font-size: 10px;
   font-weight: 850;
-  letter-spacing: .17em;
+  letter-spacing: .18em;
 }
 
 #root .level-matrix-intro h2 {
-  max-width: 590px;
-  margin: 9px 0 0;
-  color: #090b10;
+  max-width: 900px;
+  margin: 18px auto 0;
+  color: #171570;
   font-family: "Geist Variable", Inter, ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(38px, 3.65vw, 52px);
+  font-size: clamp(42px, 5.2vw, 72px);
   font-weight: 830;
   line-height: .96;
   letter-spacing: -.058em;
+}
+
+#root .level-matrix-intro h2 > span,
+#root .level-matrix-intro h2 > em { display: block; }
+
+#root .level-matrix-intro h2 > em {
+  color: #4247d7;
+  font-family: inherit;
+  font-style: normal;
+  font-weight: 830;
+}
+
+.level-matrix-swipe-hint {
+  display: none;
+  margin: -20px 0 12px;
+  color: #53637d;
+  font-size: 12px;
+  text-align: center;
 }
 
 #root .level-matrix-intro > p {
@@ -337,4 +357,5 @@
   .level-matrix-scroll { border-radius: 16px; }
   .level-matrix-table { min-width: 980px; }
   .level-matrix-table thead .matrix-feature-heading { width: 270px; }
+  .level-matrix-swipe-hint { display: block; }
 }
