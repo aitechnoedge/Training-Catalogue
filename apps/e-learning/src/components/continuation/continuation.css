@@ -9,7 +9,7 @@
 #root #contact h2,
 #root .closing-hook {
   color: var(--ink) !important;
-  font-family: "Geist Variable", Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--site-font);
   font-weight: 520;
   letter-spacing: -.055em;
 }
@@ -103,6 +103,10 @@
   transform: translateY(-.035em);
 }
 
+#root .closing-hook > span:last-child .gradual-letter {
+  -webkit-text-fill-color: currentColor;
+}
+
 .gradual-spacing,
 .gradual-word,
 .gradual-letter {
@@ -136,7 +140,7 @@
 
 #root .closing-hook > span:first-child {
   color: #171570;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--site-font);
   font-size: .54em;
   font-style: italic;
   font-weight: 600;
@@ -161,11 +165,38 @@
   background: linear-gradient(135deg, #edf7ff 0%, #dfefff 100%) !important;
 }
 
+#contact .contact-panel__layout {
+  display: grid;
+  grid-template-columns: clamp(170px, 22vw, 250px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(28px, 5vw, 72px);
+  width: min(100%, 1050px);
+  margin-inline: auto;
+}
+
+#contact .contact-support-symbol {
+  display: grid;
+  place-items: center;
+  width: clamp(170px, 22vw, 250px);
+  aspect-ratio: 1;
+}
+
+#contact .contact-support-symbol img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+#contact .contact-panel__content {
+  min-width: 0;
+}
+
 #root #contact .contact-panel h2 > em {
   display: block;
   margin-bottom: .45em;
   color: #171570;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--site-font);
   font-size: .48em;
   font-style: italic;
   font-weight: 600;
@@ -177,7 +208,7 @@
   display: block;
   margin-top: 0;
   color: #154877 !important;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif !important;
+  font-family: var(--site-font) !important;
   font-size: .78em;
   font-style: normal !important;
   font-weight: 800 !important;
@@ -207,6 +238,14 @@
 
 @media (max-width: 640px) {
   #contact > .contact-panel { border-radius: 22px; }
+  #contact .contact-panel__layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  #contact .contact-support-symbol {
+    width: clamp(82px, 26vw, 112px);
+    margin-inline: auto;
+  }
   #root #contact .contact-panel h2 > span { font-size: .72em; }
   #contact .contact-panel__content > div { align-items: stretch; }
   #contact .contact-primary-cta,

@@ -15,6 +15,7 @@ export function Header() {
         <a href="/catalogue">Catalogue</a>
         <a href="/insights">Insights</a>
         <a href="/careers">Careers</a>
+        <a href="/training-roi">Training ROI</a>
       </nav>
       <div className="header-controls">
         <a className="header-cta" href="#contact" onClick={() => setMenuOpen(false)}>Build with us <ArrowUpRight size={15} /></a>

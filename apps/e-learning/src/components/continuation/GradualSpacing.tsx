@@ -16,11 +16,11 @@ export function GradualSpacing({ text, className = '', gradient = false, tone = 
   return (
     <motion.span
       className={`gradual-spacing ${className}`}
+      aria-label={text}
       initial={reduced ? false : 'hidden'}
       whileInView="visible"
       viewport={{ once: true, amount: 0.25 }}
     >
-      <span className="sr-only">{text}</span>
       {text.split(' ').map((word, wordIndex) => {
         const start = offset;
         offset += word.length + 1;

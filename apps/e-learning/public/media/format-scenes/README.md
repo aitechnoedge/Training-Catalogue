@@ -1,14 +1,15 @@
-# Topic-specific learning illustrations
+# E-learning format previews
 
-Generated with the built-in imagegen tool. Each topic uses a distinct scene based on the website description.
+The format selector uses these user-supplied screenshots. The `e-learning-` prefix keeps their names separate from assets used by the main site.
 
-- Video Learning: video-v2.png. Prompt: .review/format-video-v2-prompt.txt
-- Microlearning: micro-v2.png. Prompt: .review/format-micro-v2-prompt.txt
-- Gamification: game-v2.png. Prompt: .review/format-game-v2-prompt.txt
-- Simulations: simulation-v2.png. Prompt: .review/format-simulation-v2-prompt.txt
-- Immersive Learning: immersive-v2.png. Prompt: .review/format-immersive-v2-prompt.txt
-- Assessments: assessment-v2.png. Prompt: .review/format-assessment-v2-prompt.txt
-- ILT + VILT: ilt-v2.png. Prompt: .review/format-ilt-v2-prompt.txt
-- AI Learning: ai-v2.png. Prompt: .review/format-ai-v2-prompt.txt
+- SCORM + xAPI: `e-learning-scorm.png`
+- Video Learning: `e-learning-video.png`
+- Micro Learning: `e-learning-micro.png`
+- Gamification: `e-learning-game.png`
+- Simulations: `e-learning-simulation.png`
+- Immersive Learning: `e-learning-immersive.png`
+- Assessments: `e-learning-assessment.png`
+- ILT + VILT: `e-learning-ilt.png`
+- AI Learning: `e-learning-ai.png`
 
-Integrated in src/components/LearningUniverse.tsx without changing its navigation, transitions or card layout. Review gallery: .review/format-scenes.html.
+These files are displayed by `src/components/continuation/LearningUniverse.tsx`.

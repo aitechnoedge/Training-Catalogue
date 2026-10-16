@@ -134,7 +134,7 @@ export function SopStory() {
           <div className="journey-copy">
             <h2 id="before-heading" className="sop-editorial-heading">
               <span>A boring SOP.</span>
-              <em>A useful idea<br />waiting inside.</em>
+              <em>A Useful Idea<br />Waiting Inside.</em>
             </h2>
             <p>A familiar document. Important information. And a person who needs to know what to do next.</p>
             <p>We keep the knowledge. Then we give it a story, a moment to practise, and a reason to remember.</p>
@@ -176,8 +176,8 @@ export function SopStory() {
           <div data-journey-anchor="2" className="journey-anchor journey-transform-target" />
           <div className="journey-copy">
             <h2 id="after-heading" className="sop-editorial-heading">
-              <span>Now it’s a lesson.</span>
-              <em>And a little<br />“I’ve got this.”</em>
+              <span>Now It’s a Lesson.</span>
+              <em>And a Little<br />“I’ve Got This.”</em>
             </h2>
             <p>The same SOP becomes a short, visual learning experience. Watch a real situation, make a choice, and get feedback you can use.</p>
             <div className="journey-chips"><span><Check size={12} /> Interactive</span><span><Check size={12} /> Bite-sized</span><span><Check size={12} /> SCORM + xAPI</span></div>

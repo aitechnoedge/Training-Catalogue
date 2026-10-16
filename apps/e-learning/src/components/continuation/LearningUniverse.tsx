@@ -5,7 +5,6 @@ import {
 } from 'motion/react';
 import { WORLDS_DATA } from '../../data/f1LearningData';
 import { DemoType } from '../../types';
-import scormXapiShowcase from '../../assets/formats-real/scorm-xapi-service-showcase.webp';
 import './learning-universe.css';
 import {
   Play,
@@ -34,6 +33,8 @@ const ORDERED_WORLDS = [...WORLDS_DATA].sort(
   (a, b) => FORMAT_ORDER.indexOf(a.id as (typeof FORMAT_ORDER)[number])
     - FORMAT_ORDER.indexOf(b.id as (typeof FORMAT_ORDER)[number])
 );
+
+const formatSceneBase = `${import.meta.env.BASE_URL}media/format-scenes/`;
 
 export function LearningUniverse() {
   const items = ORDERED_WORLDS;
@@ -99,8 +100,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/scorm-xapi-learning-journey-v1.png" 
-                alt="3D Illustration of SCORM and xAPI LMS Integration"
+                src={`${formatSceneBase}e-learning-scorm.png`}
+                alt="SCORM course player with an e-mobility learning module"
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -117,8 +118,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/video-v3.png" 
-                alt="Video lesson with animated process steps, a software walkthrough and an interactive question"
+                src={`${formatSceneBase}e-learning-video.png`}
+                alt="Cybersecurity awareness video lesson with playback controls"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -149,8 +150,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/micro-v2.png" 
-                alt="3D Illustration of Micro-learning"
+                src={`${formatSceneBase}e-learning-micro.png`}
+                alt="Microlearning hub with short video lessons and job aids"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -165,8 +166,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/game-v2.png" 
-                alt="3D Illustration of Gamification"
+                src={`${formatSceneBase}e-learning-game.png`}
+                alt="Cybersecurity phishing mission with a start button and progress bar"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -181,8 +182,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/simulation-v2.png" 
-                alt="3D Illustration of Risk-Free Simulations"
+                src={`${formatSceneBase}e-learning-simulation.png`}
+                alt="Supply chain receiving simulation with shipment details and action choices"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -197,8 +198,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/immersive-v2.png" 
-                alt="3D Illustration of Immersive Learning VR"
+                src={`${formatSceneBase}e-learning-immersive.png`}
+                alt="Operational safety inspection with interactive equipment checkpoints"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -213,8 +214,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/assessment-v2.png" 
-                alt="3D Illustration of Smart Competency Assessments"
+                src={`${formatSceneBase}e-learning-assessment.png`}
+                alt="Customer service assessment with a multiple choice question and score panel"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -229,8 +230,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/ilt-v2.png" 
-                alt="3D Illustration of Blended Live Facilitation"
+                src={`${formatSceneBase}e-learning-ilt.png`}
+                alt="Instructor led workshop connected to a virtual classroom"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -245,8 +246,8 @@ export function LearningUniverse() {
           <div className="flex flex-col gap-3">
             <div className="relative w-full rounded-3xl overflow-hidden border border-[#0b0b0d]/10 bg-white/40 backdrop-blur-md shadow-sm aspect-video flex items-center justify-center group cursor-pointer">
               <img 
-                src="/media/format-scenes/ai-v2.png" 
-                alt="3D Illustration of AI Roleplay Simulation"
+                src={`${formatSceneBase}e-learning-ai.png`}
+                alt="AI interview practice with a video interviewer and feedback scores"
                 className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 style={{ mixBlendMode: 'darken' }}
                 referrerPolicy="no-referrer"
@@ -279,19 +280,16 @@ export function LearningUniverse() {
       >
         {/* Unified Frame Container */}
         <div className="formats-single-frame bg-white/40 backdrop-blur-3xl rounded-[32px] sm:rounded-[40px] p-5 sm:p-6 lg:p-7 shadow-[0_8px_32px_rgba(11,11,13,0.04)] border border-white/60">
-          {/* Top Header Row: Section Title + Segmented Stepper */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-5 sm:mb-6">
-          <div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.08] text-[#0b0b0d]">
-              Pick a format.<br />
-              <span className="text-[#7557ff]">
-                We&apos;ll make the case for it.
-              </span>
-            </h2>
-          </div>
+          <div className="relative flex flex-col items-center gap-4 mb-5 sm:mb-6 sm:min-h-[78px] sm:items-end sm:justify-end">
+            <div className="text-center sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+              <h2 className="leading-[1.02]" style={{ fontFamily: 'Poppins, Inter, ui-sans-serif, system-ui, sans-serif' }}>
+                <span className="format-heading-kicker block text-2xl sm:text-3xl font-semibold italic">Pick A Format</span>
+                <span className="format-heading-title block text-3xl sm:text-4xl lg:text-5xl font-bold sm:whitespace-nowrap">We’ll Make The Case For It.</span>
+              </h2>
+            </div>
 
-          {/* Stepper Navigation: Prev / Next buttons + Counter */}
-          <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-auto">
+            {/* Stepper Navigation: Prev / Next buttons + Counter */}
+            <div className="flex items-center gap-2.5 shrink-0 self-start sm:self-auto">
             <span className="text-xs font-mono font-bold text-[#6a6872] px-2">
               <strong className="text-[#0b0b0d]">{String(activeIndex + 1).padStart(2, '0')}</strong>
               {' / '}
@@ -319,8 +317,8 @@ export function LearningUniverse() {
             >
               <ChevronRight className="w-4 h-4" />
             </motion.button>
+            </div>
           </div>
-        </div>
 
         {/* ========================================================================= */}
         {/* FRAMER-STYLE TOPICS DOCK (All 10 Modalities in One Interactive Strip)     */}
@@ -353,26 +351,18 @@ export function LearningUniverse() {
                   {isSelected && (
                     <motion.div
                       layoutId="activeModalityPill"
-                      className="absolute inset-0 bg-[#0b0b0d] rounded-2xl shadow-[0_8px_24px_rgba(11,11,13,0.18)]"
+                      className="absolute inset-0 bg-[#226FA7] rounded-2xl shadow-[0_8px_24px_rgba(34,111,167,0.24)]"
                       transition={{ type: 'spring', stiffness: 420, damping: 32 }}
                     />
                   )}
 
-                  {/* Icon & Index */}
+                  {/* Index */}
                   <span
                     className={`relative z-10 font-mono text-[11px] font-black transition-colors ${
                       isSelected ? 'text-white' : 'text-[#8a8894]'
                     }`}
                   >
                     {String(idx + 1).padStart(2, '0')}
-                  </span>
-
-                  <span
-                    className={`relative z-10 text-sm transition-transform ${
-                      isSelected ? 'scale-110' : ''
-                    }`}
-                  >
-                    {it.icon}
                   </span>
 
                   {/* Name */}
@@ -412,19 +402,8 @@ export function LearningUniverse() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -14, scale: 0.99 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-              className={currentWorld.type === 'track'
-                ? 'format-showcase-card'
-                : 'grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch'}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-stretch"
             >
-              {currentWorld.type === 'track' ? (
-                <img
-                  src={scormXapiShowcase}
-                  alt="SCORM and xAPI service showcase showing course launch, LMS delivery, learner tracking and analytics reporting"
-                  loading="lazy"
-                  decoding="async"
-                  className="format-showcase-card__image"
-                />
-              ) : <>
               {/* CARD 1: Strategic Brief (lg:col-span-5) */}
               <div className="lg:col-span-5 bg-white text-[#0b0b0d] rounded-3xl p-5 sm:p-6 lg:p-7 shadow-[0_16px_40px_-15px_rgba(11,11,13,0.08)] border border-[#0b0b0d]/12 flex flex-col justify-between relative overflow-hidden">
                 {/* Top Corner Decor */}
@@ -437,7 +416,7 @@ export function LearningUniverse() {
                       {currentWorld.icon}
                     </div>
                     <div className="min-w-0">
-                      <h3 className="text-xl sm:text-2xl font-black text-[#0b0b0d] leading-tight truncate">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-[#01266A] leading-tight truncate">
                         {currentWorld.name}
                       </h3>
                       <span className="text-xs text-[#727175] font-semibold block truncate">
@@ -457,7 +436,7 @@ export function LearningUniverse() {
                 <div className="mt-6 pt-4 border-t border-[#0b0b0d]/10">
                   <a
                     href="#contact"
-                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-[#0b0b0d] text-white font-black text-xs sm:text-sm hover:bg-[#202230] transition-all cursor-pointer shadow-md group"
+                    className="format-blueprint-cta w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-[#226FA7] text-white font-bold text-xs sm:text-sm hover:bg-[#17557F] transition-all cursor-pointer shadow-[0_8px_22px_rgba(34,111,167,0.24)] group"
                   >
                     <span>Request {currentWorld.name} Blueprint</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -470,7 +449,7 @@ export function LearningUniverse() {
                 <div>
                   {/* Sandbox Header */}
                   <div className="flex items-center justify-between text-xs sm:text-sm font-extrabold text-[#727175] mb-4 pb-3.5 border-b border-[#0b0b0d]/10">
-                    <span className="flex items-center gap-2 text-[#0b0b0d] font-black text-sm sm:text-base">
+                    <span className="flex items-center gap-2 text-[#01266A] font-semibold text-sm sm:text-base">
                       <Sparkles className="w-4 h-4 text-[#7557ff]" />
                       {currentWorld.type === 'track' 
                         ? 'Universal LMS Integration & Telemetry' 
@@ -504,7 +483,6 @@ export function LearningUniverse() {
                   </div>
                 </div>
               </div>
-              </>}
             </motion.div>
           </AnimatePresence>
         </div>

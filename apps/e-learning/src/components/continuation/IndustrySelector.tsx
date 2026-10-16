@@ -2,7 +2,6 @@ import { useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { motion } from 'motion/react';
 import { INDUSTRIES_DATA } from '../../data/learningData';
-import {Car,Landmark,Zap,ShieldCheck,Monitor,Truck,Factory,Microscope,ShoppingBag,Radio} from 'lucide-react';
 import type { IndustryItem } from '../../types';
 import './sculpted-cards.css';
 
@@ -82,9 +81,7 @@ interface IndustryCardProps {
   industry: IndustryItem;
 }
 
-const INDUSTRY_ICONS = [Car,Landmark,Zap,ShieldCheck,Monitor,Truck,Factory,Microscope,ShoppingBag,Radio];
 function IndustryCard({ industry }: IndustryCardProps) {
-  const Icon = INDUSTRY_ICONS[INDUSTRIES_DATA.findIndex(item=>item.id===industry.id)] || Factory;
   const theme = INDUSTRY_THEMES[industry.id] || INDUSTRY_THEMES.manufacturing;
   
   return <article 
@@ -92,12 +89,11 @@ function IndustryCard({ industry }: IndustryCardProps) {
     style={{ '--card-bg': theme.lightBg, '--title-bg': theme.gradient } as CSSProperties}
   >
     <header className="industry-nameplate">
-      <div className="flex items-center gap-3">
-        <Icon aria-hidden="true"/>
+      <div className="industry-nameplate__content">
         <h3>{industry.title}</h3>
-      </div>
-      <div className="hidden sm:block text-[9px] leading-tight text-left uppercase opacity-80 border-l border-white/20 pl-3 whitespace-pre-line tracking-wider font-semibold">
-        {theme.tagline}
+        <div className="industry-nameplate__tagline">
+          {theme.tagline}
+        </div>
       </div>
     </header>
     <div className="industry-diorama"><img src={INDUSTRY_IMAGES[industry.id]} alt={industry.title+' workplace clay illustration'} loading="lazy" decoding="async"/></div>
