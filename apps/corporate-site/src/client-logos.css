@@ -15,21 +15,22 @@
   border-radius: 999px;
   background: rgba(115,194,251,.36);
   color: #01266A;
+  font-family: Poppins, "Inter Variable", Arial, sans-serif;
   font-size: .7rem;
-  font-weight: 900;
+  font-weight: 800;
   letter-spacing: .18em;
 }
 .client-logo-header h2 {
   margin: .9rem 0 .8rem;
   color: #01266A;
-  font-family: Arial, "Segoe UI", sans-serif;
+  font-family: Poppins, "Inter Variable", Arial, sans-serif;
   font-size: clamp(2.75rem, 4.7vw, 5rem);
   font-weight: 760;
   line-height: 1.02;
   letter-spacing: -.045em;
 }
 .client-logo-header h2 em { color: #2666C4; font-style: normal; }
-.client-logo-header p { margin: 0; color: rgba(0,0,0,.66); font-size: clamp(.9rem, 1.2vw, 1.05rem); }
+.client-logo-header p { margin: 0; color: rgba(0,0,0,.66); font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(.9rem, 1.2vw, 1.05rem); font-weight: 500; }
 .client-logo-rows { display: grid; gap: clamp(.75rem, 1.5vw, 1.15rem); }
 .client-logo-viewport {
   min-width: 0;

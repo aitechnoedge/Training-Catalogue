@@ -6,13 +6,14 @@ import { HeaderStructure } from './components/HeaderStructure';
 import { IntroductionStructure } from './components/IntroductionStructure';
 import { CategoryNavigation } from './components/CategoryNavigation';
 import { FooterStructure } from './components/FooterStructure';
-import { RfqModal } from './components/RfqModal';
-import { FloatingActions } from './components/FloatingActions';
 import { peopleProcessProgrammes } from './data/actualProgrammes';
 import { fetchCourseById } from './api/catalogueApi';
 import type { ImportedArticleContent } from './components/insights/InsightArticlePage';
+import type { InsightArticle } from './data/insightsData';
 import { SeoHead } from './components/SeoHead';
-import { AnalyticsConsent } from './components/AnalyticsConsent';
+import { CatalogueDirectoryPage } from './components/CatalogueDirectoryPage';
+import { TrainingRoiPage } from './components/TrainingRoiPage';
+import { catalogueDirectoryPage } from './seo/cataloguePagination';
 
 const CatalogueGrid = lazy(() => import('./components/CatalogueGrid').then((module) => ({ default: module.CatalogueGrid })));
 const CourseDetail = lazy(() => import('./components/CourseDetail').then((module) => ({ default: module.CourseDetail })));
@@ -22,6 +23,9 @@ const CareerRolePage = lazy(() => import('./components/careers/CareerRolePage').
 const InsightsPage = lazy(() => import('./components/insights/InsightsPage').then((module) => ({ default: module.InsightsPage })));
 const InsightArticlePage = lazy(() => import('./components/insights/InsightArticlePage').then((module) => ({ default: module.InsightArticlePage })));
 const SeoLandingRoute = lazy(() => import('./components/SeoLandingRoute').then((module) => ({ default: module.SeoLandingRoute })));
+const RfqModal = lazy(() => import('./components/RfqModal').then((module) => ({ default: module.RfqModal })));
+const FloatingActions = lazy(() => import('./components/FloatingActions').then((module) => ({ default: module.FloatingActions })));
+const AnalyticsConsent = lazy(() => import('./components/AnalyticsConsent').then((module) => ({ default: module.AnalyticsConsent })));
 
 const trustRoutes = new Set(['/about', '/contact', '/authors/technoedge-editorial-team', '/editorial-policy', '/corrections-policy', '/ai-content-policy', '/privacy', '/terms']);
 const isSeoLandingPath = (pathname: string) => (
@@ -33,9 +37,11 @@ export interface AppInitialData {
   programme?: BaseProgramme | null;
   programmePath?: string;
   insightContent?: ImportedArticleContent | null;
+  insightArticle?: InsightArticle | null;
   insightSlug?: string;
   programmeLinks?: Array<{ id: string; title: string }>;
   programmeLinksPath?: string;
+  catalogueTotalPages?: number;
 }
 
 interface AppProps {
@@ -58,11 +64,13 @@ export default function App({ initialData }: AppProps) {
     ? decodeURIComponent(location.pathname.replace('/insights/', ''))
     : null;
   const isCareersPage = location.pathname === '/careers';
+  const isTrainingRoiPage = location.pathname === '/training-roi';
   const careerRoleSlug = location.pathname.startsWith('/careers/')
     ? decodeURIComponent(location.pathname.replace('/careers/', ''))
     : null;
-  const isSeoLandingPage = isSeoLandingPath(location.pathname);
-  const isCatalogueRoute = location.pathname === '/catalogue' || location.pathname.startsWith('/programmes/');
+  const cataloguePageNumber = catalogueDirectoryPage(location.pathname);
+  const isSeoLandingPage = cataloguePageNumber === null && isSeoLandingPath(location.pathname);
+  const isCatalogueRoute = cataloguePageNumber !== null || location.pathname.startsWith('/programmes/');
   const [activeCategoryId, setActiveCategoryId] = useState<CategoryId>('role-based');
   const [selectedProgramme, setSelectedProgramme] = useState<BaseProgramme | null>(() => (
     initialData?.programmePath === location.pathname ? initialData.programme ?? null : null
@@ -71,6 +79,12 @@ export default function App({ initialData }: AppProps) {
   const [programmeLoadError, setProgrammeLoadError] = useState<string | null>(null);
   const [isEnterpriseInquiryOpen, setIsEnterpriseInquiryOpen] = useState(false);
   const [enterpriseInquiryCtaId, setEnterpriseInquiryCtaId] = useState('');
+  const [showNonCriticalUi, setShowNonCriticalUi] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => setShowNonCriticalUi(true), 800);
+    return () => window.clearTimeout(timer);
+  }, []);
 
   const openEnterpriseInquiry = (ctaId: string) => {
     setEnterpriseInquiryCtaId(ctaId);
@@ -291,12 +305,15 @@ export default function App({ initialData }: AppProps) {
           <InsightArticlePage
             slug={insightArticleSlug}
             initialContent={initialData?.insightSlug === insightArticleSlug ? initialData.insightContent : null}
+            initialArticle={initialData?.insightSlug === insightArticleSlug ? initialData.insightArticle : null}
             onBack={() => navigate('/insights')}
           />
         ) : isCareersPage ? (
           <CareersPage onViewRole={(slug) => navigate(`/careers/${slug}`)} />
         ) : careerRoleSlug ? (
           <CareerRolePage slug={careerRoleSlug} onBack={() => navigate('/careers')} />
+        ) : isTrainingRoiPage ? (
+          <TrainingRoiPage />
         ) : isCatalogueRoute ? (
           <>
         {isProgrammeLoading && (
@@ -328,19 +345,23 @@ export default function App({ initialData }: AppProps) {
           </div>
         )}
 
-        {!selectedProgramme && !isProgrammeLoading && (
+        {!selectedProgramme && !isProgrammeLoading && cataloguePageNumber !== null && cataloguePageNumber > 1 && (
+          <CatalogueDirectoryPage
+            page={cataloguePageNumber}
+            totalPages={initialData?.catalogueTotalPages ?? cataloguePageNumber}
+            programmes={initialData?.programmeLinksPath === location.pathname ? initialData.programmeLinks ?? [] : []}
+          />
+        )}
+
+        {!selectedProgramme && !isProgrammeLoading && cataloguePageNumber === 1 && (
         <div className="block">
           <IntroductionStructure />
-          {location.pathname === '/catalogue' && initialData?.programmeLinksPath === '/catalogue' && initialData.programmeLinks?.length ? (
-            <section className="mx-auto w-full max-w-7xl px-4 pb-4 sm:px-10" aria-labelledby="catalogue-featured-programmes">
-              <h2 id="catalogue-featured-programmes" className="text-2xl font-bold text-black">Explore approved programmes</h2>
-              <p className="mt-2 text-[rgba(0,0,0,0.70)]">Start with these quality-reviewed programme pages, then use the filters to narrow the full catalogue.</p>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {initialData.programmeLinks.map((programme) => (
-                  <li key={programme.id}><a className="block rounded-lg border border-[rgba(1,38,106,0.14)] p-4 font-semibold text-[#01266A] hover:border-[#01266A] hover:underline" href={`/programmes/${programme.id}`}>{programme.title}</a></li>
-                ))}
-              </ul>
-            </section>
+          {initialData?.programmeLinksPath === '/catalogue' && initialData.programmeLinks?.length ? (
+            <CatalogueDirectoryPage
+              page={1}
+              totalPages={initialData.catalogueTotalPages ?? 1}
+              programmes={initialData.programmeLinks}
+            />
           ) : null}
           <CategoryNavigation
             categories={CATEGORIES_ARCHITECTURE}
@@ -371,16 +392,21 @@ export default function App({ initialData }: AppProps) {
         onOpenInquiry={() => openEnterpriseInquiry('catalogue_footer_contact_us')}
       />
 
-      {/* Floating WhatsApp and Phone utility buttons */}
-      <FloatingActions />
-
-      {/* Global Enterprise Inquiry RFQ Modal */}
-      <RfqModal
-        isOpen={isEnterpriseInquiryOpen}
-        onClose={() => setIsEnterpriseInquiryOpen(false)}
-        ctaId={enterpriseInquiryCtaId}
-      />
-      <AnalyticsConsent />
+      {(showNonCriticalUi || isEnterpriseInquiryOpen) && (
+        <Suspense fallback={null}>
+          <RfqModal
+            isOpen={isEnterpriseInquiryOpen}
+            onClose={() => setIsEnterpriseInquiryOpen(false)}
+            ctaId={enterpriseInquiryCtaId}
+          />
+        </Suspense>
+      )}
+      {showNonCriticalUi && (
+        <Suspense fallback={null}>
+          <FloatingActions />
+          <AnalyticsConsent />
+        </Suspense>
+      )}
     </div>
   );
 }

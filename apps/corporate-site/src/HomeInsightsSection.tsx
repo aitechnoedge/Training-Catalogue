@@ -9,7 +9,6 @@ export default function HomeInsightsSection() {
       <div className="home-insights-shell">
         <header className="home-insights-header">
           <div>
-            <span className="home-insights-eyebrow">INSIGHTS</span>
             <h2 id="home-insights-heading">Latest Insights</h2>
           </div>
           <a className="home-insights-all" href="/insights">Explore all insights <ArrowUpRight size={18} aria-hidden="true" /></a>

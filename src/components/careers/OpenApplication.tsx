@@ -9,7 +9,10 @@ export const OpenApplication: React.FC = () => {
     <div className="careers-page-shell careers-open-application__inner">
       <div>
         <p className="careers-section-label careers-section-label--light">Open application</p>
-        <h2 id="careers-application-title">Didn’t find the right opportunity?</h2>
+        <h2 id="careers-application-title">
+          <span>Didn’t Find The</span>
+          <span>Right Opportunity?</span>
+        </h2>
         <p>If you don’t see the right role today, send us your profile and let’s stay connected.</p>
       </div>
       <button
@@ -17,7 +20,7 @@ export const OpenApplication: React.FC = () => {
         onClick={() => setIsEmailDialogOpen(true)}
         className="careers-secondary-button"
       >
-        Send your profile
+        Send Your Profile
         <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
       </button>
     </div>

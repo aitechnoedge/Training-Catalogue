@@ -50,26 +50,30 @@ export default function TEAI360Section() {
     const section = sectionRef.current;
     if (!section || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    let frame = 0;
-    const updateStage = () => {
-      frame = 0;
-      const rect = section.getBoundingClientRect();
-      const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-      const progress = Math.min(1, Math.max(0, -rect.top / travel));
-      const nextStage = Math.min(stages.length - 1, Math.floor(progress * stages.length));
-      setActiveStage((current) => (current === nextStage ? current : nextStage));
+    let timer: number | undefined;
+    const stopSlideshow = () => {
+      if (timer !== undefined) window.clearInterval(timer);
+      timer = undefined;
     };
-    const onScroll = () => {
-      if (!frame) frame = window.requestAnimationFrame(updateStage);
+    const startSlideshow = () => {
+      stopSlideshow();
+      timer = window.setInterval(() => {
+        if (!document.hidden) setActiveStage((current) => (current + 1) % stages.length);
+      }, 1000);
     };
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setActiveStage(0);
+        startSlideshow();
+      } else {
+        stopSlideshow();
+      }
+    }, { threshold: .35 });
 
-    updateStage();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    observer.observe(section);
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
+      observer.disconnect();
+      stopSlideshow();
       if (swipeFrameRef.current) window.cancelAnimationFrame(swipeFrameRef.current);
     };
   }, []);
@@ -90,12 +94,18 @@ export default function TEAI360Section() {
       }
       return;
     }
-    const section = sectionRef.current;
-    if (!section || reducedMotion) return;
-    const sectionTop = window.scrollY + section.getBoundingClientRect().top;
-    const travel = Math.max(section.offsetHeight - window.innerHeight, 1);
-    window.scrollTo({ top: sectionTop + travel * ((index + .5) / stages.length), behavior: 'smooth' });
   };
+
+  useEffect(() => {
+    if (!window.matchMedia('(max-width: 650px)').matches) return;
+    const stageWindow = stageWindowRef.current;
+    const target = stageWindow?.querySelector<HTMLButtonElement>(`[data-stage-index="${activeStage}"]`);
+    if (!stageWindow || !target) return;
+    stageWindow.scrollTo({
+      left: target.offsetLeft - (stageWindow.clientWidth - target.offsetWidth) / 2,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
+  }, [activeStage]);
 
   const updateStageFromSwipe = () => {
     const usesHorizontalJourney = window.matchMedia('(prefers-reduced-motion: reduce)').matches

@@ -31,6 +31,11 @@
   object-fit: cover;
 }
 
+.hero-background-ai {
+  transform: scale(.92);
+  transform-origin: right center;
+}
+
 .hero-rotator::after {
   z-index: -1;
   content: "";
@@ -50,15 +55,15 @@
 .hero-rotator .hero-copy {
   width: min(47vw, 820px);
   max-width: none;
-  padding: 2.5rem 0 5.5rem clamp(2rem, 8.35vw, 10rem);
+  padding: 2.5rem 0 5.5rem var(--page-gutter);
 }
 
 .hero-rotator .hero-copy h1 {
-  font-family: Arial, "Segoe UI", sans-serif;
+  font-family: Poppins, "Inter Variable", Arial, sans-serif;
   margin: 0 0 clamp(2.4rem, 5vh, 4.4rem);
   color: #01266A;
   font-size: clamp(3.15rem, 4.55vw, 5.45rem);
-  font-weight: 750;
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: -.055em;
   text-wrap: balance;
@@ -72,7 +77,8 @@
   border-radius: 999px;
   background: #a9d5fb;
   color: #01266A;
-  font-size: clamp(.7rem, .9vw, .9rem);
+  font-family: "Inter Variable", Arial, sans-serif;
+  font-weight: 800;
   line-height: 1;
 }
 
@@ -80,15 +86,18 @@
   max-width: 620px;
   margin: 0 0 clamp(2rem, 4vh, 3.4rem);
   color: rgba(0,0,0,.78);
+  font-family: Poppins, "Inter Variable", Arial, sans-serif;
+  font-weight: 400;
   font-size: clamp(1rem, 1.25vw, 1.35rem);
   line-height: 1.35;
 }
 .hero-rotator .hero-actions { gap: 1.7rem; }
 .hero-rotator .hero-button {
-  min-height: 60px;
-  padding: .9rem 1.8rem;
+  height: 50px;
+  min-height: 50px;
+  padding: 0 1.8rem;
   border-radius: 7px;
-  font-family: Arial, "Segoe UI", sans-serif;
+  font-family: Poppins, "Inter Variable", Arial, sans-serif;
   font-size: clamp(.95rem, 1.05vw, 1.15rem);
 }
 .hero-rotator .hero-button.btn-solid { min-width: 310px; }
@@ -97,7 +106,7 @@
 .hero-rotator-controls {
   position: absolute;
   bottom: clamp(2rem, 6vh, 4.8rem);
-  left: clamp(2rem, 8.35vw, 10rem);
+  left: var(--page-gutter);
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -133,7 +142,7 @@
   }
   .hero-rotator .hero-copy {
     width: min(58vw, 570px);
-    padding: 2.5rem 0 4.5rem clamp(2rem, 4vw, 3rem);
+    padding: 2.5rem 0 4.5rem var(--page-gutter);
   }
   .hero-rotator .hero-copy h1 {
     margin-bottom: 2.3rem;
@@ -142,10 +151,10 @@
   .hero-rotator .hero-kicker { margin-bottom: 1.8rem; }
   .hero-rotator .hero-copy > p { margin-bottom: 2rem; font-size: 1rem; }
   .hero-rotator .hero-actions { gap: .75rem; }
-  .hero-rotator .hero-button { min-height: 52px; padding: .75rem 1rem; font-size: .9rem; }
+  .hero-rotator .hero-button { height: 50px; min-height: 50px; padding: 0 1rem; font-size: .9rem; }
   .hero-rotator .hero-button.btn-solid { min-width: 220px; }
   .hero-rotator .hero-button.btn-outline { min-width: 130px; }
-  .hero-rotator-controls { bottom: 2.2rem; left: clamp(2rem, 4vw, 3rem); }
+  .hero-rotator-controls { bottom: 2.2rem; left: var(--page-gutter); }
 }
 
 @media (max-width: 760px) {
@@ -160,9 +169,10 @@
   .hero-rotator::after { background: linear-gradient(180deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.96) 48%, rgba(255,255,255,.72) 68%, rgba(255,255,255,.2) 100%); }
   .hero-background-ai,
   .hero-background-workforce { object-position: 70% center; }
+  .hero-background-ai { transform: none; }
   .hero-rotator .hero-copy {
     width: 100%;
-    padding: 2.7rem 1.25rem 8rem;
+    padding: 2.7rem var(--page-gutter) 8rem;
   }
   .hero-rotator .hero-kicker {
     margin-bottom: 1.5rem;
@@ -176,8 +186,8 @@
   }
   .hero-rotator .hero-copy > p { max-width: 34rem; margin-bottom: 1.6rem; line-height: 1.5; }
   .hero-rotator .hero-actions { gap: .65rem; }
-  .hero-rotator .hero-button { min-width: 0 !important; min-height: 48px; padding: .7rem .95rem; }
-  .hero-rotator-controls { bottom: 2rem; left: 1.25rem; }
+  .hero-rotator .hero-button { min-width: 0 !important; height: 50px; min-height: 50px; padding: 0 .95rem; }
+  .hero-rotator-controls { bottom: 2rem; left: var(--page-gutter); }
 }
 
 @media (max-width: 420px) {

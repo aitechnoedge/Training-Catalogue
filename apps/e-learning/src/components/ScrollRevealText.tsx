@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion, useInView, type Variants } from 'motion/react';
 
 // ----------------------------------------------------
 // 1. FADE IN UP EFFECT (For Hero Hook)
@@ -154,7 +154,7 @@ export function MaskedLinesText({
     },
   };
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: {
       y: '120%',
       opacity: 0,

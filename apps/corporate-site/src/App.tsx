@@ -1,11 +1,13 @@
-import { lazy, Suspense, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { lazy, Suspense, useEffect, useState } from 'react';
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import { ArrowUp, Menu, X } from 'lucide-react';
 import { mountCorporateInteractions } from './interactions';
 import HeroRotator from './HeroRotator';
 import { FooterStructure } from '../../../src/components/FooterStructure';
 import { CONTACT_PHONES, whatsappUrl } from '../../../src/data/siteContact';
 import { AnalyticsConsent } from '../../../src/components/AnalyticsConsent';
+import TrainingRoiPage from './TrainingRoiPage';
+import { CareerRoleRoute, CareersRoute } from './CareersRoute';
 
 const TEAI360Section = lazy(() => import('./TEAI360Section'));
 const ServicesShowcase = lazy(() => import('./ServicesShowcase'));
@@ -37,6 +39,8 @@ function CorporateInteractions() {
 }
 
 function CorporateHome() {
+  const [showAllMoments, setShowAllMoments] = useState(false);
+
   return (
     <div id="corporate-site">
 
@@ -51,6 +55,7 @@ function CorporateHome() {
       <a href="/catalogue">Catalogue</a>
       <a href="/insights">Insights</a>
       <a href="/careers">Careers</a>
+      <a href="/training-roi">Training ROI</a>
     </nav>
     <div className="header-actions">
       <a className="btn btn-solid" href="#ai-journey">AI Capability Journey</a>
@@ -86,7 +91,7 @@ function CorporateHome() {
     <section className="why why-unified section" aria-labelledby="why-heading">
       <header className="why-unified-intro">
         <span className="eyebrow">WHY TECHNOEDGE</span>
-        <h2 id="why-heading">Built to <em>teach.</em><br />Recognised to <em>deliver.</em></h2>
+        <h2 id="why-heading">Built to <em>Teach.</em><br />Recognised to <em>Deliver.</em></h2>
         <p>Five years of helping teams turn learning into practical capability through expert-led training, digital experiences and AI-enabled solutions.</p>
       </header>
       <div className="why-unified-showcase" aria-label="TechnoEdge partnerships, recognition and experience">
@@ -119,7 +124,7 @@ function CorporateHome() {
         </header>
 
         <div className="media-field">
-          <div className="media-world">
+          <div className={`media-world${showAllMoments ? ' is-expanded' : ''}`} id="real-moments-grid">
             <figure className="media-node media-photo" data-focus="0.06" data-x="390" data-y="310" data-zoom="1.06" style={{ '--wx': '390px', '--wy': '310px', '--node-width': '520px', '--depth': '-60px' } as React.CSSProperties}>
               <GalleryImage src="/website/assets/training-media/training-auditorium-wide.jpeg" alt="Large audience attending an artificial intelligence learning forum" width={1280} height={960} />
               <figcaption>Learning at scale</figcaption>
@@ -206,8 +211,23 @@ function CorporateHome() {
               <GalleryImage src="/website/assets/training-media/recognition-mit-letter.jpg" alt="Framed appreciation letter from Military Institute of Technology for a TechnoEdge skill-development course" width={1650} height={2200} />
               <figcaption>Appreciation from Military Institute of Technology</figcaption>
             </figure>
+
+            <figure className="media-node media-photo media-recognition" style={{ '--node-width': '350px' } as React.CSSProperties}>
+              <GalleryImage src="/website/assets/training-media/recognition-youtube-letter.jpg" alt="Framed letter from YouTube recognising the 100,000-subscriber milestone" width={1650} height={2200} />
+              <figcaption>YouTube Silver Creator recognition</figcaption>
+            </figure>
           </div>
         </div>
+
+        <button
+          type="button"
+          className="media-more-toggle"
+          aria-controls="real-moments-grid"
+          aria-expanded={showAllMoments}
+          onClick={() => setShowAllMoments((expanded) => !expanded)}
+        >
+          {showAllMoments ? 'Show fewer moments' : 'View all moments'}
+        </button>
 
       </div>
 
@@ -256,6 +276,22 @@ function CorporateHome() {
   );
 }
 
+function CareersPageRoute() {
+  const navigate = useNavigate();
+  return <CareersRoute onViewRole={(slug) => navigate(`/careers/${slug}`)} />;
+}
+
+function CareerRolePageRoute() {
+  const navigate = useNavigate();
+  const { slug = '' } = useParams();
+  return <CareerRoleRoute slug={slug} onBack={() => navigate('/careers')} />;
+}
+
 export default function App() {
-  return <Routes><Route path="/" element={<CorporateHome />} /></Routes>;
+  return <Routes>
+    <Route path="/" element={<CorporateHome />} />
+    <Route path="/careers" element={<CareersPageRoute />} />
+    <Route path="/careers/:slug" element={<CareerRolePageRoute />} />
+    <Route path="/training-roi" element={<TrainingRoiPage />} />
+  </Routes>;
 }

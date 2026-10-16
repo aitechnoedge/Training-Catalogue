@@ -25,6 +25,9 @@
   },
   "exclude": [
     "apps/e-learning",
-    "apps/corporate-site"
+    "apps/corporate-site",
+    ".runtime",
+    "dist",
+    "tmp"
   ]
 }

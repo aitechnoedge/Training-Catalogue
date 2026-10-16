@@ -13,7 +13,10 @@ type RequestOptions = Omit<RequestInit, 'body'> & { body?: unknown };
 async function parse(response: Response) {
   const type = response.headers.get('content-type') || '';
   const body = type.includes('application/json') ? await response.json() : await response.text();
-  if (!response.ok) throw new Error(typeof body === 'object' && body ? body.error || 'Request failed.' : 'Request failed.');
+  if (!response.ok) {
+    if (response.status === 401 && typeof window !== 'undefined') window.dispatchEvent(new Event('adminzz:unauthorized'));
+    throw new Error(typeof body === 'object' && body ? body.error || 'Request failed.' : 'Request failed.');
+  }
   return body;
 }
 
@@ -75,8 +78,10 @@ export async function adminBinary(path: string, format: string) {
   const anchor = document.createElement('a');
   anchor.href = url;
   anchor.download = `technoedge-export.${format}`;
+  document.body.appendChild(anchor);
   anchor.click();
-  URL.revokeObjectURL(url);
+  anchor.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
 
 export const adminCsrfToken = () => csrfToken;

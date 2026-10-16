@@ -12,7 +12,7 @@ export const CurrentOpenings: React.FC<CurrentOpeningsProps> = ({ jobs, onViewRo
     <div className="careers-page-shell">
       <div className="careers-openings-section__heading">
         <p className="careers-section-label">Current openings</p>
-        <h2 id="careers-openings-title">Open roles at TechnoEdge</h2>
+        <h2 id="careers-openings-title">Open Roles at <span>TechnoEdge</span></h2>
       </div>
 
       <div className="careers-job-list">
@@ -23,10 +23,14 @@ export const CurrentOpenings: React.FC<CurrentOpeningsProps> = ({ jobs, onViewRo
               <h3>{job.title}</h3>
               <p>{[job.department, job.type, job.location].filter(Boolean).join(' · ')}</p>
             </div>
-            <button type="button" onClick={() => onViewRole(job)} className="careers-job-row__action">
+            <a
+              href={`/careers/${encodeURIComponent(job.slug)}`}
+              onClick={(event) => { event.preventDefault(); onViewRole(job); }}
+              className="careers-job-row__action"
+            >
               View role
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-            </button>
+            </a>
           </article>
         ))}
       </div>

@@ -1,7 +1,10 @@
 import { careerJobs } from '../data/careersData';
+import { isIndexableCareerJob } from './careerJobQuality';
 import { getInsightArticleById } from '../data/insightsData';
 import { getSeoLandingPage, seoLandingPages, type SeoLandingPage } from '../data/seoLandingPages';
 import type { BaseProgramme } from '../types';
+import type { InsightArticle } from '../data/insightsData';
+import { catalogueDirectoryPage, catalogueDirectoryPath } from './cataloguePagination';
 
 export const SITE_ORIGIN = 'https://www.technoedgels.com';
 export const SITE_NAME = 'TechnoEdge Learning Services';
@@ -33,6 +36,7 @@ export interface SeoRouteContext {
   isProgrammeLoading?: boolean;
   programmeLoadError?: string | null;
   search?: string;
+  insightArticle?: InsightArticle | null;
 }
 
 const DEFAULT_SOCIAL_IMAGE = `${SITE_ORIGIN}/technoedge-brand-logo.png`;
@@ -108,6 +112,12 @@ export const indexableRoutes: IndexableRoute[] = [
     indexable: true,
     loadData: async () => null,
   },
+  {
+    path: '/training-roi',
+    pageType: 'service',
+    indexable: true,
+    loadData: async () => null,
+  },
   ...seoLandingPages.map((page): IndexableRoute => ({
     path: page.path,
     pageType: pageTypeForLanding(page),
@@ -170,6 +180,33 @@ export function resolveSeoDocument(pathnameInput: string, context: SeoRouteConte
   const landing = getSeoLandingPage(pathname);
   if (landing) return landingDocument(landing);
 
+  if (pathname === '/training-roi') {
+    const canonicalUrl = absoluteUrl('/training-roi');
+    return {
+      title: 'AI Time-Back 360 | Training ROI Measurement | TechnoEdge',
+      description: 'Measure the time employees get back after training with TechnoEdge AI Time-Back 360, an outcome-focused training ROI measurement experience.',
+      canonicalUrl,
+      robots: INDEX_ROBOTS,
+      openGraph: { type: 'website', image: DEFAULT_SOCIAL_IMAGE },
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'SoftwareApplication',
+          name: 'AI Time-Back 360',
+          applicationCategory: 'BusinessApplication',
+          operatingSystem: 'Web',
+          description: 'A TechnoEdge tool for measuring time saved and training ROI across roles, departments and industries.',
+          url: canonicalUrl,
+          publisher: organization,
+        },
+        breadcrumbData([
+          { name: 'Home', path: '/' },
+          { name: 'Training ROI', path: '/training-roi' },
+        ]),
+      ],
+    };
+  }
+
   if (pathname === '/catalogue') {
     const canonicalUrl = absoluteUrl('/catalogue');
     return {
@@ -185,6 +222,34 @@ export function resolveSeoDocument(pathnameInput: string, context: SeoRouteConte
         url: canonicalUrl,
         isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
       }],
+    };
+  }
+
+  const cataloguePage = catalogueDirectoryPage(pathname);
+  if (cataloguePage && cataloguePage > 1) {
+    const canonicalPath = catalogueDirectoryPath(cataloguePage);
+    const canonicalUrl = absoluteUrl(canonicalPath);
+    const name = `Corporate training programme directory — page ${cataloguePage}`;
+    return {
+      title: `Corporate Training Programmes — Page ${cataloguePage} | TechnoEdge`,
+      description: cleanDescription(`Browse quality-approved TechnoEdge corporate training programmes listed on catalogue directory page ${cataloguePage}.`),
+      canonicalUrl,
+      robots: context.search ? NOINDEX_ROBOTS : INDEX_ROBOTS,
+      openGraph: { type: 'website', image: DEFAULT_SOCIAL_IMAGE },
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name,
+          url: canonicalUrl,
+          isPartOf: { '@type': 'WebSite', name: SITE_NAME, url: `${SITE_ORIGIN}/` },
+        },
+        breadcrumbData([
+          { name: 'Home', path: '/' },
+          { name: 'Training catalogue', path: '/catalogue' },
+          { name: `Page ${cataloguePage}`, path: canonicalPath },
+        ]),
+      ],
     };
   }
 
@@ -270,12 +335,12 @@ export function resolveSeoDocument(pathnameInput: string, context: SeoRouteConte
 
   if (pathname.startsWith('/insights/')) {
     const slug = decodePathSegment(pathname.slice('/insights/'.length));
-    const article = getInsightArticleById(slug);
+    const article = context.insightArticle?.id === slug ? context.insightArticle : getInsightArticleById(slug);
     if (article) {
       const canonicalPath = `/insights/${encodeURIComponent(article.id)}`;
       return {
-        title: `${article.title} | TechnoEdge Insights`,
-        description: cleanDescription(article.excerpt),
+        title: article.seoTitle || `${article.title} | TechnoEdge Insights`,
+        description: cleanDescription(article.metaDescription || article.excerpt),
         canonicalUrl: absoluteUrl(canonicalPath),
         robots: article.indexable ? INDEX_ROBOTS : NOINDEX_ROBOTS,
         openGraph: { type: 'article', image: absoluteUrl(article.image) },
@@ -283,13 +348,23 @@ export function resolveSeoDocument(pathnameInput: string, context: SeoRouteConte
           '@context': 'https://schema.org',
           '@type': 'BlogPosting',
           headline: article.title,
-          description: cleanDescription(article.excerpt),
+          description: cleanDescription(article.metaDescription || article.excerpt),
           url: absoluteUrl(canonicalPath),
           mainEntityOfPage: absoluteUrl(canonicalPath),
           image: absoluteUrl(article.image),
           datePublished: article.datePublished,
           dateModified: article.dateModified,
-          author: { '@type': 'Organization', name: article.author, url: `${SITE_ORIGIN}/authors/technoedge-editorial-team` },
+          author: {
+            '@type': article.authorProfileUrl ? 'Person' : 'Organization',
+            name: article.author,
+            url: article.authorProfileUrl || `${SITE_ORIGIN}/authors/technoedge-editorial-team`,
+          },
+          reviewedBy: article.reviewer ? {
+            '@type': 'Person',
+            name: article.reviewer,
+            url: article.reviewerProfileUrl || undefined,
+          } : undefined,
+          citation: article.sourceUrls?.length ? article.sourceUrls : undefined,
           publisher: organization,
         }, breadcrumbData([
           { name: 'Home', path: '/' },
@@ -316,13 +391,33 @@ export function resolveSeoDocument(pathnameInput: string, context: SeoRouteConte
     const job = careerJobs.find((item) => item.slug === slug);
     if (job) {
       const canonicalPath = `/careers/${encodeURIComponent(job.slug)}`;
+      const jobIndexable = isIndexableCareerJob(job);
       return {
         title: `${job.title} | Careers at TechnoEdge`,
-        description: cleanDescription(`Explore the ${job.title} opportunity in ${job.department} at TechnoEdge${job.location ? ` in ${job.location}` : ''}.`),
+        description: cleanDescription(job.description),
         canonicalUrl: absoluteUrl(canonicalPath),
-        robots: job.indexable ? INDEX_ROBOTS : NOINDEX_ROBOTS,
+        robots: jobIndexable ? INDEX_ROBOTS : NOINDEX_ROBOTS,
         openGraph: { type: 'website', image: DEFAULT_SOCIAL_IMAGE },
-        jsonLd: [],
+        jsonLd: jobIndexable ? [{
+          '@context': 'https://schema.org',
+          '@type': 'JobPosting',
+          title: job.title,
+          description: job.description,
+          datePosted: job.datePosted,
+          validThrough: job.validThrough,
+          employmentType: job.type === 'Internship' ? 'INTERN' : 'FULL_TIME',
+          hiringOrganization: organization,
+          jobLocation: {
+            '@type': 'Place',
+            address: organization.address,
+          },
+          directApply: true,
+          url: absoluteUrl(canonicalPath),
+        }, breadcrumbData([
+          { name: 'Home', path: '/' },
+          { name: 'Careers', path: '/careers' },
+          { name: job.title, path: canonicalPath },
+        ])] : [],
       };
     }
   }

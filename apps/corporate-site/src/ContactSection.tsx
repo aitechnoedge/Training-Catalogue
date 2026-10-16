@@ -1,6 +1,8 @@
 import { useRef, useState, type ChangeEvent, type FormEvent } from 'react';
 import { ArrowUpRight, Building2, CheckCircle2, GraduationCap, Mail, MessageCircle, Phone } from 'lucide-react';
 import { CONTACT_EMAIL, CONTACT_PHONES, whatsappUrl } from '../../../src/data/siteContact';
+
+const formatDirectPhone = (number: string) => `+91 ${number.slice(0, 3)} ${number.slice(3, 6)} ${number.slice(6)}`;
 import { submitEnquiry } from '../../../src/data/submitEnquiry';
 
 type ContactPath = 'organisation' | 'trainer';
@@ -111,11 +113,11 @@ export default function ContactSection() {
         <div className="contact-story">
           <div className="contact-story-main">
             <span className="contact-kicker">LET'S BUILD CAPABILITY</span>
-            <h2 id="contact-heading"><em>Let’s build</em> what your team needs next.</h2>
+            <h2 id="contact-heading"><em>Let’s Build</em><br />What Your Team Needs Next.</h2>
             <p>Start with the goal. We can help you explore the right training, digital learning, or AI support.</p>
             <div className="contact-scope" aria-label="What we can discuss">
-              <span>Corporate training</span>
-              <span>Digital learning</span>
+              <span>Corporate Training</span>
+              <span>Digital Learning</span>
               <span>Data &amp; AI</span>
             </div>
           </div>
@@ -123,7 +125,7 @@ export default function ContactSection() {
             <span>Prefer a direct conversation?</span>
             <div>
               {CONTACT_PHONES.map((phone) => (
-                <a href={`tel:${phone.e164}`} key={phone.number}><Phone size={17} aria-hidden="true" /> {phone.display} <ArrowUpRight size={15} aria-hidden="true" /></a>
+                <a href={`tel:${phone.e164}`} key={phone.number}><Phone size={17} aria-hidden="true" /> {formatDirectPhone(phone.number)} <ArrowUpRight size={15} aria-hidden="true" /></a>
               ))}
             </div>
           </div>
@@ -133,7 +135,6 @@ export default function ContactSection() {
           <header className="contact-panel-intro">
             <span>START A CONVERSATION</span>
             <h3>{path === 'organisation' ? 'Tell us what you want to build.' : 'Teach with TechnoEdge.'}</h3>
-            <p>{path === 'organisation' ? 'Share a little about your organisation and the outcome you have in mind.' : 'Tell us about your expertise and the learning experiences you lead.'}</p>
           </header>
 
           <fieldset className="contact-paths">

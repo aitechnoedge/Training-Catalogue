@@ -4,9 +4,13 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { closePool, getPool } from '../server/database.mjs';
+import { listPublicBlogs } from '../server/blogRepository.mjs';
 import { peopleProcessProgrammes } from '../src/data/peopleProcessProgrammes';
 import { seoLandingPages } from '../src/data/seoLandingPages';
 import { insightsArticles } from '../src/data/insightsData';
+import { careerJobs } from '../src/data/careersData';
+import { CATALOGUE_DIRECTORY_PAGE_SIZE, catalogueDirectoryPath } from '../src/seo/cataloguePagination';
+import { isIndexableCareerJob } from '../src/seo/careerJobQuality';
 
 const SITE_ORIGIN = 'https://www.technoedgels.com';
 const SITEMAP_NAMESPACE = 'http://www.sitemaps.org/schemas/sitemap/0.9';
@@ -21,6 +25,16 @@ interface SitemapEntry {
 interface PublishedProgrammeRow {
   course_id: string;
   updated_at: Date | string;
+}
+
+interface InsightFeedItem {
+  url: string;
+  title: string;
+  excerpt: string;
+  author: string;
+  indexable: boolean;
+  datePublished?: string;
+  dateModified?: string;
 }
 
 const xmlEscape = (value: string) => value
@@ -114,19 +128,73 @@ async function getPublishedProgrammes(): Promise<SitemapEntry[]> {
   }
 }
 
+async function getManagedInsights(): Promise<InsightFeedItem[]> {
+  const pool = getPool();
+  try {
+    return await listPublicBlogs(pool, { limit: 500 });
+  } finally {
+    await closePool();
+  }
+}
+
+const feedDate = (value: string | undefined) => {
+  if (!value) return undefined;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? undefined : date.toUTCString();
+};
+
+const renderRssItem = (article: InsightFeedItem) => {
+  const date = feedDate(article.datePublished ?? article.dateModified);
+  return [
+    '    <item>',
+    `      <title>${xmlEscape(article.title)}</title>`,
+    `      <link>${xmlEscape(canonicalUrl(article.url))}</link>`,
+    `      <guid isPermaLink="true">${xmlEscape(canonicalUrl(article.url))}</guid>`,
+    `      <description>${xmlEscape(article.excerpt)}</description>`,
+    article.author ? `      <dc:creator>${xmlEscape(article.author)}</dc:creator>` : '',
+    date ? `      <pubDate>${xmlEscape(date)}</pubDate>` : '',
+    '    </item>',
+  ].filter(Boolean).join('\n');
+};
+
 async function main() {
   const programmeEntries = await getPublishedProgrammes();
+  const managedInsights = await getManagedInsights();
   const landingEntries = seoLandingPages.map((page) => ({ path: page.path, lastmod: page.updated }));
+  const indexableInsights = [
+    ...insightsArticles.filter((article) => article.indexable),
+    ...managedInsights.filter((article) => article.indexable),
+  ];
+  const insightEntries = new Map<string, SitemapEntry>();
+  for (const article of indexableInsights) {
+    insightEntries.set(article.url, {
+      path: article.url,
+      lastmod: isoDate(article.dateModified ?? article.datePublished),
+    });
+  }
+  const careerEntries = careerJobs
+    .filter((job) => isIndexableCareerJob(job))
+    .map((job) => ({ path: `/careers/${job.slug}`, lastmod: isoDate(job.datePosted) }));
+  const totalCataloguePages = Math.ceil(programmeEntries.length / CATALOGUE_DIRECTORY_PAGE_SIZE);
+  const cataloguePaginationEntries = Array.from(
+    { length: Math.max(0, totalCataloguePages - 1) },
+    (_, index) => ({ path: catalogueDirectoryPath(index + 2) }),
+  );
   const childSitemaps = [
     ['sitemap-pages.xml', [
       { path: '/' },
       { path: '/catalogue' },
+      ...cataloguePaginationEntries,
       { path: '/e-learning/' },
+      { path: '/training-roi' },
       ...landingEntries,
     ]],
     ['sitemap-programmes.xml', programmeEntries],
-    ['sitemap-insights.xml', [{ path: '/insights' }]],
-    ['sitemap-careers.xml', [{ path: '/careers' }]],
+    ['sitemap-insights.xml', [
+      { path: '/insights' },
+      ...[...insightEntries.values()].sort((left, right) => left.path.localeCompare(right.path)),
+    ]],
+    ['sitemap-careers.xml', [{ path: '/careers' }, ...careerEntries]],
   ] satisfies Array<[string, SitemapEntry[]]>;
 
   await mkdir(outputDirectory, { recursive: true });
@@ -171,20 +239,16 @@ async function main() {
       path.join(outputDirectory, 'insights.xml'),
       [
         '<?xml version="1.0" encoding="UTF-8"?>',
-        '<rss version="2.0">',
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">',
         '  <channel>',
         '    <title>TechnoEdge Insights</title>',
         `    <link>${SITE_ORIGIN}/insights</link>`,
+        `    <atom:link href="${SITE_ORIGIN}/insights.xml" rel="self" type="application/rss+xml" />`,
         '    <description>Enterprise learning, technology, data and AI insights from TechnoEdge.</description>',
         '    <language>en</language>',
-        ...insightsArticles.filter((article) => article.indexable).map((article) => [
-          '    <item>',
-          `      <title>${xmlEscape(article.title)}</title>`,
-          `      <link>${xmlEscape(canonicalUrl(article.url))}</link>`,
-          `      <guid isPermaLink="true">${xmlEscape(canonicalUrl(article.url))}</guid>`,
-          `      <description>${xmlEscape(article.excerpt)}</description>`,
-          '    </item>',
-        ].join('\n')),
+        ...indexableInsights
+          .sort((left, right) => String(right.datePublished ?? right.dateModified ?? '').localeCompare(String(left.datePublished ?? left.dateModified ?? '')))
+          .map(renderRssItem),
         '  </channel>',
         '</rss>',
         '',
@@ -193,7 +257,7 @@ async function main() {
     ),
   ]);
 
-  console.log(`SEO files generated for ${programmeEntries.length} published programme URLs.`);
+  console.log(`SEO files generated for ${programmeEntries.length} published programme URLs, ${insightEntries.size} indexable insight URLs and ${careerEntries.length} indexable job URLs.`);
 }
 
 await main();

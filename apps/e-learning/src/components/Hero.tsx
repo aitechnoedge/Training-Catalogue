@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowUpRight, Sparkles } from 'lucide-react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, useReducedMotion, type Variants } from 'motion/react';
 import { LearningEngineOrbit } from './LearningEngineOrbit';
 
 interface HeroProps {
@@ -22,7 +22,7 @@ export function Hero({ onOpenScoper }: HeroProps) {
     },
   };
 
-  const maskVariants = {
+  const maskVariants: Variants = {
     hidden: { clipPath: 'circle(0% at 50% 50%)' },
     visible: {
       clipPath: 'circle(150% at 50% 50%)',
@@ -30,7 +30,7 @@ export function Hero({ onOpenScoper }: HeroProps) {
     },
   };
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: { opacity: 0, y: 30, filter: 'blur(5px)' },
     visible: {
       opacity: 1,
@@ -40,7 +40,7 @@ export function Hero({ onOpenScoper }: HeroProps) {
     },
   };
 
-  const fadeUpVariants = {
+  const fadeUpVariants: Variants = {
     hidden: { opacity: 0, y: 30, filter: 'blur(5px)' },
     visible: {
       opacity: 1,
@@ -50,7 +50,7 @@ export function Hero({ onOpenScoper }: HeroProps) {
     },
   };
 
-  const frameVariants = {
+  const frameVariants: Variants = {
     hidden: { opacity: 0, scale: 0.9, y: 60 },
     visible: {
       opacity: 1,

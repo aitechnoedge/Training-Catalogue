@@ -1,0 +1,94 @@
+/* Final responsive guardrails: containers own their overflow rather than the page root. */
+#corporate-site { overflow-x: clip; }
+.client-logo-section,
+.client-logo-viewport,
+.ai-framework,
+.ai-framework-stage-window { max-inline-size: 100%; }
+.client-logo-viewport { contain: inline-size paint; }
+
+/* Four proof points should never depend on a hidden horizontal swipe on a phone. */
+@media (max-width: 599px) {
+  .services-showcase-header h2 { white-space: normal; text-wrap: balance; }
+  .back-top { display: none; }
+
+  .impact .impact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+  }
+  .impact .impact-card,
+  .impact .impact-card.is-active,
+  .impact .impact-card.is-past,
+  .impact .impact-card.is-upcoming {
+    min-height: 138px;
+    border-right: 1px solid rgba(13, 7, 74, .7);
+  }
+  .impact .impact-card:nth-child(2n) { border-right: 0; }
+  .impact .impact-card:nth-child(-n + 2) { border-bottom: 1px solid rgba(13, 7, 74, .7); }
+  .impact .impact-value { min-height: 88px; }
+
+  /* The stage canvas can be larger than the viewport, but only inside this scroller. */
+  .ai-framework { overflow: clip; }
+  .ai-framework-stage-window {
+    inline-size: calc(100% + 2.5rem);
+    max-inline-size: none;
+    margin-inline: -1.25rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    contain: inline-size;
+  }
+  .ai-framework-stage-set { max-inline-size: none; }
+
+  /* The homepage shows a curated proof set; the remaining moments are opt-in. */
+  .media-world:not(.is-expanded) > .media-node:nth-child(n + 8) { display: none; }
+  .media-more-toggle {
+    display: inline-flex;
+    min-height: 44px;
+    margin-top: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    padding: .7rem 1rem;
+    border: 1px solid #2666C4;
+    border-radius: 999px;
+    color: #01266A;
+    background: #fff;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  /* Keep privacy controls above, rather than on top of, the contact shortcut. */
+  #corporate-site .analytics-consent { right: .65rem; bottom: 4.75rem; left: .65rem; }
+  #corporate-site .analytics-consent__manage { margin-left: auto; }
+}
+
+/* Tablet users get a direct two-column gallery instead of the desktop scrollytelling scene. */
+@media (min-width: 600px) and (max-width: 1024px) {
+  .media-universe { height: auto; padding: 4.5rem clamp(1.5rem, 5vw, 3rem); }
+  .media-pin { position: relative; top: auto; height: auto; min-height: 0; overflow: visible; background: none; }
+  .media-pin::before,
+  .media-pin::after { display: none; }
+  .media-universe-intro { position: relative; left: auto; top: auto; width: auto; margin-bottom: 2.25rem; opacity: 1 !important; transform: none; }
+  .media-field { position: relative; inset: auto; overflow: visible; perspective: none; }
+  .media-world { position: relative; inset: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; width: auto; height: auto; transform: none !important; }
+  .media-world .media-node,
+  .media-world .media-node.is-active,
+  .media-world .media-node.is-focus { position: relative; left: auto; top: auto; width: 100%; max-width: none; opacity: 1 !important; filter: none; transform: none !important; pointer-events: auto; }
+  .media-world .media-photo img,
+  .media-world .media-photo.media-tall img { max-height: none; aspect-ratio: 1.5; }
+  .media-more-toggle { display: none; }
+}
+
+/* Keep the expressive desktop montage, but cap it to a deliberate reading length. */
+@media (min-width: 1025px) {
+  .media-universe { height: clamp(2000px, 280vh, 2600px); }
+  .media-more-toggle { display: none; }
+}
+
+/* 44px targets without making the visible hero dots visually heavy. */
+.menu-toggle { min-inline-size: 44px; min-block-size: 44px; }
+.hero-rotator-dots button { position: relative; width: 44px; height: 44px; border: 0; background: transparent; }
+.hero-rotator-dots button::before { position: absolute; top: 50%; left: 50%; width: 9px; height: 9px; border: 1px solid #2666C4; border-radius: 999px; background: rgba(255,255,255,.72); content: ""; transform: translate(-50%, -50%); }
+.hero-rotator-dots button.is-active::before { width: 30px; background: #2666C4; }
+
+@media (prefers-reduced-motion: reduce) {
+  .client-logo-viewport { overflow-x: auto; }
+}

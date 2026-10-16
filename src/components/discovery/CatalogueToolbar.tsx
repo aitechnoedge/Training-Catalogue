@@ -12,8 +12,6 @@ interface CatalogueToolbarProps {
   onSortChange: (sort: SortOption) => void;
   activeFilterCount: number;
   onOpenMobileFilters: () => void;
-  resultCount: number;
-  categoryLabel: string;
 }
 
 export const CatalogueToolbar: React.FC<CatalogueToolbarProps> = ({
@@ -24,20 +22,15 @@ export const CatalogueToolbar: React.FC<CatalogueToolbarProps> = ({
   onSortChange,
   activeFilterCount,
   onOpenMobileFilters,
-  resultCount,
-  categoryLabel,
 }) => {
   return (
     <div
       id="catalogue-toolbar-controls"
-      className="w-full rounded-2xl border border-[rgba(1,38,106,0.18)] bg-gradient-to-r from-[rgba(115,194,251,0.08)] via-white to-[rgba(1,38,106,0.04)] p-3 sm:p-4 shadow-[0_8px_28px_rgba(1,38,106,0.10)]"
+      className="w-full rounded-2xl border border-[rgba(1,38,106,0.18)] bg-[#E1EDFF] p-3 sm:p-4 shadow-[0_8px_28px_rgba(1,38,106,0.10)]"
     >
       <div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-3 sm:gap-4 w-full">
         <div className="hidden xl:block w-[220px] shrink-0 pl-1">
           <p className="text-base font-extrabold tracking-tight text-[#000000]">Find your programme</p>
-          <p className="mt-1 text-xs leading-relaxed text-[rgba(0,0,0,0.62)]">
-            {resultCount > 0 ? `${resultCount.toLocaleString()} ${categoryLabel} courses` : `Search the ${categoryLabel} catalogue`}
-          </p>
         </div>
 
         {/* Search Bar takes most of available width */}

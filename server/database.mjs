@@ -1,5 +1,6 @@
 import pg from 'pg';
 import fs from 'node:fs';
+import { assertDatabaseEnvironmentIsSafe } from './deploymentEnvironment.mjs';
 
 const { Pool } = pg;
 let pool;
@@ -32,6 +33,7 @@ function createSslConfiguration(connectionUrl) {
 export function getPool() {
   if (pool) return pool;
 
+  assertDatabaseEnvironmentIsSafe();
   const connectionString = process.env.DATABASE_URL?.trim();
   if (!connectionString) {
     throw new Error('DATABASE_URL is required. Copy .env.example to .env and provide a PostgreSQL connection string.');

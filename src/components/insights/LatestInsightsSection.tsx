@@ -75,9 +75,9 @@ export const LatestInsightsSection: React.FC<{ articles: InsightArticle[] }> = (
     <section id="latest-insights" className="latest-insights" aria-labelledby="latest-insights-title">
       <div className="insights-shell">
         <div className="latest-insights__heading-row">
-          <div>
+          <div className="latest-insights__heading-copy">
             <p className="latest-insights__eyebrow">Knowledge for what&apos;s next</p>
-            <h2 id="latest-insights-title">Latest Insights</h2>
+            <h2 id="latest-insights-title">Other Insights</h2>
           </div>
 
           <div className="latest-insights__quick-nav" aria-label="Quick page navigation">

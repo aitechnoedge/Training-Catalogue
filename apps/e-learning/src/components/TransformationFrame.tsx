@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useReducedMotion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion, useMotionValue, useSpring, useTransform, type Variants } from 'motion/react';
 import { CheckCircle, Search, ShieldCheck } from 'lucide-react';
 import img1 from '../assets/images/same_person_lvl1.jpg';
 import img2 from '../assets/images/same_person_lvl2.jpg';
@@ -176,7 +176,7 @@ export function TransformationFrame() {
     }
   };
 
-  const stageVariants = {
+  const stageVariants: Variants = {
     initial: { opacity: 0 },
     animate: {
       opacity: 1,

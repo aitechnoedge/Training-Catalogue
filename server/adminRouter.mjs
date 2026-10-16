@@ -122,7 +122,6 @@ async function uploadBlogImage(pool, request) {
     method: 'POST',
     headers: {
       apikey: serviceKey,
-      Authorization: `Bearer ${serviceKey}`,
       'Content-Type': 'image/webp',
       'x-upsert': 'false',
     },

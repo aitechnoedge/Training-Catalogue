@@ -213,7 +213,10 @@ export function createApp(pool, { serveStatic = process.env.NODE_ENV === 'produc
       const origin = String(process.env.APP_URL || 'https://www.technoedgels.com').replace(/\/$/, '');
       const articles = await listPublicBlogs(pool, { limit: 500 });
       const escape = (value) => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
-      const urls = articles.map((article) => `  <url><loc>${escape(`${origin}${article.url}`)}</loc><lastmod>${escape(article.dateModified)}</lastmod></url>`).join('\n');
+      const urls = articles
+        .filter((article) => article.indexable)
+        .map((article) => `  <url><loc>${escape(`${origin}${article.url}`)}</loc><lastmod>${escape(article.dateModified)}</lastmod></url>`)
+        .join('\n');
       return response.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
     } catch (error) {
       return next(error);

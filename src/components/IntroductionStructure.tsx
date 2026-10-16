@@ -16,7 +16,8 @@ export const IntroductionStructure: React.FC = () => {
 
           <div className="catalogue-hero__supporting-copy">
             <p id="main-introduction-description">
-              Explore 3,500+ practical programmes for critical skill gaps.
+              Explore 3,500+ practical programmes for <br />
+              critical skill gaps.
             </p>
           </div>
 

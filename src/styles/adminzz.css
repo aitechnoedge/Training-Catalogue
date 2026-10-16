@@ -3,3 +3,52 @@
 .adminzz-calendar-head{display:flex;justify-content:space-between;gap:18px}.adminzz-view-toggle{align-self:flex-start;display:flex;border:1px solid var(--admin-border);border-radius:8px;overflow:hidden}.adminzz-view-toggle button{border:0;background:#fff;padding:8px 10px;color:#607994;font:700 12px inherit;cursor:pointer}.adminzz-view-toggle button.is-active{background:var(--admin-navy);color:#fff}.adminzz-calendar-month{margin:22px 0 9px;color:var(--admin-navy);font-size:15px}.adminzz-month-grid{display:grid;grid-template-columns:repeat(7,minmax(100px,1fr));border-top:1px solid var(--admin-border);border-left:1px solid var(--admin-border);overflow:auto}.adminzz-month-grid>strong{min-width:100px;padding:9px;background:#f6faff;border-right:1px solid var(--admin-border);border-bottom:1px solid var(--admin-border);color:#63809c;font-size:11px;text-transform:uppercase;text-align:center}.adminzz-day-cell{min-height:112px;padding:7px;border-right:1px solid var(--admin-border);border-bottom:1px solid var(--admin-border);display:grid;align-content:start;gap:4px}.adminzz-day-cell>span{color:var(--admin-navy);font-weight:800;font-size:12px}.adminzz-day-cell button{border:0;border-left:3px solid var(--admin-blue);background:var(--admin-pale);color:#124775;padding:4px 5px;font:700 10px inherit;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
 @media(max-width:960px){.adminzz-sidebar{transform:translateX(-100%);transition:transform .2s ease}.adminzz-sidebar.is-open{transform:translateX(0)}.adminzz-main{margin-left:0;width:100%}.adminzz-menu{display:block}.adminzz-topbar>span{display:none}.adminzz-metrics{grid-template-columns:repeat(2,1fr)}.adminzz-article-grid{grid-template-columns:repeat(2,1fr)}.adminzz-editor-layout{grid-template-columns:1fr}.adminzz-editor-side{order:-1}}
 @media(max-width:600px){.adminzz-page{padding:27px 16px 45px}.adminzz-grid.two,.adminzz-fields{grid-template-columns:1fr}.adminzz-metrics{grid-template-columns:1fr}.adminzz-topbar{padding:0 16px}.adminzz-article-grid{grid-template-columns:1fr}.adminzz-editor-head{align-items:flex-start;flex-direction:column}.adminzz-schedule-list li{grid-template-columns:1fr}.adminzz-comment-list>article{grid-template-columns:auto 1fr}.adminzz-comment-actions{grid-column:2;justify-content:flex-start}.adminzz-login-card{padding:27px 22px}.adminzz-detail-section dl{grid-template-columns:1fr}.adminzz-detail-section dt{font-weight:700}}
+
+/* Admin interaction, accessibility, and motion layer. */
+.adminzz-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.adminzz-nav-scrim{display:none}
+.adminzz-topbar{position:sticky;top:0;z-index:15}
+.adminzz-button,.adminzz-icon-button,.adminzz-stat,.adminzz-sidebar button,.adminzz-tabs button,.adminzz-view-toggle button,.adminzz-card-actions button,.adminzz-card-actions a,.adminzz-contact-actions a,.adminzz-simple-list button,.adminzz-schedule-list button,.adminzz-comment-actions button,.adminzz-revisions button,.adminzz-day-cell button{transition:transform .16s ease,border-color .16s ease,background-color .16s ease,color .16s ease,box-shadow .16s ease,opacity .16s ease}
+.adminzz-button:active:not(:disabled),.adminzz-icon-button:active:not(:disabled),.adminzz-stat:active,.adminzz-sidebar button:active,.adminzz-tabs button:active,.adminzz-view-toggle button:active,.adminzz-card-actions button:active,.adminzz-card-actions a:active,.adminzz-contact-actions a:active{transform:scale(.97)}
+.adminzz-button:focus-visible,.adminzz-icon-button:focus-visible,.adminzz-stat:focus-visible,.adminzz-sidebar button:focus-visible,.adminzz-tabs button:focus-visible,.adminzz-view-toggle button:focus-visible,.adminzz-card-actions button:focus-visible,.adminzz-card-actions a:focus-visible,.adminzz-contact-actions a:focus-visible,.adminzz-simple-list button:focus-visible,.adminzz-schedule-list button:focus-visible,.adminzz-comment-actions button:focus-visible,.adminzz-revisions button:focus-visible,.adminzz-day-cell button:focus-visible,.adminzz-table-wrap:focus-visible,.adminzz-month-grid:focus-visible,.adminzz-search:focus-within{outline:3px solid rgba(115,194,251,.55);outline-offset:2px}
+.adminzz-toolbar select{box-sizing:border-box;border:1px solid var(--admin-border);border-radius:8px;background:#fff;color:var(--admin-navy);padding:0 34px 0 11px;font:600 12px inherit;outline:none}
+.adminzz-toolbar select:focus-visible{border-color:var(--admin-blue);box-shadow:0 0 0 3px rgba(115,194,251,.2)}
+.adminzz-loading{gap:10px}
+.adminzz-loading::before{content:"";width:22px;height:22px;border:3px solid rgba(38,102,196,.2);border-top-color:var(--admin-blue);border-radius:50%;animation:adminzz-spin .8s linear infinite}
+.adminzz-pagination{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.adminzz-pagination>div{display:flex;gap:8px}
+.adminzz-table-wrap,.adminzz-month-grid{scrollbar-color:var(--admin-blue) var(--admin-pale);scrollbar-width:thin}
+.adminzz-calendar-navigation{display:flex;align-items:center;gap:7px;margin:20px 0 9px}.adminzz-calendar-navigation .adminzz-calendar-month{margin:0;min-width:150px;text-align:center}.adminzz-calendar-navigation .adminzz-button{margin-left:auto}
+.adminzz-drawer-backdrop,.adminzz-preview-backdrop{backdrop-filter:blur(4px);animation:adminzz-fade-in .18s ease both}
+.adminzz-drawer{animation:adminzz-slide-in .24s cubic-bezier(.22,.8,.28,1) both}
+.adminzz-preview{animation:adminzz-rise-in .24s cubic-bezier(.22,.8,.28,1) both}
+.adminzz-icon-button{border-radius:8px;min-width:38px;min-height:38px;display:inline-grid;place-items:center}
+.adminzz-icon-button:hover{background:var(--admin-pale)}
+.adminzz-comment-actions button:disabled{opacity:.5;cursor:not-allowed}
+@keyframes adminzz-spin{to{transform:rotate(360deg)}}
+@keyframes adminzz-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes adminzz-slide-in{from{transform:translateX(24px);opacity:.7}to{transform:translateX(0);opacity:1}}
+@keyframes adminzz-rise-in{from{transform:translateY(12px) scale(.985);opacity:.7}to{transform:translateY(0) scale(1);opacity:1}}
+@media(max-width:960px){
+  .adminzz-nav-scrim{display:block;position:fixed;inset:0;border:0;background:rgba(3,18,48,.42);z-index:19;opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .adminzz-nav-scrim.is-open{opacity:1;pointer-events:auto}
+  .adminzz-menu{min-width:42px;min-height:42px;border-radius:9px;cursor:pointer}
+  .adminzz-menu:hover{background:var(--admin-pale)}
+}
+@media(max-width:600px){
+  .adminzz-toolbar>*{width:100%}
+  .adminzz-toolbar .adminzz-search{min-width:100%}
+  .adminzz-toolbar select,.adminzz-toolbar>button{height:44px}
+  .adminzz-pagination{align-items:stretch;flex-direction:column}
+  .adminzz-pagination>div .adminzz-button{flex:1}
+  .adminzz-preview{padding:46px 22px 28px}
+}
+@media(prefers-reduced-motion:reduce){
+  .adminzz-shell *,.adminzz-shell *::before,.adminzz-shell *::after,.adminzz-login *,.adminzz-login *::before,.adminzz-login *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
+}
+@media(prefers-reduced-transparency:reduce){.adminzz-drawer-backdrop,.adminzz-preview-backdrop,.adminzz-nav-scrim{backdrop-filter:none;background:rgba(3,18,48,.78)}}
+@media(prefers-contrast:more){
+  :root{--admin-border:#6884a5}
+  .adminzz-button,.adminzz-table-wrap,.adminzz-panel,.adminzz-stat,.adminzz-article-card,.adminzz-comment-list>article{box-shadow:none}
+  .adminzz-muted,.adminzz-page-heading>p:last-child{color:#304d69}
+}

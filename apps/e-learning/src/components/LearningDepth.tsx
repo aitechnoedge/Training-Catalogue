@@ -4,7 +4,8 @@ import { LearnerIllustration } from './LearnerIllustration';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
 
 export function LearningDepth() {
-  const [level, setLevel] = useState<number>(1);
+  type LearningLevel = 1 | 2 | 3 | 4;
+  const [level, setLevel] = useState<LearningLevel>(1);
   const containerRef = useRef<HTMLElement>(null);
   const isClickScrollingRef = useRef<boolean>(false);
   const clickTimeoutRef = useRef<number | null>(null);
@@ -19,7 +20,7 @@ export function LearningDepth() {
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (isClickScrollingRef.current) return;
 
-    let targetLvl = 1;
+    let targetLvl: LearningLevel = 1;
     if (latest < 0.25) {
       targetLvl = 1;
     } else if (latest < 0.5) {
@@ -34,7 +35,7 @@ export function LearningDepth() {
   });
 
   // Smoothly jump to specific level on click
-  const handleLevelSelect = (targetLevel: number) => {
+  const handleLevelSelect = (targetLevel: LearningLevel) => {
     setLevel(targetLevel);
     if (!containerRef.current) return;
 
@@ -134,7 +135,7 @@ export function LearningDepth() {
 
             {/* Mini Step Track Indicators */}
             <div className="flex items-center gap-1.5 bg-white/40 backdrop-blur-md p-1.5 rounded-full border border-black/5 shadow-xs">
-              {[1, 2, 3, 4].map((step) => (
+              {([1, 2, 3, 4] as const).map((step) => (
                 <button
                   key={step}
                   type="button"

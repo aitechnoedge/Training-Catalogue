@@ -3,10 +3,16 @@
 .menu-toggle[aria-expanded="true"] .menu-close-icon{display:block}
 .menu-toggle svg{color:#01266A}
 
+/* One responsive outer gutter keeps navigation and page sections aligned. */
+#corporate-site{--page-gutter:clamp(16px,4.5vw,72px)}
+#corporate-site .section,
+#corporate-site .impact,
+#corporate-site .ai-framework{padding-inline:var(--page-gutter)}
+
 /* Balanced side columns keep the five links at the viewport centre. */
-.site-header{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);column-gap:24px}
+.site-header{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);column-gap:24px;padding-inline:var(--page-gutter);font-family:Poppins,"Inter Variable",Arial,sans-serif}
 .brand{grid-column:1;justify-self:start}
-.primary-nav{grid-column:2;justify-self:center;justify-content:center;gap:24px;font:600 14px Arial,sans-serif;white-space:nowrap}
+.primary-nav{grid-column:2;justify-self:center;justify-content:center;gap:24px;font:600 14px Poppins,"Inter Variable",Arial,sans-serif;white-space:nowrap}
 .header-actions{grid-column:3;justify-self:end}
 
 @media(max-width:1279px){
@@ -25,7 +31,7 @@
 }
 
 @media(max-width:760px){
-  .site-header{grid-template-columns:minmax(0,1fr) auto;padding-inline:16px}
+  .site-header{grid-template-columns:minmax(0,1fr) auto}
   .header-actions{display:none}
   .menu-toggle{grid-column:2}
 }

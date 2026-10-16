@@ -39,6 +39,7 @@
   max-width: 72rem;
   margin: 0 auto;
   color: var(--insights-navy);
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2rem, 8.6vw, 2.25rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -46,21 +47,17 @@
   text-wrap: balance;
 }
 
-.insights-hero__accent {
-  color: var(--insights-primary);
+.insights-hero h1 span {
+  display: block;
 }
 
-.insights-hero__break--desktop {
-  display: none;
-}
-
-.insights-hero__break--mobile {
-  display: initial;
+.insights-hero h1 span:last-child {
+  color: #2666C8;
 }
 
 .insights-hero__copy {
   display: grid;
-  max-width: 51.25rem;
+  max-width: none;
   margin: 1.5rem auto 0;
   gap: 0.75rem;
 }
@@ -68,8 +65,9 @@
 .insights-hero__copy p {
   margin: 0;
   color: var(--insights-text-secondary);
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.6;
   text-wrap: balance;
 }
@@ -85,14 +83,6 @@
 
   .insights-hero h1 {
     font-size: 2.625rem;
-  }
-
-  .insights-hero__break--desktop {
-    display: initial;
-  }
-
-  .insights-hero__break--mobile {
-    display: none;
   }
 
   .insights-hero__copy p {
@@ -115,6 +105,7 @@
 
   .insights-hero__copy p {
     font-size: 1.125rem;
+    white-space: nowrap;
   }
 }
 
@@ -126,6 +117,7 @@
 .editors-picks h2 {
   margin: 0 0 2rem;
   color: var(--insights-navy);
+  font-family: 'Poppins', sans-serif;
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -804,7 +796,7 @@ img.featured-mini-card__image {
 
 .insight-article__media {
   max-width: 67.5rem;
-  aspect-ratio: 16 / 7;
+  aspect-ratio: 16 / 9;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid var(--insights-border);
@@ -1160,6 +1152,52 @@ img.insight-article__image {
   color: #027a48;
 }
 
+.insight-article__review {
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, .76);
+  font-size: .9rem;
+}
+
+.insight-article__review a {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.insight-article__sources {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(1, 38, 106, .14);
+}
+
+.insight-article__sources ol {
+  display: grid;
+  gap: .65rem;
+  padding-left: 1.4rem;
+}
+
+.insight-article__sources a {
+  color: #01266a;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: .18em;
+}
+
+.insight-article__disclosure {
+  margin-top: 2rem;
+  padding: 1.2rem 1.35rem;
+  border: 1px solid rgba(38, 102, 196, .2);
+  border-radius: .85rem;
+  background: #f0f7ff;
+  color: #10141c;
+}
+
+.insight-article__disclosure p {
+  margin: .45rem 0 0;
+}
+
 .insight-comments__list {
   display: grid;
   margin-top: 1.5rem;
@@ -1409,29 +1447,50 @@ img.insight-article__image {
 }
 
 .latest-insights__heading-row {
+  position: relative;
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
+  justify-content: center;
   gap: 1.5rem;
 }
 
+.latest-insights__heading-copy {
+  text-align: center;
+}
+
+.latest-insights__quick-nav {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
 .latest-insights__eyebrow {
-  margin: 0 0 0.625rem;
-  color: var(--insights-primary);
-  font-size: 0.6875rem;
+  display: inline-flex;
+  width: min(19.6875rem, 100%);
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 1.125rem;
+  padding: 0;
+  border-radius: 999px;
+  background: #91B9F5;
+  color: #01266A;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.2em;
   line-height: 1.4;
   text-transform: uppercase;
 }
 
 .latest-insights h2 {
   margin: 0;
-  color: var(--insights-navy);
-  font-size: clamp(2rem, 7.4vw, 2.25rem);
+  color: #2666C8;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3rem, 5.4vw, 4.6875rem);
   font-weight: 700;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
 }
 
 .latest-insights__quick-nav {
@@ -1854,7 +1913,7 @@ img.insight-article__image {
   }
 
   .latest-insights h2 {
-    font-size: 2.5rem;
+    font-size: 4.6875rem;
   }
 
   .latest-insights__grid-stage {

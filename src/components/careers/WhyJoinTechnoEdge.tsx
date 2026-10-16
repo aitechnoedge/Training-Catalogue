@@ -8,7 +8,7 @@ export const WhyJoinTechnoEdge: React.FC = () => (
     <div className="careers-page-shell">
       <div className="careers-why-section__heading">
         <p className="careers-section-label">Why join TechnoEdge</p>
-        <h2 id="careers-why-title">Learn. Build. Grow.</h2>
+        <h2 id="careers-why-title">Learn. <span>Build.</span> Grow.</h2>
       </div>
 
       <CareerPhotoGallery photos={careerPhotos} />

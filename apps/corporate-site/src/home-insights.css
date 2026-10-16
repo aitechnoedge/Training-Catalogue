@@ -7,10 +7,9 @@
 
 .home-insights-shell { max-width: 1280px; margin: auto; }
 .home-insights-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 2rem; }
-.home-insights-eyebrow { display: block; color: #2666C4; font-size: .75rem; font-weight: 850; letter-spacing: .17em; }
-.home-insights-header h2 { max-width: 780px; margin: .55rem 0 .8rem; font-family: News706, Georgia, serif; font-size: clamp(2.3rem, 4.4vw, 4.2rem); line-height: 1.08; letter-spacing: -.04em; }
+.home-insights-header h2 { max-width: 780px; margin: 0 0 .8rem; font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(2.3rem, 4vw, 3.125rem); font-weight: 600; line-height: 1.08; letter-spacing: -.04em; }
 .home-insights-header p { max-width: 620px; margin: 0; color: rgba(0,0,0,.68); font-size: 1rem; }
-.home-insights-all { display: inline-flex; align-items: center; gap: .65rem; flex: none; padding: .8rem 1rem; border: 1px solid rgba(38,102,196,.22); border-radius: 12px; color: #01266A; background: #fff; font-size: .87rem; font-weight: 750; transition: background .2s, transform .2s; }
+.home-insights-all { display: inline-flex; align-items: center; gap: .65rem; flex: none; padding: .8rem 1rem; border: 1px solid rgba(38,102,196,.22); border-radius: 12px; color: #01266A; background: #fff; font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: .87rem; font-weight: 750; transition: background .2s, transform .2s; }
 .home-insights-all:hover { color: #2666C4; background: #F0F7FF; transform: translateY(-2px); }
 
 .home-insights-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }

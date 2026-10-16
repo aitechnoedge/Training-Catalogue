@@ -9,6 +9,7 @@ interface InsightArticlePageProps {
   slug: string;
   onBack: () => void;
   initialContent?: ImportedArticleContent | null;
+  initialArticle?: InsightArticle | null;
 }
 
 export interface ImportedArticleContent {
@@ -105,9 +106,10 @@ const ReferenceTable: React.FC<{ source: string }> = ({ source }) => {
   );
 };
 
-export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, onBack, initialContent = null }) => {
+export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, onBack, initialContent = null, initialArticle = null }) => {
   const staticArticle = useMemo(() => getInsightArticleById(slug), [slug]);
-  const [article, setArticle] = useState<InsightArticle | undefined>(staticArticle);
+  const seededArticle = initialArticle ?? staticArticle;
+  const [article, setArticle] = useState<InsightArticle | undefined>(seededArticle ?? undefined);
   const [content, setContent] = useState<ImportedArticleContent | null>(initialContent);
   const [contentError, setContentError] = useState<string | null>(null);
   const [resolved, setResolved] = useState(false);
@@ -118,7 +120,7 @@ export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, on
 
   useEffect(() => {
     let active = true;
-    setArticle(staticArticle);
+    setArticle(initialArticle ?? staticArticle);
     setContent(initialContent);
     setContentError(null);
     setResolved(false);
@@ -140,7 +142,7 @@ export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, on
       })
       .catch(() => {
         if (!active) return;
-        if (!staticArticle) setContentError('This article is not available.');
+        if (!staticArticle && !initialArticle) setContentError('This article is not available.');
         setResolved(true);
         if (!initialContent && staticArticle) {
           getContent(staticArticle.id)
@@ -150,7 +152,7 @@ export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, on
       });
 
     return () => { active = false; };
-  }, [slug, staticArticle, initialContent]);
+  }, [slug, staticArticle, initialArticle, initialContent]);
 
   const blocks = useMemo(() => (content ? parseBlocks(content.content) : []), [content]);
   const headings = useMemo(() => blocks.filter((block): block is Extract<ArticleBlock, { type: 'heading' }> => block.type === 'heading' && block.level === 2), [blocks]);
@@ -186,12 +188,19 @@ export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, on
           <p className="insight-article__summary">{article.excerpt}</p>
 
           <div className="insight-article__meta" aria-label="Article information">
-            <a href="/authors/technoedge-editorial-team"><UserRound aria-hidden="true" /> {article.author}</a>
+            <a href={article.authorProfileUrl || '/authors/technoedge-editorial-team'}><UserRound aria-hidden="true" /> {article.author}</a>
             <i aria-hidden="true" />
             <span><CalendarDays aria-hidden="true" /> {article.date}</span>
             <i aria-hidden="true" />
             <span><Clock3 aria-hidden="true" /> {article.readTime}</span>
           </div>
+          {(article.reviewer || article.reviewedAt) && (
+            <p className="insight-article__review">
+              {article.reviewer && <>Reviewed by {article.reviewerProfileUrl ? <a href={article.reviewerProfileUrl}>{article.reviewer}</a> : article.reviewer}</>}
+              {article.reviewer && article.reviewedAt && ' · '}
+              {article.reviewedAt && <>Material review: <time dateTime={article.reviewedAt}>{new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium' }).format(new Date(article.reviewedAt))}</time></>}
+            </p>
+          )}
         </div>
       </header>
 
@@ -226,6 +235,24 @@ export const InsightArticlePage: React.FC<InsightArticlePageProps> = ({ slug, on
               {!content && !contentError && <p className="insight-article__content-loading" role="status">Loading article…</p>}
               {contentError && <p className="insight-article__content-error" role="alert">{contentError}</p>}
               {content && <ReferenceTable source={content.tables} />}
+
+              {article.sourceUrls?.length ? (
+                <section className="insight-article__sources" aria-labelledby="article-sources-heading">
+                  <h2 id="article-sources-heading">Sources and further reading</h2>
+                  <ol>
+                    {article.sourceUrls.map((source) => (
+                      <li key={source}><a href={source} rel="noopener noreferrer">{new URL(source).hostname.replace(/^www\./, '')}</a></li>
+                    ))}
+                  </ol>
+                </section>
+              ) : null}
+
+              {article.aiAssistanceDisclosure ? (
+                <aside className="insight-article__disclosure" aria-label="AI assistance disclosure">
+                  <strong>AI assistance disclosure</strong>
+                  <p>{article.aiAssistanceDisclosure}</p>
+                </aside>
+              ) : null}
 
               <InsightComments articleId={article.id} />
             </article>

@@ -1,17 +1,17 @@
 .ai-framework-scroll {
   position: relative;
-  height: 500vh;
+  height: auto;
   color: #01266A;
   background: #ffffff;
 }
 .ai-framework {
-  position: sticky;
-  top: 72px;
+  position: relative;
+  top: auto;
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  height: calc(100svh - 72px);
-  min-height: 610px;
+  height: clamp(720px, calc(100svh - 72px), 920px);
+  min-height: 720px;
   padding: clamp(2rem, 4vh, 3.4rem) clamp(1.25rem, 5vw, 5rem) clamp(1.5rem, 3vh, 2.5rem);
   overflow: hidden;
   background: radial-gradient(ellipse at 82% 72%, rgba(115,194,251,.18), transparent 42%), linear-gradient(180deg, #FFFFFF 0%, #F0F7FF 100%);
@@ -36,8 +36,8 @@
   width: min(100%, 1440px);
   margin: 0 auto clamp(1.2rem, 2.5vh, 2.1rem);
 }
-.ai-framework-heading h2 { margin: 0 0 .25rem; color: #01266A; font-family: News706, Georgia, serif; font-size: clamp(2.4rem, 4.3vw, 4.65rem); line-height: .95; letter-spacing: -.05em; }
-.ai-framework-heading p { margin: 0; color: rgba(0,0,0,.68); font-size: clamp(.88rem, 1.1vw, 1.05rem); }
+.ai-framework-heading h2 { margin: 0 0 .25rem; color: #01266A; font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(2.4rem, 4.3vw, 4.65rem); font-weight: 600; line-height: .95; letter-spacing: -.05em; }
+.ai-framework-heading p { margin: 0; color: rgba(0,0,0,.68); font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(.88rem, 1.1vw, 1.05rem); font-weight: 500; }
 .ai-framework-layout {
   position: relative;
   z-index: 1;
@@ -57,9 +57,9 @@
   padding: clamp(.8rem, 1.4vw, 1.2rem) 0;
   animation: ai-copy-enter .44s cubic-bezier(.2,.72,.2,1) both;
 }
-.ai-framework-copy h3 { margin: 0; color: #01266A; font-family: News706, Georgia, serif; font-size: clamp(2.25rem, 4vw, 4.6rem); line-height: .96; letter-spacing: -.045em; }
-.ai-framework-copy strong { display: block; margin-top: 1.05rem; color: #2666C4; font-size: clamp(1rem, 1.35vw, 1.28rem); line-height: 1.35; }
-.ai-framework-copy p { max-width: 39ch; margin: .65rem 0 0; color: rgba(0,0,0,.68); font-size: clamp(.83rem, 1.05vw, 1rem); line-height: 1.58; }
+.ai-framework-copy h3 { margin: 0; color: #01266A; font-family: News706, Georgia, serif; font-size: clamp(2.25rem, 4vw, 4.6rem); font-weight: 700; line-height: .96; letter-spacing: -.045em; }
+.ai-framework-copy strong { display: block; margin-top: 1.05rem; color: #2666C4; font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(1rem, 1.35vw, 1.28rem); line-height: 1.35; }
+.ai-framework-copy p { max-width: 39ch; margin: .65rem 0 0; color: rgba(0,0,0,.68); font-family: Poppins, "Inter Variable", Arial, sans-serif; font-size: clamp(.83rem, 1.05vw, 1rem); font-weight: 500; line-height: 1.58; }
 .ai-framework-progress { display: grid; grid-template-columns: repeat(5, 1fr); gap: 5px; width: min(100%, 290px); margin-top: 1.35rem; }
 .ai-framework-progress span { height: 3px; background: rgba(38,102,196,.18); transition: background-color .3s ease; }
 .ai-framework-progress span.is-filled { background: #2666C4; }
@@ -255,7 +255,7 @@
 }
 @keyframes ai-copy-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 @media (max-width: 960px) {
-  .ai-framework { top: 72px; height: calc(100svh - 72px); padding-inline: 1.5rem; }
+  .ai-framework { top: auto; height: clamp(720px, calc(100svh - 72px), 920px); padding-inline: 1.5rem; }
   .ai-framework-layout { grid-template-columns: minmax(220px, .72fr) minmax(0, 1.28fr); gap: 1.5rem; }
   .ai-framework-stage-set { gap: .38rem; transform: perspective(1300px) rotateY(-3deg); }
   .ai-framework-stage { padding-inline: .65rem; }

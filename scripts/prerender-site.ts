@@ -6,11 +6,14 @@ import { pathToFileURL } from 'node:url';
 import { build } from 'vite';
 import { careerJobs } from '../src/data/careersData';
 import { insightsArticles } from '../src/data/insightsData';
+import type { ImportedArticleContent } from '../src/components/insights/InsightArticlePage';
 import { peopleProcessProgrammes } from '../src/data/peopleProcessProgrammes';
 import { indexableRoutes, resolveSeoDocument, type SeoDocument } from '../src/seo/routeManifest';
 import type { AppInitialData } from '../src/App';
 import type { BaseProgramme, PeopleProcessProgramme } from '../src/types';
 import { closePool, getPool } from '../server/database.mjs';
+import { getPublicBlog, listPublicBlogs } from '../server/blogRepository.mjs';
+import { CATALOGUE_DIRECTORY_PAGE_SIZE, catalogueDirectoryPath } from '../src/seo/cataloguePagination';
 
 const projectRoot = path.resolve(import.meta.dirname, '..');
 const distRoot = path.join(projectRoot, 'dist');
@@ -139,6 +142,24 @@ async function mapConcurrent<T>(items: T[], limit: number, worker: (item: T) => 
     }
   });
   await Promise.all(runners);
+}
+
+async function mapConcurrentResults<T, R>(
+  items: T[],
+  limit: number,
+  worker: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let cursor = 0;
+  const runners = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await worker(items[index]);
+    }
+  });
+  await Promise.all(runners);
+  return results;
 }
 
 const durationLabel = (minutes: number | null | undefined) => {
@@ -318,6 +339,23 @@ async function loadPublishedProgrammes(): Promise<BaseProgramme[]> {
   }
 }
 
+async function loadManagedInsights() {
+  const pool = getPool();
+  try {
+    const importedInsightSlugs = new Set(insightsArticles.map((article) => article.id));
+    const articles = (await listPublicBlogs(pool, { limit: 500 }) as Array<{ id: string }>)
+      .filter((article) => !importedInsightSlugs.has(article.id));
+    const records = await mapConcurrentResults(articles, 4, async (article) => {
+      const result = await getPublicBlog(pool, article.id);
+      if (!result || 'redirect' in result) return null;
+      return result;
+    });
+    return records.filter((record): record is Exclude<typeof record, null> => record !== null);
+  } finally {
+    await closePool();
+  }
+}
+
 await buildSsrBundles();
 
 const [renderRoot, renderCorporate, renderELearning] = await Promise.all([
@@ -326,9 +364,12 @@ const [renderRoot, renderCorporate, renderELearning] = await Promise.all([
   importRenderer<SimpleRenderer>(path.join(ssrRoot, 'e-learning')),
 ]);
 
-const rootTemplate = await readFile(path.join(distRoot, 'index.html'), 'utf8');
+const appShellPath = path.join(distRoot, 'app-shell.html');
+const rootTemplate = await readFile(appShellPath, 'utf8')
+  .catch(() => readFile(path.join(distRoot, 'index.html'), 'utf8'));
 
 const publishedProgrammes = await loadPublishedProgrammes();
+const managedInsights = await loadManagedInsights();
 const indexableProgrammes = publishedProgrammes.filter((programme) => programme.seoIndexable);
 const peopleProcessForLinks = peopleProcessProgrammes.map((programme) => ({
   id: programme.id,
@@ -338,28 +379,53 @@ const peopleProcessForLinks = peopleProcessProgrammes.map((programme) => ({
 const programmeDirectory = [
   ...indexableProgrammes.map((programme) => ({ id: programme.id, title: programme.title, category: programme.category })),
   ...peopleProcessForLinks,
-];
+].sort((left, right) => left.id.localeCompare(right.id));
 const programmeLinksByCategory = new Map<string, Array<{ id: string; title: string }>>();
 for (const programme of programmeDirectory) {
   const links = programmeLinksByCategory.get(programme.category) ?? [];
   links.push({ id: programme.id, title: programme.title });
   programmeLinksByCategory.set(programme.category, links);
 }
-const categoryOrder = ['role-based', 'ai-tools', 'tools-technology', 'certifications', 'process-based', 'people-behavioural'];
-const catalogueLinks = categoryOrder.flatMap((category) => (programmeLinksByCategory.get(category) ?? []).slice(0, 4));
+const cataloguePages = Array.from(
+  { length: Math.ceil(programmeDirectory.length / CATALOGUE_DIRECTORY_PAGE_SIZE) },
+  (_, index) => programmeDirectory
+    .slice(index * CATALOGUE_DIRECTORY_PAGE_SIZE, (index + 1) * CATALOGUE_DIRECTORY_PAGE_SIZE)
+    .map(({ id, title }) => ({ id, title })),
+);
+const catalogueTotalPages = cataloguePages.length;
 
 await mapConcurrent(indexableRoutes, 8, async (route) => {
   const category = route.path.startsWith('/catalogue/') ? route.path.slice('/catalogue/'.length) : null;
   const programmeLinks = route.path === '/catalogue'
-    ? catalogueLinks
+    ? cataloguePages[0]
     : category
       ? (programmeLinksByCategory.get(category) ?? []).slice(0, 24)
       : undefined;
   const initialData: AppInitialData | undefined = programmeLinks?.length
-    ? { programmeLinks, programmeLinksPath: route.path }
+    ? {
+        programmeLinks,
+        programmeLinksPath: route.path,
+        ...(route.path === '/catalogue' ? { catalogueTotalPages } : {}),
+      }
     : undefined;
   const markup = await renderRoot(route.path, initialData);
   await writeRoute(route.path, injectDocument(rootTemplate, markup, resolveSeoDocument(route.path), initialData));
+});
+
+const paginatedCataloguePages = cataloguePages.slice(1).map((programmeLinks, index) => ({
+  page: index + 2,
+  programmeLinks,
+}));
+
+await mapConcurrent(paginatedCataloguePages, 8, async ({ page, programmeLinks }) => {
+  const route = catalogueDirectoryPath(page);
+  const initialData: AppInitialData = {
+    programmeLinks,
+    programmeLinksPath: route,
+    catalogueTotalPages,
+  };
+  const markup = await renderRoot(route, initialData);
+  await writeRoute(route, injectDocument(rootTemplate, markup, resolveSeoDocument(route), initialData));
 });
 
 await mapConcurrent(publishedProgrammes, 12, async (programme) => {
@@ -408,6 +474,16 @@ await mapConcurrent(insightsArticles, 8, async (article) => {
   await writeRoute(route, injectDocument(rootTemplate, markup, resolveSeoDocument(route), initialData));
 });
 
+const importedInsightSlugs = new Set(insightsArticles.map((article) => article.id));
+const managedInsightRecords = managedInsights.filter(({ article }) => !importedInsightSlugs.has(article.id));
+await mapConcurrent(managedInsightRecords, 8, async ({ article, contentHtml, referenceTable }) => {
+  const route = `/insights/${article.id}`;
+  const insightContent: ImportedArticleContent = { content: '', tables: referenceTable || '', contentHtml };
+  const initialData: AppInitialData = { insightArticle: article, insightContent, insightSlug: article.id };
+  const markup = await renderRoot(route, initialData);
+  await writeRoute(route, injectDocument(rootTemplate, markup, resolveSeoDocument(route, { insightArticle: article }), initialData));
+});
+
 await mapConcurrent(careerJobs, 4, async (job) => {
   const route = `/careers/${job.slug}`;
   const markup = await renderRoot(route);
@@ -426,6 +502,10 @@ await Promise.all([
 ]);
 
 // Preserve a named copy of the client shell for the restricted admin route only.
-await cp(path.join(distRoot, 'index.html'), path.join(distRoot, 'app-shell.html'));
+await writeFile(appShellPath, rootTemplate, 'utf8');
+// Vercel gives a physical /index.html precedence over rewrites. Publish the
+// fully rendered corporate page at the root so / is the real Home page even
+// before JavaScript runs, while /app-shell remains available to /adminzz.
+await cp(corporateTemplatePath, path.join(distRoot, 'index.html'));
 
-console.log(`Prerendered ${indexableRoutes.length} primary routes, programme pages, ${insightsArticles.length} insights and ${careerJobs.length} career details.`);
+console.log(`Prerendered ${indexableRoutes.length} primary routes, ${catalogueTotalPages} catalogue directory pages, programme pages, ${insightsArticles.length + managedInsightRecords.length} insights and ${careerJobs.length} career details.`);

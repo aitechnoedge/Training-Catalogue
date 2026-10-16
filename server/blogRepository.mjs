@@ -69,6 +69,15 @@ function normaliseTags(value) {
   return [...new Set(source.map((item) => String(item).trim()).filter(Boolean))].slice(0, 20);
 }
 
+function normaliseSourceUrls(value) {
+  const source = Array.isArray(value) ? value : String(value || '').split(/[\n,]/);
+  return [...new Set(source.map((item) => String(item).trim()).filter(Boolean).map((item) => {
+    const parsed = new URL(item);
+    if (parsed.protocol !== 'https:') throw new Error('Article sources must use HTTPS URLs.');
+    return parsed.toString();
+  }))].slice(0, 30);
+}
+
 function readDate(value, required = false) {
   if (!value) {
     if (required) throw new Error('Choose a publication date and time.');
@@ -91,18 +100,50 @@ export function validateBlogInput(body, existing = {}) {
   const contentHtml = cleanHtml(body.contentHtml ?? existing.content_html ?? '');
   const wordCount = sanitizeHtml(contentHtml, { allowedTags: [], allowedAttributes: {} })
     .split(/\s+/).filter(Boolean).length;
+  const h2Count = (contentHtml.match(/<h2\b/gi) || []).length;
+  const sourceUrls = normaliseSourceUrls(body.sourceUrls ?? existing.source_urls);
+  const authorName = readText(body.authorName ?? existing.author_name ?? 'TechnoEdge Editorial Team', 160, { required: true });
+  const authorProfileUrl = readOptionalUrl(body.authorProfileUrl ?? existing.author_profile_url);
+  const reviewerName = readText(body.reviewerName ?? existing.reviewer_name, 160);
+  const reviewerProfileUrl = readOptionalUrl(body.reviewerProfileUrl ?? existing.reviewer_profile_url);
+  const reviewedAt = readDate(body.reviewedAt ?? existing.reviewed_at);
+  const excerpt = readText(body.excerpt ?? existing.excerpt, 800);
+  const featuredImageAlt = readText(body.featuredImageAlt ?? existing.featured_image_alt, 300);
+  const indexable = Boolean(body.indexable ?? existing.indexable);
+
+  if (indexable) {
+    const failures = [];
+    if (!['published', 'scheduled'].includes(status)) failures.push('status must be published or scheduled');
+    if (/^(?:admintechnoedge|TechnoEdge Editorial Team)$/i.test(authorName)) failures.push('a verified individual author is required');
+    if (!authorProfileUrl) failures.push('an author profile URL is required');
+    if (!reviewerName || /Editorial Team/i.test(reviewerName)) failures.push('a named subject-matter reviewer is required');
+    if (!reviewerProfileUrl) failures.push('a reviewer profile URL is required');
+    if (!reviewedAt) failures.push('a material review date is required');
+    if (sourceUrls.length < 2) failures.push('at least two approved HTTPS sources are required');
+    if (wordCount < 800) failures.push('the article must contain at least 800 words');
+    if (h2Count < 3) failures.push('the article must contain at least three H2 sections');
+    if (excerpt.length < 80 || excerpt.length > 160 || !/[.!?…]$/u.test(excerpt)) failures.push('the excerpt must be 80–160 characters and end as a complete sentence');
+    if (!featuredImageAlt) failures.push('featured-image alt text is required');
+    if (failures.length) throw new Error(`Article indexing requirements failed: ${failures.join('; ')}.`);
+  }
 
   return {
     slug,
     title,
-    excerpt: readText(body.excerpt ?? existing.excerpt, 800),
+    excerpt,
     contentHtml,
     referenceTable: readText(body.referenceTable ?? existing.reference_table, 20_000),
     category,
     tags: normaliseTags(body.tags ?? existing.tags),
-    authorName: readText(body.authorName ?? existing.author_name ?? 'TechnoEdge Editorial Team', 160, { required: true }),
+    authorName,
+    authorProfileUrl,
+    reviewerName,
+    reviewerProfileUrl,
+    sourceUrls,
+    reviewedAt,
+    aiAssistanceDisclosure: readText(body.aiAssistanceDisclosure ?? existing.ai_assistance_disclosure, 1000),
     featuredImageUrl: readOptionalUrl(body.featuredImageUrl ?? existing.featured_image_url),
-    featuredImageAlt: readText(body.featuredImageAlt ?? existing.featured_image_alt, 300),
+    featuredImageAlt,
     imageCaption: readText(body.imageCaption ?? existing.image_caption, 500),
     seoTitle: readText(body.seoTitle ?? existing.seo_title, 180),
     metaDescription: readText(body.metaDescription ?? existing.meta_description, 320),
@@ -110,7 +151,7 @@ export function validateBlogInput(body, existing = {}) {
     status,
     publishAt,
     isFeatured: Boolean(body.isFeatured ?? existing.is_featured),
-    indexable: Boolean(body.indexable ?? existing.indexable),
+    indexable,
     readTimeMinutes: Math.max(1, Math.ceil(wordCount / 220)),
   };
 }
@@ -130,6 +171,14 @@ function mapPublicArticle(row) {
     image: row.featured_image_url,
     imageAlt: row.featured_image_alt || row.title,
     author: row.author_name,
+    authorProfileUrl: row.author_profile_url || '',
+    reviewer: row.reviewer_name || '',
+    reviewerProfileUrl: row.reviewer_profile_url || '',
+    sourceUrls: row.source_urls || [],
+    reviewedAt: row.reviewed_at ? new Date(row.reviewed_at).toISOString() : undefined,
+    aiAssistanceDisclosure: row.ai_assistance_disclosure || '',
+    seoTitle: row.seo_title || '',
+    metaDescription: row.meta_description || '',
     url: `/insights/${row.slug}`,
     indexable: row.indexable,
     isFeatured: row.is_featured,
@@ -285,21 +334,26 @@ export async function createAdminBlog(pool, actor, body) {
   const result = await pool.query(`
     INSERT INTO content.blog_posts (
       slug, title, excerpt, content_html, reference_table, category, tags, author_name,
+      author_profile_url, reviewer_name, reviewer_profile_url, source_urls, reviewed_at,
+      ai_assistance_disclosure,
       featured_image_url, featured_image_alt, image_caption, seo_title, meta_description,
       canonical_url, status, publish_at, published_at, is_featured, indexable,
       read_time_minutes, created_by, updated_by
     ) VALUES (
       $1, $2, $3, $4, $5, $6, $7::text[], $8,
-      $9, $10, $11, $12, $13, $14, $15, $16,
-      CASE WHEN $15 = 'published' THEN now() ELSE NULL END,
-      $17, $18, $19, $20::uuid, $20::uuid
+      $9, $10, $11, $12::text[], $13, $14,
+      $15, $16, $17, $18, $19, $20, $21, $22,
+      CASE WHEN $21 = 'published' THEN now() ELSE NULL END,
+      $23, $24, $25, $26::uuid, $26::uuid
     ) RETURNING *
   `, [
     value.slug, value.title, value.excerpt, value.contentHtml, value.referenceTable,
-    value.category, value.tags, value.authorName, value.featuredImageUrl,
-    value.featuredImageAlt, value.imageCaption, value.seoTitle,
-    value.metaDescription, value.canonicalUrl, value.status, value.publishAt,
-    value.isFeatured, value.indexable, value.readTimeMinutes, actor.authUserId,
+    value.category, value.tags, value.authorName, value.authorProfileUrl,
+    value.reviewerName, value.reviewerProfileUrl, value.sourceUrls, value.reviewedAt,
+    value.aiAssistanceDisclosure, value.featuredImageUrl, value.featuredImageAlt,
+    value.imageCaption, value.seoTitle, value.metaDescription, value.canonicalUrl,
+    value.status, value.publishAt, value.isFeatured, value.indexable,
+    value.readTimeMinutes, actor.authUserId,
   ]);
   await pool.query(`
     INSERT INTO content.blog_revisions (post_id, revision, snapshot, actor_user_id)
@@ -325,21 +379,26 @@ export async function updateAdminBlog(pool, actor, postId, body) {
     const result = await client.query(`
       UPDATE content.blog_posts SET
         slug = $2, title = $3, excerpt = $4, content_html = $5, reference_table = $6,
-        category = $7, tags = $8::text[], author_name = $9, featured_image_url = $10,
-        featured_image_alt = $11, image_caption = $12, seo_title = $13,
-        meta_description = $14, canonical_url = $15, status = $16, publish_at = $17,
+        category = $7, tags = $8::text[], author_name = $9,
+        author_profile_url = $10, reviewer_name = $11, reviewer_profile_url = $12,
+        source_urls = $13::text[], reviewed_at = $14, ai_assistance_disclosure = $15,
+        featured_image_url = $16, featured_image_alt = $17, image_caption = $18,
+        seo_title = $19, meta_description = $20, canonical_url = $21,
+        status = $22, publish_at = $23,
         published_at = CASE
-          WHEN $16 = 'published' THEN COALESCE(published_at, now())
-          WHEN $16 IN ('draft', 'scheduled') THEN NULL
+          WHEN $22 = 'published' THEN COALESCE(published_at, now())
+          WHEN $22 IN ('draft', 'scheduled') THEN NULL
           ELSE published_at
         END,
-        is_featured = $18, indexable = $19, read_time_minutes = $20,
-        revision = revision + 1, updated_by = $21::uuid, updated_at = now(),
-        archived_at = CASE WHEN $16 = 'archived' THEN COALESCE(archived_at, now()) ELSE NULL END
+        is_featured = $24, indexable = $25, read_time_minutes = $26,
+        revision = revision + 1, updated_by = $27::uuid, updated_at = now(),
+        archived_at = CASE WHEN $22 = 'archived' THEN COALESCE(archived_at, now()) ELSE NULL END
       WHERE post_id = $1::uuid RETURNING *
     `, [
       postId, value.slug, value.title, value.excerpt, value.contentHtml,
       value.referenceTable, value.category, value.tags, value.authorName,
+      value.authorProfileUrl, value.reviewerName, value.reviewerProfileUrl,
+      value.sourceUrls, value.reviewedAt, value.aiAssistanceDisclosure,
       value.featuredImageUrl, value.featuredImageAlt, value.imageCaption,
       value.seoTitle, value.metaDescription, value.canonicalUrl, value.status,
       value.publishAt, value.isFeatured, value.indexable, value.readTimeMinutes,
@@ -360,11 +419,15 @@ export async function duplicateAdminBlog(pool, actor, postId) {
   const result = await pool.query(`
     INSERT INTO content.blog_posts (
       slug, title, excerpt, content_html, reference_table, category, tags, author_name,
+      author_profile_url, reviewer_name, reviewer_profile_url, source_urls, reviewed_at,
+      ai_assistance_disclosure,
       featured_image_url, featured_image_alt, image_caption, seo_title, meta_description,
       canonical_url, status, is_featured, indexable, read_time_minutes, created_by, updated_by
     )
     SELECT substring(slug || '-copy-' || substr(gen_random_uuid()::text, 1, 6) for 180),
       title || ' (Copy)', excerpt, content_html, reference_table, category, tags, author_name,
+      author_profile_url, reviewer_name, reviewer_profile_url, source_urls, NULL,
+      ai_assistance_disclosure,
       featured_image_url, featured_image_alt, image_caption, seo_title, meta_description,
       '', 'draft', false, false, read_time_minutes, $2::uuid, $2::uuid
     FROM content.blog_posts WHERE post_id = $1::uuid
@@ -389,6 +452,12 @@ export async function restoreBlogRevision(pool, actor, postId, revision) {
     category: snapshot.category,
     tags: snapshot.tags,
     authorName: snapshot.author_name,
+    authorProfileUrl: snapshot.author_profile_url,
+    reviewerName: snapshot.reviewer_name,
+    reviewerProfileUrl: snapshot.reviewer_profile_url,
+    sourceUrls: snapshot.source_urls,
+    reviewedAt: snapshot.reviewed_at,
+    aiAssistanceDisclosure: snapshot.ai_assistance_disclosure,
     featuredImageUrl: snapshot.featured_image_url,
     featuredImageAlt: snapshot.featured_image_alt,
     imageCaption: snapshot.image_caption,

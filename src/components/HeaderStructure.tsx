@@ -15,6 +15,7 @@ const primaryNavigation = [
   { label: 'Catalogue', path: '/catalogue', enabled: true },
   { label: 'Insights', path: '/insights', enabled: true },
   { label: 'Careers', path: '/careers', enabled: true },
+  { label: 'Training ROI', path: '/training-roi', enabled: true },
 ];
 
 export const HeaderStructure: React.FC<HeaderStructureProps> = ({
@@ -108,9 +109,11 @@ export const HeaderStructure: React.FC<HeaderStructureProps> = ({
         <div id="mobile-site-navigation" className="min-[1280px]:hidden border-t border-[rgba(1,38,106,0.12)] bg-white px-4 sm:px-8 py-5 shadow-[0_18px_35px_rgba(15,23,42,0.10)]">
           <nav className="flex flex-col" aria-label="Mobile navigation">
             {visibleNavigation.map((item) => {
-              const isActive = item.path === '/catalogue'
-                ? currentPath === '/catalogue' || currentPath.startsWith('/programmes/')
-                : currentPath.startsWith(item.path);
+              const isActive = item.path === '/'
+                ? currentPath === '/' || currentPath === '/website/'
+                : item.path === '/catalogue'
+                  ? currentPath === '/catalogue' || currentPath.startsWith('/programmes/')
+                  : currentPath.startsWith(item.path);
               return (
                 <a
                   key={item.path}

@@ -17,7 +17,7 @@ export const ImportCentre: React.FC = () => {
   const [result, setResult] = useState<{ imported: number; message: string } | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [history, setHistory] = useState<Array<{ preview_id: string; file_name: string; status: string; created_at: string; completed_at?: string; counts?: { valid?: number } }>>([]);
-  const loadHistory = () => getImportHistory().then((result) => setHistory(result.data)).catch(() => {});
+  const loadHistory = () => getImportHistory().then((response) => setHistory(response.data)).catch(() => setError('Import history could not be loaded. You can still validate a new file.'));
 
   useEffect(() => { loadHistory(); }, []);
 
@@ -58,7 +58,7 @@ export const ImportCentre: React.FC = () => {
   };
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8" aria-labelledby="import-centre-title">
+    <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8" aria-labelledby="import-centre-title" aria-busy={isWorking}>
       <div className="mb-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wider text-[#01266A]">Secure catalogue administration</p>
         <h1 id="import-centre-title" className="text-3xl font-bold text-black">Course Import Centre</h1>
@@ -82,6 +82,7 @@ export const ImportCentre: React.FC = () => {
             className="mt-2 block w-full rounded-lg border border-[rgba(38,102,196,0.14)] px-3 py-3 text-sm"
             onChange={(event) => {
               setSelectedFile(event.target.files?.[0] || null);
+              if (event.target.files?.[0]) setPastedText('');
               setPreview(null);
             }}
           />
@@ -91,6 +92,7 @@ export const ImportCentre: React.FC = () => {
             value={pastedText}
             onChange={(event) => {
               setPastedText(event.target.value);
+              if (event.target.value) setSelectedFile(null);
               setPreview(null);
             }}
             rows={10}
@@ -104,7 +106,7 @@ export const ImportCentre: React.FC = () => {
               disabled={isWorking}
               className="inline-flex items-center gap-2 rounded-lg bg-[#01266A] px-5 py-3 text-sm font-semibold text-white disabled:opacity-50"
             >
-              <Upload className="h-4 w-4" />
+              <Upload className="h-4 w-4" aria-hidden="true" />
               {isWorking ? 'Working…' : 'Validate and preview'}
             </button>
             <a
@@ -112,7 +114,7 @@ export const ImportCentre: React.FC = () => {
               download
               className="inline-flex items-center gap-2 rounded-lg border border-[rgba(38,102,196,0.24)] px-5 py-3 text-sm font-semibold text-[#01266A]"
             >
-              <Download className="h-4 w-4" /> Download Excel template
+              <Download className="h-4 w-4" aria-hidden="true" /> Download Excel template
             </a>
           </div>
         </div>
@@ -137,9 +139,10 @@ export const ImportCentre: React.FC = () => {
               </div>
               <a
                 href={jsonlDownloadUrl(preview.previewId)}
+                download
                 className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[#01266A] underline"
               >
-                <Download className="h-4 w-4" /> Download converted JSONL
+                <Download className="h-4 w-4" aria-hidden="true" /> Download converted JSONL
               </a>
               {preview.canImport && (
                 <div className="mt-5 border-t border-[rgba(38,102,196,0.14)] pt-5">
@@ -166,8 +169,8 @@ export const ImportCentre: React.FC = () => {
           )}
           {result && (
             <div className="flex gap-3 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900" role="status">
-              <CheckCircle2 className="h-5 w-5 shrink-0" />
-              <div><strong>{result.imported} courses imported.</strong><div className="mt-1">The catalogue now reads them directly from Supabase.</div></div>
+              <CheckCircle2 className="h-5 w-5 shrink-0" aria-hidden="true" />
+              <div><strong>{result.imported} courses imported.</strong><div className="mt-1">{result.message || 'The catalogue now reads them directly from Supabase.'}</div></div>
             </div>
           )}
         </div>
@@ -175,7 +178,7 @@ export const ImportCentre: React.FC = () => {
 
       {error && (
         <div className="mt-6 flex gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-800" role="alert">
-          <AlertCircle className="h-5 w-5 shrink-0" /> {error}
+          <AlertCircle className="h-5 w-5 shrink-0" aria-hidden="true" /> {error}
         </div>
       )}
 
@@ -224,7 +227,7 @@ export const ImportCentre: React.FC = () => {
         <h2 id="import-history-title" className="text-lg font-bold">Import history</h2>
         {history.length ? <ul className="mt-3 divide-y divide-[rgba(38,102,196,0.12)] text-sm">{history.map((batch) => (
           <li key={batch.preview_id} className="flex flex-wrap items-center justify-between gap-2 py-3">
-            <span><strong>{batch.file_name}</strong><span className="ml-2 text-black/50">{new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(batch.created_at))}</span></span>
+            <span><strong>{batch.file_name}</strong><span className="ml-2 text-black/50">{new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Kolkata' }).format(new Date(batch.created_at))} IST</span></span>
             <span className="rounded-full bg-[#F0F7FF] px-2 py-1 text-xs font-bold text-[#01266A]">{batch.status} · {batch.counts?.valid || 0} valid</span>
           </li>
         ))}</ul> : <p className="mt-3 text-sm text-black/55">Validated and imported batches will be recorded here.</p>}

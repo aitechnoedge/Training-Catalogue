@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-08T10:12:11.710Z",
+  "generatedAt": "2026-10-16T13:33:01.031Z",
   "gateVersion": 2,
   "summary": [
     {
@@ -7,6 +7,18 @@
       "published": 823,
       "indexable": 424,
       "remediation": 399
+    },
+    {
+      "category_code": "people-behavioural",
+      "published": 110,
+      "indexable": 0,
+      "remediation": 110
+    },
+    {
+      "category_code": "people-process",
+      "published": 100,
+      "indexable": 0,
+      "remediation": 100
     },
     {
       "category_code": "role-based",
@@ -29,12 +41,16 @@
   ],
   "releaseReadiness": {
     "readyForEditorialReview": 25,
-    "contentRemediationRequired": 779
+    "contentRemediationRequired": 989
   },
   "blockerSummary": [
     {
       "blocker": "summary",
-      "count": 274
+      "count": 324
+    },
+    {
+      "blocker": "duplicate_title",
+      "count": 305
     },
     {
       "blocker": "summary-similarity-at-or-above-90-percent",
@@ -55,10 +71,6 @@
     {
       "blocker": "official_source_or_status",
       "count": 110
-    },
-    {
-      "blocker": "duplicate_title",
-      "count": 95
     },
     {
       "blocker": "outcomes",
@@ -5473,6 +5485,2156 @@
         "status": "remediation-required",
         "gateVersion": 2
       }
+    },
+    {
+      "course_id": "BS0001",
+      "category_code": "people-behavioural",
+      "title": "Business Communication Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0002",
+      "category_code": "people-behavioural",
+      "title": "Business Communication Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0003",
+      "category_code": "people-behavioural",
+      "title": "Leadership Communication",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0004",
+      "category_code": "people-behavioural",
+      "title": "Leadership Communication",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0005",
+      "category_code": "people-behavioural",
+      "title": "Assertive & Influential Communication",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0006",
+      "category_code": "people-behavioural",
+      "title": "Assertive & Influential Communication",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0007",
+      "category_code": "people-behavioural",
+      "title": "Interpersonal & Relationship Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0008",
+      "category_code": "people-behavioural",
+      "title": "Interpersonal & Relationship Skills",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0009",
+      "category_code": "people-behavioural",
+      "title": "Listening & Powerful Questioning",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0010",
+      "category_code": "people-behavioural",
+      "title": "Listening & Powerful Questioning",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0011",
+      "category_code": "people-behavioural",
+      "title": "Presentation & Public Speaking Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0012",
+      "category_code": "people-behavioural",
+      "title": "Presentation & Public Speaking Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0013",
+      "category_code": "people-behavioural",
+      "title": "Business Storytelling & Data Storytelling",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0014",
+      "category_code": "people-behavioural",
+      "title": "Business Storytelling & Data Storytelling",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0015",
+      "category_code": "people-behavioural",
+      "title": "Professional Presence & Business Etiquette",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0016",
+      "category_code": "people-behavioural",
+      "title": "Professional Presence & Business Etiquette",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0017",
+      "category_code": "people-behavioural",
+      "title": "Cross-Cultural Communication & Intelligence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0018",
+      "category_code": "people-behavioural",
+      "title": "Cross-Cultural Communication & Intelligence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0019",
+      "category_code": "people-behavioural",
+      "title": "Emotional Intelligence & Empathy",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0020",
+      "category_code": "people-behavioural",
+      "title": "Emotional Intelligence & Empathy",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0021",
+      "category_code": "people-behavioural",
+      "title": "Critical & Analytical Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0022",
+      "category_code": "people-behavioural",
+      "title": "Critical & Analytical Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0023",
+      "category_code": "people-behavioural",
+      "title": "Problem Solving & Decision Making",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0024",
+      "category_code": "people-behavioural",
+      "title": "Problem Solving & Decision Making",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0025",
+      "category_code": "people-behavioural",
+      "title": "Creative & Lateral Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0026",
+      "category_code": "people-behavioural",
+      "title": "Creative & Lateral Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0027",
+      "category_code": "people-behavioural",
+      "title": "Innovation & Design Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0028",
+      "category_code": "people-behavioural",
+      "title": "Innovation & Design Thinking",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0029",
+      "category_code": "people-behavioural",
+      "title": "business accumen",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0030",
+      "category_code": "people-behavioural",
+      "title": "business accumen",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0031",
+      "category_code": "people-behavioural",
+      "title": "Personal Effectiveness & Productivity",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0032",
+      "category_code": "people-behavioural",
+      "title": "Personal Effectiveness & Productivity",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0033",
+      "category_code": "people-behavioural",
+      "title": "Time, Planning & Priority Management",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0034",
+      "category_code": "people-behavioural",
+      "title": "Time, Planning & Priority Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0035",
+      "category_code": "people-behavioural",
+      "title": "Resilience, Flexibility & Stress Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0036",
+      "category_code": "people-behavioural",
+      "title": "Resilience, Flexibility & Stress Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0037",
+      "category_code": "people-behavioural",
+      "title": "First-Time Manager Development",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0038",
+      "category_code": "people-behavioural",
+      "title": "First-Time Manager Development",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0039",
+      "category_code": "people-behavioural",
+      "title": "Management Effectiveness",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0040",
+      "category_code": "people-behavioural",
+      "title": "Management Effectiveness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0041",
+      "category_code": "people-behavioural",
+      "title": "LDP (leadership development program)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0042",
+      "category_code": "people-behavioural",
+      "title": "LDP (leadership development program)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0043",
+      "category_code": "people-behavioural",
+      "title": "Executive Presence & Leadership Impact",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0044",
+      "category_code": "people-behavioural",
+      "title": "Executive Presence & Leadership Impact",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0045",
+      "category_code": "people-behavioural",
+      "title": "Mindful & Emotionally Intelligent Leadership",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0046",
+      "category_code": "people-behavioural",
+      "title": "Mindful & Emotionally Intelligent Leadership",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0047",
+      "category_code": "people-behavioural",
+      "title": "Team Management & Team Building",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0048",
+      "category_code": "people-behavioural",
+      "title": "Team Management & Team Building",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0049",
+      "category_code": "people-behavioural",
+      "title": "High-Performance Team Leadership",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0050",
+      "category_code": "people-behavioural",
+      "title": "High-Performance Team Leadership",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0051",
+      "category_code": "people-behavioural",
+      "title": "Coaching, Mentoring & People Development",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0052",
+      "category_code": "people-behavioural",
+      "title": "Coaching, Mentoring & People Development",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0053",
+      "category_code": "people-behavioural",
+      "title": "Goal Setting, Feedback & Performance Conversations",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0054",
+      "category_code": "people-behavioural",
+      "title": "Goal Setting, Feedback & Performance Conversations",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0055",
+      "category_code": "people-behavioural",
+      "title": "Conflict Resolution & Collaboration",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0056",
+      "category_code": "people-behavioural",
+      "title": "Conflict Resolution & Collaboration",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0057",
+      "category_code": "people-behavioural",
+      "title": "Stakeholder Management & Influence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0058",
+      "category_code": "people-behavioural",
+      "title": "Stakeholder Management & Influence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0059",
+      "category_code": "people-behavioural",
+      "title": "Accountability & Ownership",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0060",
+      "category_code": "people-behavioural",
+      "title": "Accountability & Ownership",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0061",
+      "category_code": "people-behavioural",
+      "title": "Change Leadership & Change Management",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0062",
+      "category_code": "people-behavioural",
+      "title": "Change Leadership & Change Management",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0063",
+      "category_code": "people-behavioural",
+      "title": "Trust, Values & Organizational Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0064",
+      "category_code": "people-behavioural",
+      "title": "Trust, Values & Organizational Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0065",
+      "category_code": "people-behavioural",
+      "title": "Negotiation Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0066",
+      "category_code": "people-behavioural",
+      "title": "Negotiation Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0067",
+      "category_code": "people-behavioural",
+      "title": "Sales Excellence & Sales Effectiveness",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0068",
+      "category_code": "people-behavioural",
+      "title": "Sales Excellence & Sales Effectiveness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0069",
+      "category_code": "people-behavioural",
+      "title": "Customer Experience & Relationship Management Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0070",
+      "category_code": "people-behavioural",
+      "title": "Customer Experience & Relationship Management Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0071",
+      "category_code": "people-behavioural",
+      "title": "DEI - Diversity, Equity, Inclusion",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0072",
+      "category_code": "people-behavioural",
+      "title": "DEI - Diversity, Equity, Inclusion",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0073",
+      "category_code": "people-behavioural",
+      "title": "Remote Working & Virtual Team Effectiveness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0074",
+      "category_code": "people-behavioural",
+      "title": "Remote Working & Virtual Team Effectiveness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0075",
+      "category_code": "people-behavioural",
+      "title": "Execution & Business Excellence",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0076",
+      "category_code": "people-behavioural",
+      "title": "Execution & Business Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0077",
+      "category_code": "people-behavioural",
+      "title": "Interviewing & Talent Assessment Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0078",
+      "category_code": "people-behavioural",
+      "title": "Interviewing & Talent Assessment Skills",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0079",
+      "category_code": "people-behavioural",
+      "title": "Train the Trainer & Facilitation Skills",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0080",
+      "category_code": "people-behavioural",
+      "title": "Train the Trainer & Facilitation Skills",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0081",
+      "category_code": "people-behavioural",
+      "title": "Career Readiness, Onboarding & Workplace Readiness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0082",
+      "category_code": "people-behavioural",
+      "title": "Career Readiness, Onboarding & Workplace Readiness",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0083",
+      "category_code": "people-behavioural",
+      "title": "Inclusive, Respectful & Empowering Workplace",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0084",
+      "category_code": "people-behavioural",
+      "title": "Inclusive, Respectful & Empowering Workplace",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0085",
+      "category_code": "people-behavioural",
+      "title": "Respectful Workplace & POSH Sensitization",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0086",
+      "category_code": "people-behavioural",
+      "title": "Respectful Workplace & POSH Sensitization",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0087",
+      "category_code": "people-behavioural",
+      "title": "Leading Cross-Generational Teams",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0088",
+      "category_code": "people-behavioural",
+      "title": "Leading Cross-Generational Teams",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0089",
+      "category_code": "people-behavioural",
+      "title": "Accent Neutralization Training",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0090",
+      "category_code": "people-behavioural",
+      "title": "Accent Neutralization Training",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0091",
+      "category_code": "people-behavioural",
+      "title": "Leadership Development Program (LDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0092",
+      "category_code": "people-behavioural",
+      "title": "Leadership Development Program (LDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0093",
+      "category_code": "people-behavioural",
+      "title": "Management Development Program (MDP)",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0094",
+      "category_code": "people-behavioural",
+      "title": "Management Development Program (MDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0095",
+      "category_code": "people-behavioural",
+      "title": "First-Time Manager Development Program (FTM / FMP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0096",
+      "category_code": "people-behavioural",
+      "title": "First-Time Manager Development Program (FTM / FMP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0097",
+      "category_code": "people-behavioural",
+      "title": "Emerging Leaders Development Program (ELDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0098",
+      "category_code": "people-behavioural",
+      "title": "Emerging Leaders Development Program (ELDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0099",
+      "category_code": "people-behavioural",
+      "title": "High-Potential Leadership Development Program (HiPo Program)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0100",
+      "category_code": "people-behavioural",
+      "title": "High-Potential Leadership Development Program (HiPo Program)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0101",
+      "category_code": "people-behavioural",
+      "title": "Middle Management Leadership Development Program (MLDP / MMDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0102",
+      "category_code": "people-behavioural",
+      "title": "Middle Management Leadership Development Program (MLDP / MMDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0103",
+      "category_code": "people-behavioural",
+      "title": "Senior Leadership Development Program (SLDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0104",
+      "category_code": "people-behavioural",
+      "title": "Senior Leadership Development Program (SLDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0105",
+      "category_code": "people-behavioural",
+      "title": "Executive Leadership Program (ELP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0106",
+      "category_code": "people-behavioural",
+      "title": "Executive Leadership Program (ELP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0107",
+      "category_code": "people-behavioural",
+      "title": "Women Leadership Development Program (WLP)",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0108",
+      "category_code": "people-behavioural",
+      "title": "Women Leadership Development Program (WLP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0109",
+      "category_code": "people-behavioural",
+      "title": "Digital & AI Leadership Development Program (AI / Digital LDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "BS0110",
+      "category_code": "people-behavioural",
+      "title": "Digital & AI Leadership Development Program (AI / Digital LDP)",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0001",
+      "category_code": "people-process",
+      "title": "Project Management Fundamentals & Advanced Practice",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0002",
+      "category_code": "people-process",
+      "title": "Project Management Fundamentals & Advanced Practice",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0003",
+      "category_code": "people-process",
+      "title": "Project Planning, Scheduling & Resources",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0004",
+      "category_code": "people-process",
+      "title": "Project Planning, Scheduling & Resources",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0005",
+      "category_code": "people-process",
+      "title": "Project Risk & Quality",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0006",
+      "category_code": "people-process",
+      "title": "Project Risk & Quality",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0007",
+      "category_code": "people-process",
+      "title": "Project Governance & PMO",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0008",
+      "category_code": "people-process",
+      "title": "Project Governance & PMO",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0009",
+      "category_code": "people-process",
+      "title": "Project Stakeholder & Communication",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0010",
+      "category_code": "people-process",
+      "title": "Project Stakeholder & Communication",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0011",
+      "category_code": "people-process",
+      "title": "Project Leadership & Strategic PM",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0012",
+      "category_code": "people-process",
+      "title": "Project Leadership & Strategic PM",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0013",
+      "category_code": "people-process",
+      "title": "Program & Portfolio Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0014",
+      "category_code": "people-process",
+      "title": "Program & Portfolio Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0015",
+      "category_code": "people-process",
+      "title": "Project Cost, Budgeting & Earned Value",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0016",
+      "category_code": "people-process",
+      "title": "Project Cost, Budgeting & Earned Value",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0017",
+      "category_code": "people-process",
+      "title": "Agile & Scrum Fundamentals",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0018",
+      "category_code": "people-process",
+      "title": "Agile & Scrum Fundamentals",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0019",
+      "category_code": "people-process",
+      "title": "Agile Project Management & Hybrid Delivery",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0020",
+      "category_code": "people-process",
+      "title": "Agile Project Management & Hybrid Delivery",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0021",
+      "category_code": "people-process",
+      "title": "Kanban, DevOps & Agile Ways of Working",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0022",
+      "category_code": "people-process",
+      "title": "Kanban, DevOps & Agile Ways of Working",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0023",
+      "category_code": "people-process",
+      "title": "Agile Leadership, Teams & Collaboration",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0024",
+      "category_code": "people-process",
+      "title": "Agile Leadership, Teams & Collaboration",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0025",
+      "category_code": "people-process",
+      "title": "Agile Planning, Estimation & Metrics",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0026",
+      "category_code": "people-process",
+      "title": "Agile Planning, Estimation & Metrics",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0027",
+      "category_code": "people-process",
+      "title": "Agile Transformation & Enterprise Agility",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0028",
+      "category_code": "people-process",
+      "title": "Agile Transformation & Enterprise Agility",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0029",
+      "category_code": "people-process",
+      "title": "Lean & Lean Six Sigma",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0030",
+      "category_code": "people-process",
+      "title": "Lean & Lean Six Sigma",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0031",
+      "category_code": "people-process",
+      "title": "Kaizen & Continuous Improvement",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0032",
+      "category_code": "people-process",
+      "title": "Kaizen & Continuous Improvement",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0033",
+      "category_code": "people-process",
+      "title": "Quality Management, Assurance & Quality Risk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0034",
+      "category_code": "people-process",
+      "title": "Quality Management, Assurance & Quality Risk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0035",
+      "category_code": "people-process",
+      "title": "Root Cause, CAPA & Problem Solving",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0036",
+      "category_code": "people-process",
+      "title": "Root Cause, CAPA & Problem Solving",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0037",
+      "category_code": "people-process",
+      "title": "Statistical Quality & 7 QC Tools",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0038",
+      "category_code": "people-process",
+      "title": "Statistical Quality & 7 QC Tools",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0039",
+      "category_code": "people-process",
+      "title": "Business Process Management & Improvement",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0040",
+      "category_code": "people-process",
+      "title": "Business Process Management & Improvement",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0041",
+      "category_code": "people-process",
+      "title": "Process Analysis, Discovery & Mapping",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0042",
+      "category_code": "people-process",
+      "title": "Process Analysis, Discovery & Mapping",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0043",
+      "category_code": "people-process",
+      "title": "Operational & Business Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0044",
+      "category_code": "people-process",
+      "title": "Operational & Business Excellence",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0045",
+      "category_code": "people-process",
+      "title": "Process Automation & Workflow",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0046",
+      "category_code": "people-process",
+      "title": "Process Automation & Workflow",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0047",
+      "category_code": "people-process",
+      "title": "Process Measurement & Performance",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0048",
+      "category_code": "people-process",
+      "title": "Process Measurement & Performance",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0049",
+      "category_code": "people-process",
+      "title": "Process Governance, Standardization & Maturity",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0050",
+      "category_code": "people-process",
+      "title": "Process Governance, Standardization & Maturity",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0051",
+      "category_code": "people-process",
+      "title": "ITSM Fundamentals & Service Improvement",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0052",
+      "category_code": "people-process",
+      "title": "ITSM Fundamentals & Service Improvement",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0053",
+      "category_code": "people-process",
+      "title": "IT Service Operations & Service Desk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0054",
+      "category_code": "people-process",
+      "title": "IT Service Operations & Service Desk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0055",
+      "category_code": "people-process",
+      "title": "Incident, Problem & Major Incident",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0056",
+      "category_code": "people-process",
+      "title": "Incident, Problem & Major Incident",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0057",
+      "category_code": "people-process",
+      "title": "Change, Release, Configuration & Asset",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0058",
+      "category_code": "people-process",
+      "title": "Change, Release, Configuration & Asset",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0059",
+      "category_code": "people-process",
+      "title": "Service Level, Performance & Reporting",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0060",
+      "category_code": "people-process",
+      "title": "Service Level, Performance & Reporting",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0061",
+      "category_code": "people-process",
+      "title": "IT Governance, Controls & Information Security",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0062",
+      "category_code": "people-process",
+      "title": "IT Governance, Controls & Information Security",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0063",
+      "category_code": "people-process",
+      "title": "Risk Management Fundamentals & ERM",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0064",
+      "category_code": "people-process",
+      "title": "Risk Management Fundamentals & ERM",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0065",
+      "category_code": "people-process",
+      "title": "Risk Assessment, Monitoring & Reporting",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0066",
+      "category_code": "people-process",
+      "title": "Risk Assessment, Monitoring & Reporting",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0067",
+      "category_code": "people-process",
+      "title": "Governance, Risk & Compliance",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0068",
+      "category_code": "people-process",
+      "title": "Governance, Risk & Compliance",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0069",
+      "category_code": "people-process",
+      "title": "Internal Controls & Self-Assessment",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0070",
+      "category_code": "people-process",
+      "title": "Internal Controls & Self-Assessment",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0071",
+      "category_code": "people-process",
+      "title": "Third-Party & Vendor Risk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0072",
+      "category_code": "people-process",
+      "title": "Third-Party & Vendor Risk",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0073",
+      "category_code": "people-process",
+      "title": "Business Continuity, Resilience & Crisis",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0074",
+      "category_code": "people-process",
+      "title": "Business Continuity, Resilience & Crisis",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0075",
+      "category_code": "people-process",
+      "title": "Digital, Business & Process Transformation",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0076",
+      "category_code": "people-process",
+      "title": "Digital, Business & Process Transformation",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0077",
+      "category_code": "people-process",
+      "title": "Transformation Strategy, Governance & Benefits",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0078",
+      "category_code": "people-process",
+      "title": "Transformation Strategy, Governance & Benefits",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0079",
+      "category_code": "people-process",
+      "title": "Product Management Fundamentals",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0080",
+      "category_code": "people-process",
+      "title": "Product Management Fundamentals",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0081",
+      "category_code": "people-process",
+      "title": "Product Strategy & Lifecycle",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0082",
+      "category_code": "people-process",
+      "title": "Product Strategy & Lifecycle",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0083",
+      "category_code": "people-process",
+      "title": "Product & Customer Discovery",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0084",
+      "category_code": "people-process",
+      "title": "Product & Customer Discovery",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0085",
+      "category_code": "people-process",
+      "title": "Roadmapping & Prioritization",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0086",
+      "category_code": "people-process",
+      "title": "Roadmapping & Prioritization",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0087",
+      "category_code": "people-process",
+      "title": "Product Planning, Execution & Operations",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0088",
+      "category_code": "people-process",
+      "title": "Product Planning, Execution & Operations",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0089",
+      "category_code": "people-process",
+      "title": "Product Analytics & Data-Driven PM",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0090",
+      "category_code": "people-process",
+      "title": "Product Analytics & Data-Driven PM",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0091",
+      "category_code": "people-process",
+      "title": "Innovation, Design Thinking & NPD",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0092",
+      "category_code": "people-process",
+      "title": "Innovation, Design Thinking & NPD",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0093",
+      "category_code": "people-process",
+      "title": "BA Fundamentals & Planning",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0094",
+      "category_code": "people-process",
+      "title": "BA Fundamentals & Planning",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0095",
+      "category_code": "people-process",
+      "title": "Requirements Engineering & Management",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0096",
+      "category_code": "people-process",
+      "title": "Requirements Engineering & Management",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0097",
+      "category_code": "people-process",
+      "title": "Business Case & Solution Evaluation",
+      "blockers": [
+        "summary",
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0098",
+      "category_code": "people-process",
+      "title": "Business Case & Solution Evaluation",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0099",
+      "category_code": "people-process",
+      "title": "BA Techniques & Toolkit",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
+    },
+    {
+      "course_id": "PI0100",
+      "category_code": "people-process",
+      "title": "BA Techniques & Toolkit",
+      "blockers": [
+        "duplicate_title"
+      ],
+      "ready_for_editorial_review": false,
+      "seo_quality_report": {}
     },
     {
       "course_id": "RB0005",

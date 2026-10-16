@@ -3,16 +3,14 @@ import { importedInsights } from './importedInsights';
 export interface InsightsHeroContent {
   titleLead: string;
   titleBridge: string;
-  titleAccent: string;
   paragraphs: readonly string[];
 }
 
 export const insightsHeroContent: InsightsHeroContent = {
   titleLead: 'Insights That Move',
-  titleBridge: 'Learning and',
-  titleAccent: 'Business Forward',
+  titleBridge: 'Learning & Business Forward',
   paragraphs: [
-    'Practical perspectives on AI, technology, learning, and workforce transformation—grounded in the challenges businesses face today.',
+    'Practical perspectives on AI, technology, learning, and workforce transformation grounded in the challenges businesses face today.',
     "Clear, useful ideas designed to help teams build capability, make better decisions, and stay ready for what's next.",
   ],
 };
@@ -34,6 +32,15 @@ export interface InsightArticle {
   readTime: string;
   image: string;
   author: string;
+  authorProfileUrl?: string;
+  reviewer?: string;
+  reviewerProfileUrl?: string;
+  sourceUrls?: string[];
+  reviewedAt?: string;
+  aiAssistanceDisclosure?: string;
+  imageAlt?: string;
+  seoTitle?: string;
+  metaDescription?: string;
   url: string;
   indexable: boolean;
   datePublished?: string;
@@ -48,6 +55,7 @@ export const insightsArticles: InsightArticle[] = importedInsights.map((article)
   indexable: false,
   datePublished: undefined,
   dateModified: undefined,
+  sourceUrls: [],
 }));
 
 export const insightCategories: ReadonlyArray<'All' | InsightCategory> = [

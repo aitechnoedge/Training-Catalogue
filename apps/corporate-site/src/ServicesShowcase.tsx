@@ -36,7 +36,7 @@ export default function ServicesShowcase() {
     <section className="services-showcase section" id="services" aria-labelledby="services-heading">
       <div className="services-showcase-shell">
         <header className="services-showcase-header">
-          <h2 id="services-heading">Five services. <span>One capability partner.</span></h2>
+          <h2 id="services-heading">Five Services. <span>One Capability Partner.</span></h2>
         </header>
 
         <div className="services-carousel-tabs" role="tablist" aria-label="Choose a service">

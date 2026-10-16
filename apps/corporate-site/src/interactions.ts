@@ -137,8 +137,11 @@ export function mountCorporateInteractions(): () => void {
   let galleryIndex = 0;
   let previousBodyOverflow = '';
   const mediaControl = (node: HTMLElement) => node.querySelector<HTMLButtonElement>(':scope > .media-open-control');
+  const createdMediaControls: HTMLButtonElement[] = [];
+  const usesStaticMediaLayout = () => innerWidth <= 1024 || reducedMotion;
 
   mediaNodes.forEach((node) => {
+    if (mediaControl(node)) return;
     const label = node.querySelector('figcaption')?.textContent?.trim()
       || node.querySelector(':scope > span')?.textContent?.trim()
       || 'training moment';
@@ -147,8 +150,9 @@ export function mountCorporateInteractions(): () => void {
     control.className = 'media-open-control';
     control.setAttribute('aria-haspopup', 'dialog');
     control.setAttribute('aria-label', `View ${label}`);
-    control.tabIndex = innerWidth <= 760 || reducedMotion ? 0 : -1;
+    control.tabIndex = usesStaticMediaLayout() ? 0 : -1;
     node.append(control);
+    createdMediaControls.push(control);
   });
 
   const showMediaSlide = (index: number) => {
@@ -217,7 +221,7 @@ export function mountCorporateInteractions(): () => void {
   let mediaFrame = 0;
   const drawMedia = () => {
     mediaFrame = 0;
-    if (!mediaWorld || innerWidth <= 760 || reducedMotion) return;
+    if (!mediaWorld || usesStaticMediaLayout()) return;
     renderedProgress += (targetProgress - renderedProgress) * .18;
     const cursor = .1 + renderedProgress * (mediaCompositions.length - .45);
     const stageWidth = mediaWorld.clientWidth;
@@ -257,7 +261,7 @@ export function mountCorporateInteractions(): () => void {
   };
   const updateMedia = () => {
     if (!media || !mediaWorld || !mediaNodes.length) return;
-    if (innerWidth <= 760 || reducedMotion) {
+    if (usesStaticMediaLayout()) {
       if (mediaIntro) mediaIntro.style.opacity = '1';
       mediaNodes.forEach((node) => {
         node.classList.remove('is-active', 'is-focus');
@@ -328,5 +332,6 @@ export function mountCorporateInteractions(): () => void {
     frameIds.forEach((id) => cancelAnimationFrame(id));
     revealTargets.forEach((element) => element.classList.remove('reveal', 'in-view'));
     counters.forEach((element) => delete element.dataset.counted);
+    createdMediaControls.forEach((control) => control.remove());
   };
 }

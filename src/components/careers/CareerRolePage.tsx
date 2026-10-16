@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { careerJobs } from '../../data/careersData';
-import { CareerEmailDialog } from './CareerEmailDialog';
+import { CAREERS_EMAIL } from '../../data/siteContact';
 
 interface CareerRolePageProps {
   slug: string;
@@ -10,7 +10,6 @@ interface CareerRolePageProps {
 
 export const CareerRolePage: React.FC<CareerRolePageProps> = ({ slug, onBack }) => {
   const job = careerJobs.find((item) => item.slug === slug);
-  const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false);
 
   if (!job) {
     return (
@@ -18,23 +17,26 @@ export const CareerRolePage: React.FC<CareerRolePageProps> = ({ slug, onBack }) 
         <div className="careers-page-shell career-role-page__empty">
           <p className="careers-section-label">Careers at TechnoEdge</p>
           <h1>Role not found</h1>
-          <button type="button" className="careers-primary-button" onClick={onBack}>
+          <a href="/careers" className="careers-primary-button" onClick={(event) => { event.preventDefault(); onBack(); }}>
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back to careers
-          </button>
+          </a>
         </div>
       </section>
     );
   }
 
+  const applicationLink = `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent(`Application for ${job.title}`)}`;
+
   return (
     <section className="career-role-page" aria-labelledby="career-role-title">
       <div className="careers-page-shell">
-        <nav aria-label="Breadcrumbs">
-        <a className="career-role-page__back" href="/careers" onClick={(event) => { event.preventDefault(); onBack(); }}>
-          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          Back to careers
-        </a>
+        <nav className="career-role-page__breadcrumbs" aria-label="Breadcrumbs">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/careers" onClick={(event) => { event.preventDefault(); onBack(); }}>Careers</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{job.title}</span>
         </nav>
         <div className="career-role-page__content">
           <div>
@@ -44,23 +46,28 @@ export const CareerRolePage: React.FC<CareerRolePageProps> = ({ slug, onBack }) 
               {[job.department, job.type, job.location].filter(Boolean).join(' · ')}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => setIsEmailDialogOpen(true)}
-            className="careers-primary-button"
-          >
-            Send your profile
+          <a href={applicationLink} className="careers-primary-button">
+            Apply by email
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </button>
+          </a>
         </div>
         <div className="career-role-page__details">
           <section aria-labelledby="role-overview-heading">
             <h2 id="role-overview-heading">About this role</h2>
-            <p>This opportunity sits within the {job.department} team and is offered as a {job.type.toLowerCase()} role{job.location ? ` based in ${job.location}` : ''}. Detailed responsibilities and qualification criteria are confirmed with shortlisted candidates before an application progresses.</p>
+            <p>{job.description}</p>
+          </section>
+          <section aria-labelledby="role-responsibilities-heading">
+            <h2 id="role-responsibilities-heading">What you’ll work on</h2>
+            <ul>{job.responsibilities.map((item) => <li key={item}>{item}</li>)}</ul>
+          </section>
+          <section aria-labelledby="role-requirements-heading">
+            <h2 id="role-requirements-heading">What we’re looking for</h2>
+            <ul>{job.requirements.map((item) => <li key={item}>{item}</li>)}</ul>
           </section>
           <section aria-labelledby="role-application-heading">
             <h2 id="role-application-heading">Application process</h2>
-            <p>Send your profile with the role title in the subject. The TechnoEdge careers team will review relevant experience and contact suitable applicants with the complete role brief and next steps.</p>
+            <p>{job.applicationInstructions}</p>
+            <p>Our careers team reviews relevant experience and contacts suitable applicants about the next step.</p>
           </section>
           <section aria-labelledby="role-company-heading">
             <h2 id="role-company-heading">Working at TechnoEdge</h2>
@@ -68,7 +75,6 @@ export const CareerRolePage: React.FC<CareerRolePageProps> = ({ slug, onBack }) 
           </section>
         </div>
       </div>
-      {isEmailDialogOpen && <CareerEmailDialog roleTitle={job.title} onClose={() => setIsEmailDialogOpen(false)} />}
     </section>
   );
 };

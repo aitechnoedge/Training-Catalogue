@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
 @import "./styles/brand-tokens.css";
 
@@ -67,6 +68,7 @@
 .catalogue-hero__headline {
   margin: 0;
   color: #01266A;
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(3.375rem, 4vw, 4rem);
   font-weight: 800;
   letter-spacing: -0.052em;
@@ -79,7 +81,7 @@
 
 .catalogue-hero__headline span:last-child {
   margin-top: 0.1em;
-  color: #01266A;
+  color: #2666C8;
 }
 
 .catalogue-hero__supporting-copy {
@@ -103,8 +105,9 @@
 .catalogue-hero__supporting-copy p {
   margin: 0;
   color: rgba(0, 0, 0, 0.66);
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(1.0625rem, 1.24vw, 1.2rem);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.65;
 }
 
@@ -116,7 +119,8 @@
   padding: 0.75rem 1.4rem;
   border: 1px solid rgba(1, 38, 106, 0.2);
   border-radius: 0.875rem;
-  background: rgba(255, 255, 255, 0.94);
+  background: #F0F7FF;
+  font-family: 'Poppins', sans-serif;
 }
 
 .catalogue-hero__metric-value {
@@ -141,6 +145,19 @@
   font-weight: 700;
   letter-spacing: -0.012em;
   white-space: nowrap;
+}
+
+.category-navigation__heading {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.category-navigation__heading h2 {
+  font-size: clamp(2rem, 5vw, 3.125rem);
+}
+
+.category-navigation__heading p {
+  font-weight: 500;
 }
 
 .catalogue-hero__media {
@@ -338,6 +355,32 @@
 .career-role-page__details p {
   color: rgba(0, 0, 0, 0.7);
   line-height: 1.7;
+}
+
+.career-role-page__details ul {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0;
+  padding-left: 1.2rem;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.65;
+}
+
+.career-role-page__details li::marker {
+  color: #2666c4;
+}
+
+.career-role-page__breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  color: rgba(0, 0, 0, 0.62);
+  font-size: 0.9rem;
+}
+
+.career-role-page__breadcrumbs a {
+  color: #01266a;
+  font-weight: 700;
 }
 
 @media (max-width: 760px) {
@@ -540,6 +583,7 @@
 .careers-page {
   overflow: clip;
   background: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
 
 .careers-page-shell {
@@ -590,6 +634,10 @@
   outline: none;
 }
 
+.careers-hero .careers-primary-button {
+  min-height: 50px;
+}
+
 .careers-secondary-button {
   flex: 0 0 auto;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -609,11 +657,15 @@
   isolation: isolate;
   overflow: hidden;
   border-bottom: 1px solid rgba(1, 38, 106, 0.1);
-  background:
-    linear-gradient(108deg, #ffffff 0%, #ffffff 44%, #F0F7FF 66%, #F0F7FF 100%);
+  background-color: #F0F7FF;
+  background-image: url('/media/careers/careers-hero-architecture.webp');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .careers-hero::before {
+  display: none;
   position: absolute;
   z-index: -1;
   inset: 0;
@@ -629,7 +681,7 @@
   width: min(calc(100% - 3rem), 100rem);
   min-height: clamp(34rem, 40vw, 38rem);
   margin-inline: auto;
-  grid-template-columns: minmax(0, 1fr) minmax(32rem, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
   gap: 0;
   padding-block: clamp(2.25rem, 4vw, 3.5rem);
@@ -638,16 +690,36 @@
 .careers-hero__content {
   position: relative;
   z-index: 2;
-  max-width: 46rem;
+  max-width: 58rem;
   animation: careers-enter 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.careers-hero__content .careers-section-label,
+.careers-editorial-section .careers-section-label,
+.careers-why-section__heading .careers-section-label,
+.careers-openings-section__heading .careers-section-label,
+.careers-open-application .careers-section-label--light {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  margin-bottom: 1.35rem;
+  border-radius: 999px;
+  background: #A8D5FF;
+  color: #01266A;
+  padding: 0.42rem 1.45rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .careers-hero h1 {
   max-width: 15ch;
   margin: 0;
-  color: #000000;
-  font-size: clamp(3.45rem, 4.35vw, 5rem);
-  font-weight: 800;
+  color: #01266A;
+  font-size: clamp(2.5rem, 4.8vw, 3.15rem);
+  font-weight: 700;
   letter-spacing: -0.058em;
   line-height: 0.96;
 }
@@ -658,7 +730,8 @@
 
 .careers-hero h1 span:last-child {
   margin-top: 0.16em;
-  font-size: clamp(2.85rem, 3.6vw, 4.15rem);
+  color: #226FA7;
+  font-size: inherit;
   line-height: 1;
 }
 
@@ -673,6 +746,7 @@
   margin: 1.45rem 0 1.8rem;
   color: rgba(5, 11, 25, 0.7);
   font-size: clamp(1.03rem, 1.2vw, 1.16rem);
+  font-weight: 500;
   line-height: 1.62;
 }
 
@@ -860,13 +934,32 @@
 
 .careers-editorial-section {
   padding-block: clamp(5rem, 9vw, 8rem);
-  background: #F0F7FF;
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.9) 46%, rgba(255,255,255,.4) 70%, rgba(255,255,255,.06) 100%),
+    url('/media/careers/careers-about-innovation.webp');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .careers-editorial-section__grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-  gap: clamp(3rem, 8vw, 9rem);
+  grid-template-columns: minmax(0, 44rem);
+  justify-content: start;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.careers-editorial-section h2 span {
+  display: block;
+}
+
+.careers-editorial-section h2 span:first-child {
+  white-space: nowrap;
+}
+
+.careers-editorial-section__heading-accent {
+  color: #226FA7;
 }
 
 .careers-editorial-section h2,
@@ -876,7 +969,7 @@
   margin: 0;
   color: #01266A;
   font-size: clamp(2.4rem, 4vw, 4.2rem);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.05em;
   line-height: 1.05;
 }
@@ -885,13 +978,16 @@
   display: grid;
   gap: 1.5rem;
   align-content: center;
-  padding-top: 1.8rem;
+  max-width: 44rem;
+  padding-top: 0;
+  text-align: left;
 }
 
 .careers-editorial-section__copy p {
   margin: 0;
   color: rgba(0, 0, 0, 0.69);
   font-size: clamp(1.04rem, 1.3vw, 1.17rem);
+  font-weight: 500;
   line-height: 1.8;
 }
 
@@ -904,6 +1000,14 @@
 
 .careers-why-section__heading {
   max-width: 48rem;
+}
+
+.careers-why-section__heading h2 span {
+  color: #226FA7;
+}
+
+.careers-openings-section h2 span {
+  color: #226FA7;
 }
 
 .career-photo-gallery {
@@ -1245,7 +1349,7 @@
 
 .career-flashcard__number {
   color: #01266A;
-  font-family: var(--font-mono);
+  font-family: 'Poppins', sans-serif;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1331,7 +1435,7 @@
 
 .careers-job-row__number {
   color: #01266A;
-  font-family: var(--font-mono);
+  font-family: 'Poppins', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
 }
@@ -1370,54 +1474,74 @@
 .careers-open-application {
   position: relative;
   overflow: hidden;
-  background: #01266A;
-  color: #ffffff;
+  background-color: #F4F8FD;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.92) 34%, rgba(255, 255, 255, 0.42) 55%, rgba(255, 255, 255, 0) 74%),
+    url('/media/careers/careers-open-application-growth.webp');
+  background-position: center right;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #01266A;
 }
 
 .careers-open-application::before,
 .careers-open-application::after {
-  position: absolute;
-  border: 1px solid rgba(91, 156, 255, 0.23);
-  border-radius: 50%;
-  content: '';
-}
-
-.careers-open-application::before {
-  top: -18rem;
-  right: -8rem;
-  width: 37rem;
-  height: 37rem;
-}
-
-.careers-open-application::after {
-  right: 5rem;
-  bottom: -16rem;
-  width: 29rem;
-  height: 29rem;
+  display: none;
 }
 
 .careers-open-application__inner {
   position: relative;
   z-index: 2;
   display: flex;
-  min-height: 0;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
-  padding-block: clamp(3rem, 5vw, 4.5rem);
+  min-height: clamp(19rem, 29vw, 26rem);
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.75rem;
+  padding-block: clamp(3.5rem, 6vw, 5rem);
+}
+
+.careers-open-application__inner > div {
+  width: min(100%, 39rem);
 }
 
 .careers-open-application h2 {
   max-width: 16ch;
-  color: #ffffff;
+  color: #01266A;
 }
 
 .careers-open-application p:not(.careers-section-label) {
   max-width: 42rem;
   margin: 1.5rem 0 0;
-  color: rgba(255, 255, 255, 0.72);
+  color: rgba(7, 31, 69, 0.76);
   font-size: 1.03rem;
+  font-weight: 500;
   line-height: 1.7;
+}
+
+.careers-open-application .careers-section-label--light {
+  color: #01266A;
+}
+
+.careers-open-application h2 span {
+  display: block;
+}
+
+.careers-open-application h2 span:last-child {
+  color: #226FA7;
+}
+
+.careers-open-application .careers-secondary-button {
+  border-color: #01266A;
+  background: #01266A;
+  color: #ffffff;
+  box-shadow: 0 0.8rem 2rem rgba(1, 38, 106, 0.16);
+}
+
+.careers-open-application .careers-secondary-button:hover,
+.careers-open-application .careers-secondary-button:focus-visible {
+  background: #2666C4;
+  box-shadow: 0 1rem 2.4rem rgba(1, 38, 106, 0.22);
 }
 
 .career-role-page {
@@ -1527,15 +1651,7 @@
 @media (max-width: 68rem) {
   .careers-hero__inner {
     width: min(calc(100% - 2.5rem), 100rem);
-    grid-template-columns: minmax(0, 1fr) minmax(26rem, 0.92fr);
-  }
-
-  .careers-hero h1 {
-    font-size: clamp(3.1rem, 5.6vw, 4.4rem);
-  }
-
-  .careers-hero h1 span:last-child {
-    font-size: clamp(2.65rem, 4.6vw, 3.65rem);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .careers-hero__visual {
@@ -1557,7 +1673,7 @@
     grid-template-columns: 1fr;
     gap: 1.25rem;
     padding-top: 3.25rem;
-    padding-bottom: 0;
+    padding-bottom: 3.25rem;
   }
 
   .careers-hero__content {
@@ -1677,11 +1793,11 @@
   }
 
   .careers-hero h1 {
-    font-size: clamp(2.65rem, 13vw, 3.75rem);
+    font-size: clamp(2.25rem, 11.5vw, 3.15rem);
   }
 
   .careers-hero h1 span:last-child {
-    font-size: clamp(2.25rem, 10.8vw, 3.1rem);
+    font-size: inherit;
   }
 
   .careers-hero__visual {
@@ -1742,6 +1858,17 @@
     min-height: 0;
     padding-block: 3rem;
   }
+
+  .careers-open-application {
+    background-image:
+      linear-gradient(90deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.93) 62%, rgba(255, 255, 255, 0.72) 100%),
+      url('/media/careers/careers-open-application-growth.webp');
+    background-position: 68% center;
+  }
+
+  .careers-editorial-section h2 span:first-child {
+    white-space: normal;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1770,5 +1897,179 @@
   .careers-job-row {
     scroll-behavior: auto;
     transition-duration: 0.01ms;
+  }
+}
+
+.catalogue-directory {
+  padding: 1.5rem 1rem 4rem;
+  background: linear-gradient(180deg, #fff 0%, #f7fbff 100%);
+}
+
+.catalogue-directory--standalone {
+  padding-top: clamp(2rem, 5vw, 4rem);
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+.catalogue-directory__shell {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+}
+
+.catalogue-directory__breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  color: rgba(16, 20, 28, .65);
+  font-size: .875rem;
+  list-style: none;
+}
+
+.catalogue-directory__breadcrumbs li + li::before {
+  margin-right: .55rem;
+  color: rgba(16, 20, 28, .35);
+  content: '/';
+}
+
+.catalogue-directory__breadcrumbs a:hover {
+  color: #01266a;
+  text-decoration: underline;
+}
+
+.catalogue-directory__heading {
+  max-width: 52rem;
+  margin-bottom: 2rem;
+}
+
+.catalogue-directory__heading > p:first-child {
+  margin: 0 0 .65rem;
+  color: #2666c4;
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.catalogue-directory__heading h1,
+.catalogue-directory__heading h2 {
+  margin: 0;
+  color: #10141c;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.catalogue-directory__heading > p:last-child {
+  margin: 1rem 0 0;
+  color: rgba(16, 20, 28, .7);
+  line-height: 1.7;
+}
+
+.catalogue-directory__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.catalogue-directory__list a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .85rem;
+  min-height: 100%;
+  padding: 1rem;
+  border: 1px solid rgba(1, 38, 106, .14);
+  border-radius: .85rem;
+  background: #fff;
+  color: #10141c;
+  box-shadow: 0 .4rem 1.4rem rgba(1, 38, 106, .05);
+}
+
+.catalogue-directory__list a:hover {
+  border-color: #2666c4;
+  color: #01266a;
+  transform: translateY(-1px);
+}
+
+.catalogue-directory__list span {
+  color: #2666c4;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.catalogue-directory__list strong {
+  font-size: .95rem;
+  line-height: 1.4;
+}
+
+.catalogue-directory__list svg,
+.catalogue-directory__pagination svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.catalogue-directory__pagination {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.catalogue-directory__pagination > a {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  width: fit-content;
+  color: #01266a;
+  font-weight: 750;
+}
+
+.catalogue-directory__pagination > a:last-child {
+  justify-self: end;
+}
+
+.catalogue-directory__pagination > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+}
+
+.catalogue-directory__pagination > div a {
+  display: grid;
+  width: 2.45rem;
+  height: 2.45rem;
+  place-items: center;
+  border: 1px solid rgba(1, 38, 106, .16);
+  border-radius: .65rem;
+  color: #01266a;
+  font-weight: 750;
+}
+
+.catalogue-directory__pagination > div a[aria-current='page'] {
+  border-color: #01266a;
+  background: #01266a;
+  color: #fff;
+}
+
+@media (max-width: 720px) {
+  .catalogue-directory__list {
+    grid-template-columns: 1fr;
+  }
+
+  .catalogue-directory__pagination {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .catalogue-directory__pagination > div {
+    grid-column: 1 / -1;
+    grid-row: 1;
   }
 }

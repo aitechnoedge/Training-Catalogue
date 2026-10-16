@@ -18,21 +18,9 @@ export const CareersHero: React.FC<CareersHeroProps> = ({ onViewOpenings }) => (
           Grow your skills, take ownership, and create work that makes a difference.
         </p>
         <button type="button" className="careers-primary-button" onClick={onViewOpenings}>
-          View open roles
+          View Open Roles
           <ArrowDown className="h-4 w-4" aria-hidden="true" />
         </button>
-      </div>
-
-      <div className="careers-hero__visual">
-        <figure className="careers-hero__portrait-shell">
-          <div className="careers-hero__portrait-media">
-            <img
-              src="/media/careers/pavan-lalwani-founder-ceo-portrait.png"
-              alt="Pavan Lalwani, Founder and CEO of TechnoEdge"
-              decoding="async"
-            />
-          </div>
-        </figure>
       </div>
     </div>
   </section>

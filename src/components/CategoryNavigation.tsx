@@ -9,7 +9,6 @@ import {
   HeartHandshake,
   Workflow,
 } from 'lucide-react';
-import { motion } from 'motion/react';
 
 interface Props {
   categories: CategoryArchitecture[];
@@ -62,13 +61,13 @@ export const CategoryNavigation: React.FC<Props> = ({ categories, activeCategory
   };
 
   return (
-    <section id="category-selection-section" className="w-full bg-white px-4 sm:px-10 py-10 shrink-0 border-b border-[rgba(1,38,106,0.14)]" aria-label="Training Categories">
-      <div className="max-w-7xl mx-auto">
+    <section id="category-selection-section" className="w-full bg-white px-4 sm:px-10 py-6 sm:py-8 shrink-0 border-b border-[rgba(1,38,106,0.14)] font-['Poppins',sans-serif]" aria-label="Training Categories">
+      <div className="max-w-[1400px] mx-auto">
         
         {/* Section Heading */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-[#000000]">Explore Our Catalogues</h2>
-          <p className="text-[rgba(0,0,0,0.70)] mt-1">Select a learning track to browse programmes.</p>
+        <div className="category-navigation__heading mb-8 sm:mb-9">
+          <h2 className="font-bold text-[#01266A]">Explore Our Catalogue</h2>
+          <p className="text-[rgba(0,0,0,0.78)] text-base sm:text-lg">Select a learning track to browse programmes.</p>
         </div>
 
         {/* Tablist for categories */}
@@ -87,34 +86,31 @@ export const CategoryNavigation: React.FC<Props> = ({ categories, activeCategory
                 onPointerEnter={(e) => handlePointerEnter(cat.id, e)}
                 onPointerDown={(e) => handlePointerEnter(cat.id, e)}
                 onPointerLeave={() => handlePointerLeave(cat.id)}
-                className={`text-left p-6 rounded-xl transition-all duration-200 relative outline-none focus-visible:ring-2 focus-visible:ring-[#01266A] focus-visible:ring-offset-2 flex flex-col overflow-hidden cursor-pointer ${
+                className={`text-left min-h-[17rem] p-5 sm:p-6 rounded-xl transition-all duration-200 relative outline-none focus-visible:ring-2 focus-visible:ring-[#01266A] focus-visible:ring-offset-2 flex flex-col overflow-hidden cursor-pointer ${
                   isActive
-                    ? 'bg-[rgba(115,194,251,0.10)] border-2 border-[#01266A] shadow-sm scale-[1.02]'
-                    : 'bg-white border border-[rgba(1,38,106,0.14)] hover:border-[#01266A]/30 hover:shadow-[0_8px_24px_rgba(1,38,106,0.16)] hover:-translate-y-0.5'
+                    ? 'bg-[#F0F7FF] border-2 border-[#01266A] shadow-[0_3px_7px_rgba(1,38,106,0.20)]'
+                    : 'bg-white border border-[rgba(1,38,106,0.16)] hover:border-[#2666C4]/50 hover:shadow-[0_8px_24px_rgba(1,38,106,0.12)] hover:-translate-y-0.5'
                 }`}
               >
                 {/* Dynamic Origin Fill Ripple */}
-                <motion.span
-                  animate={{ scale: isHovered && originData ? 1 : 0 }}
+                <span
                   aria-hidden
                   className={`pointer-events-none absolute -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                    isActive
-                      ? 'bg-[rgba(1,38,106,0.12)]'
-                      : 'bg-gradient-to-br from-[rgba(1,38,106,0.12)] to-[rgba(115,194,251,0.22)]'
+                    'bg-[#DCEEFF]'
                   }`}
-                  initial={false}
                   style={{
                     height: originData?.coverSize || 0,
                     left: originData?.x || 0,
                     top: originData?.y || 0,
                     width: originData?.coverSize || 0,
+                    transform: `translate(-50%, -50%) scale(${isHovered && originData ? 1 : 0})`,
+                    transition: 'transform 500ms cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 />
 
                 <div className="relative z-10 flex flex-col flex-1 w-full">
-                  <div className="flex justify-between items-start mb-5 w-full">
-                    <div className={`p-3 rounded-lg transition-all duration-200 ${
+                  <div className="flex items-start gap-4 mb-5 w-full">
+                    <div className={`shrink-0 p-3 rounded-lg transition-all duration-200 ${
                       isActive && isHovered
                         ? 'bg-[#2666C4] text-white shadow-sm scale-105'
                         : isActive
@@ -125,34 +121,33 @@ export const CategoryNavigation: React.FC<Props> = ({ categories, activeCategory
                     }`}>
                       {getCategoryIcon(cat.id)}
                     </div>
-                    <div className="text-right">
-                      <span className={`block text-3xl font-bold tracking-tight transition-colors duration-200 ${
+                    <h3 className={`pt-1 text-xl font-bold leading-tight transition-colors duration-200 ${
+                      isActive ? 'text-[#01266A]' : isHovered ? 'text-[#01266A]/70' : 'text-[#111111]'
+                    }`}>
+                      {cat.name}
+                    </h3>
+                    <div className="ml-auto text-right">
+                      <span className={`block text-[2.125rem] font-bold leading-none tracking-tight transition-colors duration-200 ${
                         isActive ? 'text-[#01266A]' : isHovered ? 'text-[#01266A]/70' : 'text-[rgba(0,0,0,0.65)]'
                       }`}>
                         {cat.count > 0 ? cat.count.toLocaleString() : 'New'}
                       </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-[rgba(0,0,0,0.58)]">
+                      <span className={`mt-1 block text-[10px] font-bold uppercase tracking-wider ${isActive ? 'text-[#01266A]' : 'text-[rgba(0,0,0,0.58)]'}`}>
                         {cat.count > 0 ? 'Programmes' : 'Catalogue'}
                       </span>
                     </div>
                   </div>
                   
-                  <h3 className={`text-xl font-bold mb-2 transition-colors duration-200 ${
-                    isActive ? 'text-[#01266A]' : isHovered ? 'text-[#01266A]/70' : 'text-[#000000]'
-                  }`}>
-                    {cat.name}
-                  </h3>
-                  
-                  <p className={`text-sm mb-6 ${isActive ? 'text-[rgba(0,0,0,0.72)]' : 'text-[rgba(0,0,0,0.58)]'}`}>
+                  <p className={`text-sm leading-[1.6] ${isActive ? 'text-[rgba(0,0,0,0.72)]' : 'text-[rgba(0,0,0,0.62)]'}`}>
                     {cat.description}
                   </p>
 
                   {isActive ? (
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#01266A] uppercase tracking-wider mt-auto pt-4 border-t border-[rgba(1,38,106,0.14)] w-full">
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-[#01266A] uppercase tracking-wider mt-auto pt-3 border-t border-[rgba(1,38,106,0.14)] w-full">
                       <CheckCircle2 className="w-4 h-4 text-[#01266A]" /> Selected
                     </div>
                   ) : (
-                    <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mt-auto pt-4 border-t border-transparent w-full transition-colors duration-200 ${
+                    <div className={`flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider mt-auto pt-3 border-t border-[rgba(1,38,106,0.14)] w-full transition-colors duration-200 ${
                       isHovered ? 'text-[#01266A]/70' : 'text-[rgba(0,0,0,0.58)]'
                     }`}>
                       <span>Click to explore</span>
