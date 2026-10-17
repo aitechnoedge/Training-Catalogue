@@ -1,26 +1,11 @@
-const targetEnvironment = String(
-  process.env.VERCEL_TARGET_ENV || process.env.APP_ENV || process.env.VERCEL_ENV || 'development',
-).toLowerCase();
-const isProduction = targetEnvironment === 'production';
-
-const nonProductionHeaders = isProduction
-  ? []
-  : [{
-      source: '/:path*',
-      headers: [
-        { key: 'X-Robots-Tag', value: 'noindex, nofollow, noarchive' },
-        { key: 'X-Deployment-Environment', value: targetEnvironment },
-      ],
-    }];
-
 export const config = {
   framework: 'vite',
   cleanUrls: true,
   buildCommand: 'npm run build',
   outputDirectory: 'dist',
-  ...(isProduction
-    ? { crons: [{ path: '/api/cron/publish', schedule: '*/5 * * * *' }] }
-    : {}),
+  // Vercel compiles this file before build-time environment variables are
+  // available. Vercel schedules configured crons only on Production.
+  crons: [{ path: '/api/cron/publish', schedule: '*/5 * * * *' }],
   redirects: [
     {
       source: '/:path*',
@@ -37,7 +22,6 @@ export const config = {
     { source: '/training-roi/', destination: '/training-roi', permanent: true },
   ],
   headers: [
-    ...nonProductionHeaders,
     {
       source: '/adminzz/:path*',
       headers: [

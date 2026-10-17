@@ -76,6 +76,6 @@ Rollback staging by redeploying the previous known-good staging deployment. Roll
 
 Local staging checks and builds use `.vercel/.env.staging.local`, clear every application credential inherited from the shell, and then load only that staging file. Vercel replaces Sensitive values with placeholders when pulling; populate those ignored local entries from the approved secret manager before using the local commands. The remote `npm run staging:deploy` command does not depend on a pulled secret file.
 
-`vercel.mjs` includes the publication cron only for Production and adds an `X-Robots-Tag` header to every non-production route. The post-build step also replaces every generated HTML robots directive and writes a deny-all `robots.txt`, providing protection even outside Vercel.
+`vercel.mjs` declares the publication cron; Vercel invokes configured crons only for Production deployments. Runtime middleware adds an `X-Robots-Tag` header to every non-production route. The post-build step also replaces every generated HTML robots directive and writes a deny-all `robots.txt`, providing protection even outside Vercel.
 
 `middleware.js` fails closed on the staging target: missing Basic Auth configuration returns `503`, invalid credentials return `401`, and Production bypasses the staging gate entirely.

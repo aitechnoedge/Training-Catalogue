@@ -50,7 +50,7 @@ export function stagingAuthenticationResponse(request, environment = process.env
 export default function middleware(request) {
   const authenticationResponse = stagingAuthenticationResponse(request);
   if (authenticationResponse) return authenticationResponse;
-  if (environmentName(process.env) === 'staging') {
+  if (environmentName(process.env) !== 'production') {
     return next({ headers: { 'X-Robots-Tag': 'noindex, nofollow, noarchive' } });
   }
   return next();
