@@ -88,6 +88,7 @@ button{font:inherit; color:inherit}
 .spread{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap}
 .grid{display:grid; gap:16px}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g3{grid-template-columns:repeat(3,minmax(0,1fr))} .g4{grid-template-columns:repeat(4,minmax(0,1fr))} .g6{grid-template-columns:repeat(6,minmax(0,1fr))}
+#rf .g2 > label[for="r-level"]{grid-column:1/-1}
 .sec-h{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; flex-wrap:wrap}
 .sec-h h2{font-size:24px}
 .eyebrow{font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; font-weight:800; color:var(--muted)}
@@ -2162,14 +2163,6 @@ function renderLogin(v){
   $('lf').onsubmit = e => { e.preventDefault(); doLogin($('l-id').value, $('l-pin').value); };
   renderIssuedProfileForm($('profile-section'), null);
 }
-function geoSelects(prefix, z, r, t){
-  const regions = Object.values(GEO).flatMap(x => Object.keys(x));
-  return `<label class="f" for="${prefix}-region">Region<select id="${prefix}-region">${regions.map(x => `<option ${x === r ? 'selected' : ''}>${x}</option>`).join('')}</select></label>`;
-}
-function bindGeo(prefix, r, t){
-  const region = $(prefix + '-region');
-  if (r && [...region.options].some(x => x.value === r)) region.value = r;
-}
 function renderRegister(v){
   v.innerHTML = `<div class="login"><section class="pitch"><span class="mii"><span class="tri" aria-hidden="true"><i></i><i></i><i></i></span>Made in India by Technoedge</span>
       <h1 style="position:relative; z-index:1">Create your profile</h1><p style="position:relative; z-index:1">Takes 30 seconds. Your answers stay private. Only your scores count for your team.</p></section>
@@ -2179,18 +2172,15 @@ function renderRegister(v){
         <label class="f" for="r-id">Employee ID<input id="r-id" required maxlength="20"></label>
         <label class="f" for="r-role">Role<select id="r-role"><option value="RM">Relationship Manager</option><option value="TH">Territory Head</option></select></label>
         <label class="f" for="r-pin">Choose a 4-digit PIN<input id="r-pin" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" required></label>
-        ${geoSelects('r', 'West', 'Mumbai', 'Andheri')}
       </div>
       <p class="err" id="r-err" hidden></p>
       <div class="row"><button class="btn primary big" type="submit">Create and start</button><button class="btn" type="button" id="r-back">Back to log in</button></div>
     </form></div>`;
-  bindGeo('r', 'Mumbai', 'Andheri');
   $('r-back').onclick = () => { view = 'login'; render(); };
   $('rf').onsubmit = e => { e.preventDefault(); const id = $('r-id').value.trim().toUpperCase(), pin = $('r-pin').value.trim(), err = $('r-err');
     if (S.users[id]){ err.textContent = 'This Employee ID already has a profile. Log in instead.'; err.hidden = false; return; }
     if (!/^\d{4}$/.test(pin)){ err.textContent = 'PIN must be 4 digits.'; err.hidden = false; return; }
-    const region = $('r-region').value, zone = REGZ[region] || 'West', territory = GEO[zone]?.[region]?.[0] || '';
-    S.users[id] = { empId:id, name:$('r-name').value.trim(), pin, role:$('r-role').value, zone, region, territory, rounds:[], created:Date.now() };
+    S.users[id] = { empId:id, name:$('r-name').value.trim(), pin, role:$('r-role').value, zone:'West', region:'Mumbai', territory:'Andheri', rounds:[], created:Date.now() };
     S.session = id; persist(true); view = 'home'; render(); toast('Profile created. Start Base Camp when you are ready.'); };
 }
 function logout(){ stopTick(); P = null; homeN = null; S.session = null; persist(true); view = 'login'; render(); toast('You are logged out'); }
@@ -3282,7 +3272,6 @@ function renderIssuedProfileForm(host, u){
         <label class="f" for="r-ind">Industry<select id="r-ind">${I.map(k => `<option value="${k}" ${k === p.ind ? 'selected' : ''}>${esc(INDUSTRIES[k].name)}</option>`).join('')}</select></label>
         <label class="f" for="r-dept">Department<select id="r-dept"></select></label>
         <label class="f" for="r-level">Level<select id="r-level"></select></label>
-        ${geoSelects('r', p.zone || 'West', p.region || 'Mumbai', p.territory || 'Andheri')}
       </div>
       <p class="err" id="r-err" hidden></p>
       <div class="row"><button class="btn primary big" type="submit">Save and start</button><button class="btn" type="button" id="r-back">Back to log in</button></div>
@@ -3293,7 +3282,6 @@ function renderIssuedProfileForm(host, u){
   $('r-ind').onchange = fi; $('r-dept').onchange = fl; $('r-level').onchange = kp; fi();
   if (cDeptsFor($('r-ind').value).includes(p.dept)){ $('r-dept').value = p.dept; fl(); }
   if (['S','M','L'].includes(p.level)){ $('r-level').value = p.level; kp(); }
-  bindGeo('r', p.region || 'Mumbai', p.territory || 'Andheri');
   $('r-back').onclick = () => { profileId = null; renderIssuedProfileForm(host, null); $('login-top').scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block:'start' }); };
   $('rf').onsubmit = e => { e.preventDefault(); let current = S.users[profileId], err = $('r-err');
     if (!current){
@@ -3303,9 +3291,8 @@ function renderIssuedProfileForm(host, u){
       if (isStaff(current)){ err.textContent = 'Staff profiles are already configured. Please use Log in.'; err.hidden = false; return; }
       profileId = current.empId;
     }
-    const ind = $('r-ind').value, dept = $('r-dept').value, level = $('r-level').value, region = $('r-region').value;
-    const zone = REGZ[region] || current.zone || 'West', territory = current.region === region && current.territory ? current.territory : GEO[zone]?.[region]?.[0] || current.territory || '';
-    Object.assign(current, { role: packKey(dept, ind, level), dept, ind, level, zone, region, territory });
+    const ind = $('r-ind').value, dept = $('r-dept').value, level = $('r-level').value;
+    Object.assign(current, { role: packKey(dept, ind, level), dept, ind, level });
     S.session = current.empId; profileId = null; persist(true); view = 'home'; render(); window.scrollTo(0, 0); toast('Profile completed. Start Base Camp when you are ready.'); };
 }
 function renderLogin(v){
@@ -3349,7 +3336,6 @@ function renderRegister(v){
         <label class="f" for="r-ind">Industry<select id="r-ind">${I.map(k => `<option value="${k}" ${k === u.ind ? 'selected' : ''}>${esc(INDUSTRIES[k].name)}</option>`).join('')}</select></label>
         <label class="f" for="r-dept">Department<select id="r-dept"></select></label>
         <label class="f" for="r-level">Level<select id="r-level"></select></label>
-        ${geoSelects('r', u.zone || 'West', u.region || 'Mumbai', u.territory || 'Andheri')}
       </div>
       <p class="err" id="r-err" hidden></p>
       <div class="row"><button class="btn primary big" type="submit">Save and start</button><button class="btn" type="button" id="r-back">Back to log in</button></div>
@@ -3360,13 +3346,11 @@ function renderRegister(v){
   $('r-ind').onchange = fi; $('r-dept').onchange = fl; $('r-level').onchange = kp; fi();
   if (cDeptsFor($('r-ind').value).includes(u.dept)){ $('r-dept').value = u.dept; fl(); }
   if (['S','M','L'].includes(u.level)){ $('r-level').value = u.level; kp(); }
-  bindGeo('r', u.region || 'Mumbai', u.territory || 'Andheri');
   $('r-back').onclick = () => { profileId = null; view = 'login'; render(); };
   $('rf').onsubmit = e => { e.preventDefault(); const current = S.users[profileId], err = $('r-err');
     if (!current){ err.textContent = 'Your issued account could not be found. Return to login and try again.'; err.hidden = false; return; }
-    const ind = $('r-ind').value, dept = $('r-dept').value, level = $('r-level').value, region = $('r-region').value;
-    const zone = REGZ[region] || current.zone || 'West', territory = current.region === region && current.territory ? current.territory : GEO[zone]?.[region]?.[0] || current.territory || '';
-    Object.assign(current, { role: packKey(dept, ind, level), dept, ind, level, zone, region, territory });
+    const ind = $('r-ind').value, dept = $('r-dept').value, level = $('r-level').value;
+    Object.assign(current, { role: packKey(dept, ind, level), dept, ind, level });
     S.session = current.empId; profileId = null; persist(true); view = 'home'; render(); toast('Profile completed. Start Base Camp when you are ready.'); };
 }
 

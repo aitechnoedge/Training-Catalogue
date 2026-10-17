@@ -35,7 +35,7 @@ export const HeaderStructure: React.FC<HeaderStructureProps> = ({
   return (
     <header id="technoedge-header-structure" className="w-full bg-white border-b border-[rgba(1,38,106,0.12)] sticky top-0 z-40 shrink-0">
       {/* Main navigation header */}
-      <div className="mx-auto grid h-[76px] w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 px-4 min-[761px]:h-20 min-[761px]:px-[clamp(22px,4.5vw,72px)] min-[1280px]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] min-[1280px]:gap-x-6">
+      <div className="te-page-container grid h-[76px] grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 min-[761px]:h-20 min-[1280px]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] min-[1280px]:gap-x-6">
         {/* The corporate wordmark is shared by every site topbar. */}
         <a href="/" aria-label="TechnoEdge home" className="shrink-0 rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#01266A]">
           <img

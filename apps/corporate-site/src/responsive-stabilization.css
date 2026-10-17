@@ -20,10 +20,10 @@
   .impact .impact-card.is-past,
   .impact .impact-card.is-upcoming {
     min-height: 138px;
-    border-right: 1px solid rgba(13, 7, 74, .7);
+    border-right: 1px solid rgba(1, 38, 106, .35);
   }
   .impact .impact-card:nth-child(2n) { border-right: 0; }
-  .impact .impact-card:nth-child(-n + 2) { border-bottom: 1px solid rgba(13, 7, 74, .7); }
+  .impact .impact-card:nth-child(-n + 2) { border-bottom: 1px solid rgba(1, 38, 106, .35); }
   .impact .impact-value { min-height: 88px; }
 
   /* The stage canvas can be larger than the viewport, but only inside this scroller. */
@@ -86,8 +86,10 @@
 /* 44px targets without making the visible hero dots visually heavy. */
 .menu-toggle { min-inline-size: 44px; min-block-size: 44px; }
 .hero-rotator-dots button { position: relative; width: 44px; height: 44px; border: 0; background: transparent; }
-.hero-rotator-dots button::before { position: absolute; top: 50%; left: 50%; width: 9px; height: 9px; border: 1px solid #2666C4; border-radius: 999px; background: rgba(255,255,255,.72); content: ""; transform: translate(-50%, -50%); }
-.hero-rotator-dots button.is-active::before { width: 30px; background: #2666C4; }
+.hero-rotator-dots { gap: .25rem; }
+.hero-rotator-dots button::before { position: absolute; top: 50%; left: 50%; width: 7px; height: 7px; border: 1px solid #2666C4; border-radius: 999px; background: rgba(255,255,255,.72); content: ""; transform: translate(-50%, -50%); }
+.hero-rotator-dots button.is-active { width: 44px; background: transparent; }
+.hero-rotator-dots button.is-active::before { width: 20px; background: #2666C4; }
 
 @media (prefers-reduced-motion: reduce) {
   .client-logo-viewport { overflow-x: auto; }

@@ -1,7 +1,20 @@
-import { useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { INDUSTRIES_DATA } from '../../data/learningData';
+import {
+  Car,
+  Factory,
+  Landmark,
+  Microscope,
+  Monitor,
+  Radio,
+  ShieldCheck,
+  ShoppingBag,
+  Truck,
+  Zap,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import type { IndustryItem } from '../../types';
 import './sculpted-cards.css';
 
@@ -19,12 +32,83 @@ const INDUSTRY_IMAGES: Record<string, string> = {
 };
 
 export function IndustrySelector() {
+  const containerRef = useRef<HTMLElement>(null);
+  const trackWindowRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  const [scrollRange, setScrollRange] = useState(0);
+  const [scrollStopperEnabled, setScrollStopperEnabled] = useState(false);
+
+  useEffect(() => {
+    const section = containerRef.current;
+    if (!section) return;
+
+    const preloaders: HTMLImageElement[] = [];
+    const warmIndustryImages = () => {
+      for (const source of Object.values(INDUSTRY_IMAGES)) {
+        const image = new Image();
+        image.decoding = 'async';
+        image.src = source;
+        preloaders.push(image);
+        void image.decode().catch(() => undefined);
+      }
+    };
+
+    const preloadObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        preloadObserver.disconnect();
+        warmIndustryImages();
+      },
+      { rootMargin: '180% 0px' },
+    );
+
+    preloadObserver.observe(section);
+    return () => preloadObserver.disconnect();
+  }, []);
+
+  useLayoutEffect(() => {
+    const section = containerRef.current;
+    const track = trackRef.current;
+    const trackWindow = trackWindowRef.current;
+    if (!section || !track || !trackWindow) return;
+
+    const desktopViewport = window.matchMedia('(min-width: 800px) and (min-height: 820px)');
+    const updateMeasurements = () => {
+      const enabled = desktopViewport.matches && !reduceMotion;
+      const nextRange = Math.max(0, track.scrollWidth - section.clientWidth);
+
+      setScrollStopperEnabled(enabled && nextRange > 0);
+      setScrollRange(nextRange);
+
+      if (enabled) trackWindow.scrollLeft = 0;
+    };
+
+    updateMeasurements();
+
+    const resizeObserver = new ResizeObserver(updateMeasurements);
+    resizeObserver.observe(section);
+    resizeObserver.observe(track);
+    desktopViewport.addEventListener('change', updateMeasurements);
+
+    return () => {
+      resizeObserver.disconnect();
+      desktopViewport.removeEventListener('change', updateMeasurements);
+    };
+  }, [reduceMotion]);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+  const x = useTransform(scrollYProgress, (progress) => -Math.round(progress * scrollRange));
 
   return (
     <section
       id="industries"
-      className="industry-section bg-transparent"
+      ref={containerRef}
+      className={`industry-section industry-scrollstopper bg-transparent${scrollStopperEnabled ? ' is-scrollstopper-active' : ''}`}
+      style={{ '--industry-scroll-distance': `${scrollRange}px` } as CSSProperties}
     >
       <div className="industry-stage w-full py-16 sm:py-20 lg:py-24">
         
@@ -44,9 +128,10 @@ export function IndustrySelector() {
           </motion.div>
         </div>
 
-        <div className="industry-track-window w-full overflow-x-auto py-1 sm:py-2" role="region" aria-label="Industry learning examples" tabIndex={0}>
-          <div
+        <div ref={trackWindowRef} className="industry-track-window w-full overflow-x-auto py-1 sm:py-2" role="region" aria-label="Industry learning examples" tabIndex={0}>
+          <motion.div
             ref={trackRef}
+            style={scrollStopperEnabled ? { x } : undefined}
             className="industry-track flex gap-5 sm:gap-6 lg:gap-8 pl-4 sm:pl-8 lg:pl-12 pr-12 sm:pr-20 lg:pr-24 items-stretch"
           >
             {INDUSTRIES_DATA.map((industry) => (
@@ -55,7 +140,7 @@ export function IndustrySelector() {
                 industry={industry}
               />
             ))}
-          </div>
+          </motion.div>
         </div>
 
       </div>
@@ -81,7 +166,21 @@ interface IndustryCardProps {
   industry: IndustryItem;
 }
 
+const INDUSTRY_ICONS: Record<string, LucideIcon> = {
+  automotive: Car,
+  banking: Landmark,
+  energy: Zap,
+  insurance: ShieldCheck,
+  it: Monitor,
+  logistics: Truck,
+  manufacturing: Factory,
+  pharma: Microscope,
+  retail: ShoppingBag,
+  telecom: Radio,
+};
+
 function IndustryCard({ industry }: IndustryCardProps) {
+  const Icon = INDUSTRY_ICONS[industry.id] || Factory;
   const theme = INDUSTRY_THEMES[industry.id] || INDUSTRY_THEMES.manufacturing;
   
   return <article 
@@ -89,6 +188,8 @@ function IndustryCard({ industry }: IndustryCardProps) {
     style={{ '--card-bg': theme.lightBg, '--title-bg': theme.gradient } as CSSProperties}
   >
     <header className="industry-nameplate">
+      <Icon className="industry-nameplate__icon" aria-hidden="true" />
+      <span className="industry-nameplate__divider" aria-hidden="true" />
       <div className="industry-nameplate__content">
         <h3>{industry.title}</h3>
         <div className="industry-nameplate__tagline">

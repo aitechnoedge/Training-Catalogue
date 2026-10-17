@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useRef } from 'react';
 import { Header } from './components/Header';
 import { LayeredCorporateHero } from './components/LayeredCorporateHero';
 import { GlassCursor } from './components/ui/glass-cursor';
@@ -14,22 +14,34 @@ const ContinuationContact = lazy(() => import('./components/continuation/Contact
 const SectionDivider = lazy(() => import('./components/SectionDivider').then((module) => ({ default: module.SectionDivider })));
 
 export default function App() {
-  const [progress, setProgress] = useState(0);
+  const readingProgressRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
     document.documentElement.style.overflow = '';
 
+    let frame = 0;
     const update = () => {
+      frame = 0;
       const available = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(available > 0 ? window.scrollY / available : 0);
+      const progress = available > 0 ? window.scrollY / available : 0;
+      if (readingProgressRef.current) {
+        readingProgressRef.current.style.transform = `scaleX(${progress})`;
+      }
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
     };
 
     document.body.classList.remove('cursor-none');
-    window.addEventListener('scroll', update, { passive: true });
+    update();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
     return () => {
-      window.removeEventListener('scroll', update);
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
       document.documentElement.style.overflow = '';
       document.body.classList.remove('cursor-none');
     };
@@ -38,7 +50,7 @@ export default function App() {
   return (
     <div className="site-shell">
       <GlassCursor />
-      <div className="reading-progress"><i style={{ transform: `scaleX(${progress})` }} /></div>
+      <div className="reading-progress"><i ref={readingProgressRef} /></div>
       <div className="site-content">
         <Header />
         <main>

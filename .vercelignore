@@ -1,0 +1,3 @@
+# Local audit outputs and temporary build snapshots are not deployment inputs.
+artifacts/
+tmp/

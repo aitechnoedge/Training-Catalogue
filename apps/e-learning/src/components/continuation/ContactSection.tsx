@@ -27,14 +27,14 @@ export function ContactSection() {
         <div className="contact-panel__layout relative z-10">
           <div className="contact-support-symbol" aria-hidden="true">
             <img
-              src="/e-learning/media/customer-support-avatar.png"
+              src="/e-learning/media/pastel-neumorphic-support-avatar.png?v=20261017-3"
               alt=""
               loading="lazy"
               decoding="async"
             />
           </div>
 
-          <div className="contact-panel__content text-center">
+          <div className="contact-panel__content text-left">
             <h2 className="tracking-tight text-[#30283f] mb-4 sm:mb-6">
               <em>Not Sure Which Format Fits?</em>
               <span>Tell Us What People Need to<br className="hidden sm:block" /> Understand, Decide or Do.</span>
@@ -43,7 +43,7 @@ export function ContactSection() {
               We&apos;ll help you choose the right experience.
             </p>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="contact-panel__actions flex flex-wrap items-center gap-4">
               <button
                 type="button"
                 onClick={() => setIsEnquiryOpen(true)}

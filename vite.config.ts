@@ -43,7 +43,11 @@ export default defineConfig(() => {
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      // Workspace builds replace files under dist; watching them can crash
+      // Windows FSWatcher while the dev server is running.
+      watch: process.env.DISABLE_HMR === 'true' ? null : {
+        ignored: ['**/dist/**'],
+      },
       proxy: {
         '/website': {
           target: process.env.WEBSITE_PROXY || 'http://localhost:3003',

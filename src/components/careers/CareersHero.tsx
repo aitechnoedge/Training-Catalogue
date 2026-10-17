@@ -23,5 +23,14 @@ export const CareersHero: React.FC<CareersHeroProps> = ({ onViewOpenings }) => (
         </button>
       </div>
     </div>
+    <img
+      className="careers-hero__art"
+      src="/media/careers/careers-founder-message.webp"
+      alt="TechnoEdge Founder and CEO Pavan Lalwani speaking at a podium, with the message: At TechnoEdge, we don't just aspire — we inspire."
+      width="2400"
+      height="1350"
+      decoding="async"
+      fetchPriority="high"
+    />
   </section>
 );

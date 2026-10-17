@@ -63,33 +63,42 @@ export const ToolsTechnologyCard: React.FC<Props> = ({ programme, onViewDetail }
         }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       />
-      {/* Visual Area & Tool Logo placement */}
+      {/* Visual Area */}
       <div className="w-full aspect-[16/9] bg-[rgba(115,194,251,0.04)] border-b border-[rgba(1,38,106,0.08)] relative flex items-center justify-center overflow-hidden">
-        {/* Subtle decorative pattern */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:12px_12px]"></div>
-        
-        {/* ID Position */}
+        {programme.imageUrl ? (
+          <img
+            src={programme.imageUrl}
+            alt={programme.title}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103"
+            onError={(event) => {
+              (event.target as HTMLImageElement).style.display = 'none';
+            }}
+          />
+        ) : (
+          <>
+            <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:12px_12px]" />
+            {programme.toolLogoUrl ? (
+              <div className="flex items-center justify-center w-[84px] h-[84px] sm:w-[96px] sm:h-[96px] lg:w-[120px] lg:h-[110px] rounded-2xl shadow-sm bg-white p-3 lg:p-4 z-10 border border-[rgba(1,38,106,0.12)] group-hover:scale-105 transition-transform duration-300">
+                <img
+                  src={programme.toolLogoUrl}
+                  alt={`${programme.toolName} logo`}
+                  className="max-w-full max-h-full w-auto h-auto object-contain"
+                  onError={(event) => {
+                    (event.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="flex items-center justify-center w-[84px] h-[84px] sm:w-[96px] sm:h-[96px] lg:w-[120px] lg:h-[110px] rounded-2xl shadow-sm bg-white p-3 lg:p-4 z-10 border border-[rgba(1,38,106,0.12)] text-[9px] lg:text-[10px] font-bold text-[rgba(0,0,0,0.3)] tracking-widest uppercase text-center group-hover:scale-105 transition-transform duration-300">
+                IMAGE<br/>REQUIRED
+              </div>
+            )}
+          </>
+        )}
+
         <div className="absolute top-3 left-3 bg-white/95 backdrop-blur text-[10px] font-bold px-2 py-0.5 rounded shadow-2xs text-[#000000] group-hover:text-[#2666C4] group-hover:border-[#2666C4] uppercase tracking-wider border border-[rgba(1,38,106,0.14)] z-20 transition-colors duration-200">
           {programme.id}
         </div>
-        
-        {/* Logo Placeholder Area */}
-        {programme.toolLogoUrl ? (
-          <div className="flex items-center justify-center w-[84px] h-[84px] sm:w-[96px] sm:h-[96px] lg:w-[120px] lg:h-[110px] rounded-2xl shadow-sm bg-white p-3 lg:p-4 z-10 border border-[rgba(1,38,106,0.12)] group-hover:scale-105 transition-transform duration-300">
-            <img 
-              src={programme.toolLogoUrl} 
-              alt={`${programme.toolName} logo`} 
-              className="max-w-full max-h-full w-auto h-auto object-contain"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }} 
-            />
-          </div>
-        ) : (
-          <div className="flex items-center justify-center w-[84px] h-[84px] sm:w-[96px] sm:h-[96px] lg:w-[120px] lg:h-[110px] rounded-2xl shadow-sm bg-white p-3 lg:p-4 z-10 border border-[rgba(1,38,106,0.12)] text-[9px] lg:text-[10px] font-bold text-[rgba(0,0,0,0.3)] tracking-widest uppercase text-center group-hover:scale-105 transition-transform duration-300">
-            LOGO<br/>REQD
-          </div>
-        )}
       </div>
       
       {/* Content Area */}

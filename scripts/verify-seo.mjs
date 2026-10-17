@@ -100,15 +100,21 @@ for (const [name, html] of [['corporate', corporateHtml], ['e-learning', learnin
   assert.doesNotMatch(html, /<div id="root">\s*<link\b/i, `${name} resource hints must be hoisted outside the hydration root.`);
 }
 
-const corporateGalleryWebpSources = [
-  ...corporateHtml.matchAll(/<source\b[^>]*\bsrcSet="(\/website\/assets\/training-media\/[^\"]+-1200\.webp)"[^>]*\btype="image\/webp"[^>]*\/?\s*>/gi),
-].map((match) => match[1]);
+const corporateGalleryWebpSources = [...corporateHtml.matchAll(/<source\b[^>]*>/gi)]
+  .map(([tag]) => tag)
+  .filter((tag) => /\btype="image\/webp"/i.test(tag) && tag.includes('/website/assets/training-media/'))
+  .map((tag) => tag.match(/(\/website\/assets\/training-media\/[^\s,\"]+-1200\.webp)\s+1200w/i)?.[1]);
+assert.ok(corporateGalleryWebpSources.every(Boolean), 'Every gallery WebP source must include a 1200 px image.');
 assert.equal(new Set(corporateGalleryWebpSources).size, 16, 'Corporate gallery must expose all 16 optimized WebP sources.');
 assert.equal(corporateGalleryWebpSources.length, 16, 'Corporate gallery WebP source markup must not be duplicated.');
 for (const source of corporateGalleryWebpSources) {
   await assert.doesNotReject(access(path.join(buildDirectory, source.replace(/^\//, ''))), `Missing optimized gallery asset: ${source}`);
 }
-const corporateGalleryFallbacks = corporateHtml.match(/<img\b[^>]*\bsrc="\/website\/assets\/training-media\/[^\"]+\.(?:jpe?g)"[^>]*\bwidth="\d+"[^>]*\bheight="\d+"[^>]*\bloading="lazy"[^>]*\bdecoding="async"[^>]*\/?\s*>/gi) || [];
+const corporateGalleryFallbacks = [...corporateHtml.matchAll(/<img\b[^>]*>/gi)]
+  .map(([tag]) => tag)
+  .filter((tag) => /\bsrc="\/website\/assets\/training-media\/[^\"]+\.(?:jpe?g)"/i.test(tag))
+  .filter((tag) => /\bwidth="\d+"/i.test(tag) && /\bheight="\d+"/i.test(tag))
+  .filter((tag) => /\bloading="lazy"/i.test(tag) && /\bdecoding="async"/i.test(tag));
 assert.equal(corporateGalleryFallbacks.length, 16, 'Corporate gallery images must retain fallback sources and intrinsic dimensions.');
 
 const routeFile = (pathname) => {

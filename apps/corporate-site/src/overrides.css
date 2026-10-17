@@ -4,7 +4,6 @@
 .menu-toggle svg{color:#01266A}
 
 /* One responsive outer gutter keeps navigation and page sections aligned. */
-#corporate-site{--page-gutter:clamp(16px,4.5vw,72px)}
 #corporate-site .section,
 #corporate-site .impact,
 #corporate-site .ai-framework{padding-inline:var(--page-gutter)}

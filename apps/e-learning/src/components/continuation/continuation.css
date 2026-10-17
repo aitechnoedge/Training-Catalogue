@@ -167,9 +167,9 @@
 
 #contact .contact-panel__layout {
   display: grid;
-  grid-template-columns: clamp(170px, 22vw, 250px) minmax(0, 1fr);
+  grid-template-columns: clamp(230px, 27vw, 310px) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(28px, 5vw, 72px);
+  gap: clamp(30px, 4vw, 58px);
   width: min(100%, 1050px);
   margin-inline: auto;
 }
@@ -177,7 +177,7 @@
 #contact .contact-support-symbol {
   display: grid;
   place-items: center;
-  width: clamp(170px, 22vw, 250px);
+  width: clamp(230px, 27vw, 310px);
   aspect-ratio: 1;
 }
 
@@ -186,10 +186,14 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 52%, rgba(0,0,0,.92) 62%, rgba(0,0,0,.42) 72%, transparent 82%);
+  mask-image: radial-gradient(ellipse at center, #000 52%, rgba(0,0,0,.92) 62%, rgba(0,0,0,.42) 72%, transparent 82%);
 }
 
 #contact .contact-panel__content {
   min-width: 0;
+  text-align: left;
 }
 
 #root #contact .contact-panel h2 > em {
@@ -218,15 +222,30 @@
   -webkit-text-stroke: 0;
 }
 
-#contact .contact-panel__content > p { margin-inline: auto; }
-#contact .contact-panel__content > div { justify-content: center; }
+#contact .contact-panel__content > p { margin-inline: 0; }
+#contact .contact-panel__actions {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+#contact .contact-primary-cta,
+#contact .contact-email-cta {
+  box-sizing: border-box;
+  width: min(100%, 290px);
+  min-height: 56px;
+  justify-content: center;
+  padding: 0 24px;
+  border-radius: 999px;
+}
+
+#contact .contact-primary-cta { height: 56px; }
 
 #contact .contact-email-cta {
-  min-height: 56px;
-  padding: 0 24px;
   color: #12377f;
   border: 1px solid #12377f;
-  border-radius: 8px;
   background: #fff;
   text-decoration: none;
 }
@@ -243,11 +262,57 @@
     gap: 18px;
   }
   #contact .contact-support-symbol {
-    width: clamp(82px, 26vw, 112px);
+    width: clamp(140px, 42vw, 190px);
     margin-inline: auto;
   }
   #root #contact .contact-panel h2 > span { font-size: .72em; }
-  #contact .contact-panel__content > div { align-items: stretch; }
+  #contact .contact-panel__actions { align-items: stretch; }
   #contact .contact-primary-cta,
   #contact .contact-email-cta { width: 100%; justify-content: center; }
+}
+
+/* Shared page margins across the e-learning experience. */
+#root .site-header {
+  display: block;
+  padding-inline: 0;
+}
+
+#root .site-header__inner {
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 24px;
+}
+
+#root .max-w-7xl,
+#root #contact {
+  max-width: calc(var(--page-content-width) + 2 * var(--page-gutter));
+  padding-inline: var(--page-gutter);
+}
+
+@media (min-width: 761px) {
+  #root .layered-hero__copy {
+    left: max(var(--page-gutter), calc((100% - var(--page-content-width)) / 2));
+  }
+
+  #root .industry-track {
+    padding-inline-start: max(var(--page-gutter), calc((100% - var(--page-content-width)) / 2));
+  }
+}
+
+@media (max-width: 1279px) {
+  #root .site-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  #root .site-header .global-nav {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  #root .site-header__inner { column-gap: 8px; }
 }

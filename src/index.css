@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap');
 @import "tailwindcss";
 @import "./styles/brand-tokens.css";
+@import "./styles/page-layout.css";
 
 @theme {
   --font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -664,21 +665,21 @@
   background-size: cover;
 }
 
-.careers-hero::before {
-  display: none;
+.careers-hero__art {
   position: absolute;
-  z-index: -1;
   inset: 0;
-  background-image: linear-gradient(rgba(1, 38, 106, 0.032) 1px, transparent 1px), linear-gradient(90deg, rgba(1, 38, 106, 0.032) 1px, transparent 1px);
-  background-size: 4.5rem 4.5rem;
-  content: '';
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 65%, #000);
-  mask-image: linear-gradient(90deg, transparent, #000 65%, #000);
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right center;
 }
 
 .careers-hero__inner {
+  position: relative;
+  z-index: 2;
   display: grid;
-  width: min(calc(100% - 3rem), 100rem);
+  width: min(calc(100% - 2rem), 80rem);
   min-height: clamp(34rem, 40vw, 38rem);
   margin-inline: auto;
   grid-template-columns: minmax(0, 1fr);
@@ -935,9 +936,7 @@
 .careers-editorial-section {
   padding-block: clamp(5rem, 9vw, 8rem);
   background-color: #ffffff;
-  background-image:
-    linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.9) 46%, rgba(255,255,255,.4) 70%, rgba(255,255,255,.06) 100%),
-    url('/media/careers/careers-about-innovation.webp');
+  background-image: url('/media/careers/careers-about-innovation.webp');
   background-position: center right;
   background-repeat: no-repeat;
   background-size: cover;
@@ -978,7 +977,7 @@
   display: grid;
   gap: 1.5rem;
   align-content: center;
-  max-width: 44rem;
+  max-width: 25rem;
   padding-top: 0;
   text-align: left;
 }
@@ -1000,6 +999,8 @@
 
 .careers-why-section__heading {
   max-width: 48rem;
+  margin-inline: auto;
+  text-align: center;
 }
 
 .careers-why-section__heading h2 span {
@@ -1407,11 +1408,16 @@
 }
 
 .careers-openings-section__heading {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
-  grid-template-columns: 0.55fr 1.45fr;
-  align-items: end;
-  gap: 2rem;
+  gap: 1.25rem;
+  text-align: center;
+}
+
+.careers-openings-section__heading .careers-section-label {
+  margin-bottom: 0;
 }
 
 .careers-job-list {
@@ -1650,7 +1656,6 @@
 
 @media (max-width: 68rem) {
   .careers-hero__inner {
-    width: min(calc(100% - 2.5rem), 100rem);
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -1668,12 +1673,19 @@
 }
 
 @media (max-width: 56.25rem) {
+  .careers-hero__art {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
   .careers-hero__inner {
     min-height: 0;
     grid-template-columns: 1fr;
     gap: 1.25rem;
     padding-top: 3.25rem;
-    padding-bottom: 3.25rem;
+    padding-bottom: 1.5rem;
   }
 
   .careers-hero__content {
@@ -1736,8 +1748,10 @@
     gap: 1rem;
   }
 
-  .careers-editorial-section__copy {
-    max-width: 44rem;
+  .careers-editorial-section {
+    background-position: right bottom;
+    background-size: 100% auto;
+    padding-bottom: clamp(15rem, 56vw, 31.5rem);
   }
 
   .careers-team-gallery {
@@ -1773,11 +1787,6 @@
     transform: none;
   }
 
-  .careers-openings-section__heading {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
   .careers-open-application__inner,
   .career-role-page__content {
     align-items: flex-start;
@@ -1790,6 +1799,12 @@
   .careers-page-shell,
   .careers-hero__inner {
     width: min(calc(100% - 2rem), 80rem);
+  }
+
+  .careers-hero__art {
+    width: 160%;
+    max-width: none;
+    margin-left: -60%;
   }
 
   .careers-hero h1 {
@@ -2073,3 +2088,19 @@
     grid-row: 1;
   }
 }
+
+/* Common outer grid for catalogue, careers, and search landing pages. */
+.catalogue-hero__inner,
+.seo-landing-breadcrumbs,
+.seo-landing-hero,
+.seo-landing-main,
+.careers-page-shell,
+.careers-hero__inner {
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--page-content-width));
+  margin-inline: auto;
+}
+
+.catalogue-hero__inner { padding-inline: 0; }
+
+.catalogue-directory { padding-inline: var(--page-gutter); }
+.catalogue-directory__shell { width: min(100%, var(--page-content-width)); }

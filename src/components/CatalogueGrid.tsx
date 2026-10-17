@@ -632,9 +632,9 @@ export const CatalogueGrid: React.FC<Props> = ({ activeCategoryId, onViewDetail 
       {!isPlannedCategory && (
         <div
           id="sticky-catalogue-search-bar-wrapper"
-          className="sticky top-[64px] z-30 w-full bg-[#2666C8] backdrop-blur-md border-b border-[rgba(1,38,106,0.12)] shadow-[0_6px_22px_rgba(1,38,106,0.07)] px-4 sm:px-8 lg:px-10 py-3 sm:py-4 transition-all"
+          className="sticky top-[64px] z-30 w-full bg-[#2666C8] backdrop-blur-md border-b border-[rgba(1,38,106,0.12)] shadow-[0_6px_22px_rgba(1,38,106,0.07)] py-3 sm:py-4 transition-all"
         >
-          <div className="max-w-7xl mx-auto">
+          <div className="te-page-container">
             <CatalogueToolbar
               searchQuery={searchQuery}
               onSearchChange={handleSearchChange}
@@ -648,7 +648,7 @@ export const CatalogueGrid: React.FC<Props> = ({ activeCategoryId, onViewDetail 
         </div>
       )}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-10 py-6 sm:py-8">
+      <div className="te-page-container py-6 sm:py-8">
         {activeCategoryId === 'ai-tools' && toolsError && (
           <div className="mb-6 flex items-center justify-between gap-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800" role="alert">
             <span>Unable to load the AI Tools catalogue: {toolsError}</span>

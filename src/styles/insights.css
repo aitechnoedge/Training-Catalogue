@@ -10,7 +10,7 @@
   --insights-surface-hover: color-mix(in srgb, var(--brand-pale) 72%, var(--brand-sky));
   --insights-surface-alt: var(--brand-warm);
   --insights-surface: var(--brand-white);
-  --insights-content-width: 77.5rem;
+  --insights-content-width: var(--page-content-width);
 
   width: 100%;
   background: var(--insights-surface);
@@ -19,7 +19,7 @@
 }
 
 .insights-shell {
-  width: min(calc(100% - 2.5rem), var(--insights-content-width));
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--insights-content-width));
   margin-inline: auto;
 }
 
@@ -74,7 +74,7 @@
 
 @media (min-width: 48rem) {
   .insights-shell {
-    width: min(calc(100% - 4rem), var(--insights-content-width));
+    width: min(calc(100% - 2 * var(--page-gutter)), var(--insights-content-width));
   }
 
   .insights-hero {
@@ -92,7 +92,7 @@
 
 @media (min-width: 64rem) {
   .insights-shell {
-    width: min(calc(100% - 7rem), var(--insights-content-width));
+    width: min(calc(100% - 2 * var(--page-gutter)), var(--insights-content-width));
   }
 
   .insights-hero {

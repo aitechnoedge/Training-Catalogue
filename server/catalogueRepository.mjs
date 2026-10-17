@@ -51,6 +51,7 @@ function baseProgramme(row) {
     return {
       ...programme,
       categoryBadge: 'Tool or Technology',
+      imageUrl: row.image_url || '',
       toolLogoUrl: row.tool_logo_url || '',
       toolName: row.tool_name,
       vendor: row.vendor,
@@ -63,6 +64,7 @@ function baseProgramme(row) {
     return {
       ...programme,
       categoryBadge: 'Tool or Technology',
+      imageUrl: row.image_url || '',
       toolLogoUrl: '',
       toolName: row.primary_technology,
       vendor: row.technical_vendor || 'Various',
@@ -90,6 +92,7 @@ function baseProgramme(row) {
     return {
       ...programme,
       categoryBadge: 'Certification Programme',
+      imageUrl: row.image_url || '',
       provider: row.certification_provider,
       providerCourseCode: row.course_code_public === false ? undefined : row.certification_code,
       examCode: row.certification_exam_code || undefined,

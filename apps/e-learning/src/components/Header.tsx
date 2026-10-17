@@ -6,6 +6,7 @@ export function Header() {
 
   return (
     <header className={`site-header${menuOpen ? ' menu-open' : ''}`}>
+      <div className="site-header__inner te-page-container">
       <a className="site-brand" href="/" aria-label="TechnoEdge home">
         <img className="site-brand__logo" src="/website/assets/technoedge-logo.png" alt="TechnoEdge Learning Services" />
       </a>
@@ -22,6 +23,7 @@ export function Header() {
         <button className="global-menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="e-learning-primary-nav" aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'} onClick={() => setMenuOpen((open) => !open)}>
           {menuOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
+      </div>
       </div>
     </header>
   );

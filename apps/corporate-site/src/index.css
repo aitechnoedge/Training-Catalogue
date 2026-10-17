@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @source "../../../src/components/FooterStructure.tsx";
 @import "../../../src/styles/brand-tokens.css";
+@import "../../../src/styles/page-layout.css";
 @import "./legacy.css";
 @import "./overrides.css";
 @import "./recognition.css";
@@ -13,3 +14,5 @@
 @import "./impact-compact.css";
 @import "./teai360-ascent.css";
 @import "./responsive-stabilization.css";
+@import "./real-moments-gallery.css";
+@import "./page-layout.css";

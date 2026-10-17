@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../../../src/components/FooterStructure.tsx";
+@import "../../../src/styles/page-layout.css";
 
 :root {
   --site-font: "Poppins", ui-sans-serif, system-ui, sans-serif;

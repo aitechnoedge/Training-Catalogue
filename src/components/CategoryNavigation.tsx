@@ -61,8 +61,8 @@ export const CategoryNavigation: React.FC<Props> = ({ categories, activeCategory
   };
 
   return (
-    <section id="category-selection-section" className="w-full bg-white px-4 sm:px-10 py-6 sm:py-8 shrink-0 border-b border-[rgba(1,38,106,0.14)] font-['Poppins',sans-serif]" aria-label="Training Categories">
-      <div className="max-w-[1400px] mx-auto">
+    <section id="category-selection-section" className="w-full bg-white py-6 sm:py-8 shrink-0 border-b border-[rgba(1,38,106,0.14)] font-['Poppins',sans-serif]" aria-label="Training Categories">
+      <div className="te-page-container">
         
         {/* Section Heading */}
         <div className="category-navigation__heading mb-8 sm:mb-9">

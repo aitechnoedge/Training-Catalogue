@@ -1,0 +1,62 @@
+/* Keep the homepage content on the same outer grid as the rest of the site. */
+#corporate-site .site-header {
+  display: block;
+  padding-inline: 0;
+}
+
+#corporate-site .site-header__inner {
+  display: grid;
+  height: 100%;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 24px;
+}
+
+#corporate-site .impact .impact-shell,
+#corporate-site .services-showcase-shell,
+#corporate-site .home-insights-shell,
+#corporate-site .moments-gallery__support,
+#corporate-site .contact-shell {
+  max-width: var(--page-content-width);
+}
+
+#corporate-site .moments-gallery__support {
+  width: min(calc(100% - 2 * var(--page-gutter)), var(--page-content-width));
+  margin-inline: auto;
+}
+
+#corporate-site .impact .impact-shell {
+  width: min(100%, var(--page-content-width));
+}
+
+#corporate-site .contact-shell {
+  width: min(100%, var(--page-content-width));
+}
+
+@media (min-width: 761px) {
+  #corporate-site .hero-rotator .hero-copy {
+    padding-left: max(var(--page-gutter), calc((100% - var(--page-content-width)) / 2));
+  }
+
+  #corporate-site .hero-rotator-controls {
+    left: max(var(--page-gutter), calc((100% - var(--page-content-width)) / 2));
+  }
+}
+
+@media (max-width: 1279px) {
+  #corporate-site .site-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+  }
+
+  #corporate-site .site-header .primary-nav {
+    grid-column: 1 / -1;
+    justify-self: stretch;
+    width: 100%;
+  }
+}
+
+@media (max-width: 1050px) {
+  #corporate-site .site-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}

@@ -1,7 +1,9 @@
 /* Card surfaces and typography only; pinned tracks and animation timing are unchanged. */
 .sculpted-industry-card{padding:16px;border-radius:28px;background:var(--card-bg, #f4f6f8);border:1px solid rgba(0,0,0,0.06);box-shadow:inset 2px 2px 4px rgba(255,255,255,0.8), 0 12px 20px rgba(0,0,0,0.05);display:flex;flex-direction:column;gap:12px;min-height:0}
-.industry-nameplate{display:flex;align-items:center;min-height:76px;padding:14px 22px;border-radius:14px;background:var(--title-bg, linear-gradient(145deg,#3c4852,#202d39));color:#fff;box-shadow:inset 0 1px 3px rgba(255,255,255,0.16),0 5px 14px rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.16)}
-.industry-nameplate__content{display:grid;gap:2px;padding-left:18px;border-left:2px solid rgba(255,255,255,.25)}
+.industry-nameplate{display:flex;align-items:center;gap:16px;min-height:76px;padding:14px 22px;border-radius:14px;background:var(--title-bg, linear-gradient(145deg,#3c4852,#202d39));color:#fff;box-shadow:inset 0 1px 3px rgba(255,255,255,0.16),0 5px 14px rgba(0,0,0,0.18);border:1px solid rgba(255,255,255,0.16)}
+.industry-nameplate__icon{width:30px;height:30px;flex:0 0 30px;color:#fff;stroke-width:1.8}
+.industry-nameplate__divider{width:1px;height:40px;flex:0 0 1px;background:rgba(255,255,255,.34)}
+.industry-nameplate__content{display:grid;min-width:0;gap:2px}
 #root #industries .industry-nameplate h3{font-size:clamp(18px,1.7vw,24px);line-height:1.08;letter-spacing:.02em;text-transform:uppercase;color:#fff;margin:0;font-weight:700}
 .industry-nameplate__tagline{color:rgba(255,255,255,.9);font-size:10px;font-weight:500;line-height:1.2;letter-spacing:.01em;text-transform:uppercase;white-space:normal}
 .industry-diorama{flex:1 1 auto;min-height:190px;overflow:hidden;border-radius:15px;background:transparent;box-shadow:inset 0 0 0 1px rgba(0,0,0,0.05)}
@@ -77,7 +79,68 @@
 }
 #industries .industry-diorama { min-height: 220px; }
 
+/* Desktop scroll-stopper: vertical progress moves the cards horizontally while
+   the stage remains in place. Compact and reduced-motion layouts stay swipeable. */
+@media (min-width: 800px) and (min-height: 820px) {
+  #industries.industry-scrollstopper.is-scrollstopper-active {
+    position: relative;
+    height: calc(100svh + var(--industry-scroll-distance, 0px));
+    min-height: calc(100svh + var(--industry-scroll-distance, 0px));
+  }
+  #industries.is-scrollstopper-active .industry-stage {
+    position: sticky;
+    top: var(--site-topbar-height, 80px);
+    display: flex;
+    flex-direction: column;
+    height: calc(100svh - var(--site-topbar-height, 80px));
+    padding-block: clamp(1rem, 2.2vh, 1.75rem);
+    overflow: hidden;
+  }
+  #industries.is-scrollstopper-active .industry-intro {
+    flex: 0 0 auto;
+    margin-bottom: clamp(.85rem, 1.8vh, 1.35rem);
+  }
+  #industries.is-scrollstopper-active .industry-track-window {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-height: 0;
+    overflow: hidden;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+    overscroll-behavior: none;
+  }
+  #industries.is-scrollstopper-active .industry-track-window::-webkit-scrollbar { display: none; }
+  #industries.is-scrollstopper-active .industry-track {
+    height: 100%;
+    max-height: 650px;
+    padding-bottom: 0;
+    contain: layout style;
+    isolation: isolate;
+    backface-visibility: hidden;
+    will-change: transform;
+    pointer-events: none;
+  }
+  #industries.is-scrollstopper-active .sculpted-industry-card {
+    height: 100%;
+    transform: none !important;
+    transition: none !important;
+  }
+  #industries.is-scrollstopper-active .industry-diorama img {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #industries.industry-scrollstopper { height: auto; min-height: auto; }
+  #industries .industry-track { transform: none !important; }
+}
+
 @media (max-width: 640px) {
+  .industry-nameplate{gap:12px;padding-inline:16px}
+  .industry-nameplate__icon{width:25px;height:25px;flex-basis:25px}
+  .industry-nameplate__divider{height:34px}
   #industries .sculpted-industry-card { width: min(86vw, 360px); min-height: 500px; }
   #industries .industry-editable-panels { grid-template-columns: 1fr; }
   #industries .industry-diorama { min-height: 180px; }

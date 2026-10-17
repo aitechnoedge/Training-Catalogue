@@ -32,7 +32,7 @@ export const FooterStructure: React.FC<FooterStructureProps> = ({
   return (
     <footer id="technoedge-corporate-footer" className="w-full bg-white text-[rgba(0,0,0,0.72)] border-t border-[rgba(38,102,196,0.14)] mt-auto">
       {/* Main Footer Body */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 lg:py-16">
+      <div className="te-page-container py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           
           {/* Col 1: Contact Info */}
@@ -151,7 +151,7 @@ export const FooterStructure: React.FC<FooterStructureProps> = ({
 
       {/* Copyright Bottom Bar */}
       <div className="border-t border-[rgba(1,38,106,0.12)] bg-[#F0F7FF]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-6 text-center">
+        <div className="te-page-container py-6 text-center">
           <p className="text-sm text-[rgba(0,0,0,0.58)]">
             © TechnoEdge Learning Services. All Rights Reserved.
           </p>

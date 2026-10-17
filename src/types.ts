@@ -139,6 +139,7 @@ export interface PeopleProcessProgramme extends BaseProgramme {
 
 export interface ToolsTechProgramme extends BaseProgramme {
   category: 'tools-technology' | 'ai-tools';
+  imageUrl?: string;
   toolLogoUrl: string;
   toolName: string; // Official brand name e.g. "ChatGPT", "Microsoft Copilot", "Power BI"
   vendor: string; // e.g. "OpenAI", "Microsoft", "Databricks", "AWS"
@@ -150,6 +151,7 @@ export interface ToolsTechProgramme extends BaseProgramme {
 export interface CertificationProgramme extends BaseProgramme {
   category: 'certifications';
   categoryBadge: 'Certification Programme';
+  imageUrl?: string;
   provider: string;
   providerCourseCode?: string;
   examCode?: string;
