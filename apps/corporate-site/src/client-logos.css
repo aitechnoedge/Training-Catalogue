@@ -50,10 +50,13 @@
   gap: clamp(.65rem, 1.2vw, 1rem);
   padding-right: clamp(.65rem, 1.2vw, 1rem);
 }
-.client-logo-track-left { animation: clientLogosLeft 38s linear infinite; }
+.client-logo-track-left { animation: clientLogosLeft 95s linear infinite; }
 .client-logo-track-right {
   transform: translate3d(-50%,0,0);
-  animation: clientLogosRight 42s linear infinite;
+  animation: clientLogosRight 105s linear infinite;
+}
+.client-logo-viewport:hover .client-logo-track {
+  animation-play-state: paused;
 }
 .client-logo-card {
   display: flex;
