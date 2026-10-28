@@ -62,8 +62,8 @@ function CorporateHome() {
           <p>Four measures of the capability we build with teams worldwide.</p>
         </header>
         <div className="impact-grid" aria-label="Company metrics">
-          <article className="impact-card"><div className="impact-value"><strong data-count="200">0</strong><span>+</span></div><p>Clients Globally</p><small>Enterprise learning engagements worldwide</small></article>
-          <article className="impact-card"><div className="impact-value"><strong data-count="3500">0</strong><span>+</span></div><p>Training Hours</p><small>Across critical technologies</small></article>
+          <article className="impact-card"><div className="impact-value"><strong data-count="100">0</strong><span>+</span></div><p>Clients Globally</p><small>Enterprise learning engagements worldwide</small></article>
+          <article className="impact-card"><div className="impact-value"><strong data-count="50000">0</strong><span>+</span></div><p>Training Hours</p><small>Across critical technologies</small></article>
           <article className="impact-card"><div className="impact-value"><strong data-count="3000">0</strong><span>+</span></div><p>Courses Supported</p><small>Mapped to roles and outcomes</small></article>
           <article className="impact-card"><div className="impact-value"><strong data-count="1500">0</strong><span>+</span></div><p>Content Hours</p><small>Designed for repeatable learning</small></article>
         </div>
